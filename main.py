@@ -17,10 +17,10 @@ MAX_BYTES = 1024 * 1024
 
 
 def check_front() -> None:
-    """v8 self-check: fail loudly if any v7/v8 string regresses in the source.
+    """v9 self-check: fail loudly if any v7/v8/v9 string regresses in the source.
 
     Reads build/front.html (the rendered page) and verifies the strings the
-    v7 and v8 fix rounds depend on. The build fails instead of shipping a
+    v7, v8 and v9 fix rounds depend on. The build fails instead of shipping a
     page that re-breaks a reviewer blocker.
     """
     import re
@@ -74,6 +74,32 @@ def check_front() -> None:
         problems.append("AYT still present (inset label must read ANTALYA)")
     if 'font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">B</text>' not in html:
         problems.append("inset pin B must be 12px (14px renders as a vertical bar)")
+    # v9 blocker: the LEFT OUT row must use the DATE CHECK's own test
+    # (completed pre-edition, not carried), not the old stricter test
+    # (first reported before today's edition) that Quick's v8 blocker
+    # objected to. The source encodes the apostrophe as &rsquo;, so check
+    # both the entity form and the literal form, anywhere in the file.
+    if (
+        "first reported before today&rsquo;s edition" in html
+        or "first reported before today's edition" in html
+    ):
+        problems.append(
+            "old LEFT OUT reason still present (v9 blocker: use "
+            "'completed before edition, not carried')"
+        )
+    if html.count("completed before edition, not carried") != 1:
+        problems.append(
+            f"LEFT OUT must say 'completed before edition, not carried' "
+            f"exactly once (found {html.count('completed before edition, not carried')}) "
+            f"(v9 blocker)"
+        )
+    if html.count("completed pre-edition items not carried above") != 1:
+        problems.append(
+            f"DATE CHECK must say 'completed pre-edition items not carried "
+            f"above' exactly once "
+            f"(found {html.count('completed pre-edition items not carried above')}) "
+            f"(B1)"
+        )
     # B3: every CONFIRMED card badge must name two outlets, scoped to the
     # big-cards block (heroes carry their sources in .src, not .so).
     cards = html[html.index("<!-- BIG CARDS"):html.index("<!-- MAP")]
@@ -95,8 +121,8 @@ def check_front() -> None:
     if slots != 36:
         problems.append(f"story slots must be 36 (found {slots})")
     if problems:
-        raise SystemExit("front.html v8 check failed:\n- " + "\n- ".join(problems))
-    print(f"front.html v8 check ok: {badges} CONFIRMED cards, all with 2 outlets; 36 slots")
+        raise SystemExit("front.html v9 check failed:\n- " + "\n- ".join(problems))
+    print(f"front.html v9 check ok: {badges} CONFIRMED cards, all with 2 outlets; 36 slots")
 
 
 def self_check(data: bytes) -> None:
