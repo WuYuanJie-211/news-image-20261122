@@ -29,13 +29,26 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 .card .edge { position:absolute; left:0; top:0; width:4px; height:110px; }
 .card .kick { position:absolute; left:16px; top:12px; font-size:13px; font-weight:bold; letter-spacing:1px; white-space:nowrap; }
 .card .head { position:absolute; left:16px; top:44px; width:284px; font-size:17px; font-weight:bold; line-height:18.4px; }
-.card .det { position:absolute; left:16px; top:79px; font-size:13px; color:#404040; white-space:nowrap; }
+.card .det { position:absolute; left:16px; top:78px; font-size:13px; color:#404040; white-space:nowrap; }
 .dc { position:absolute; left:704px; top:1822px; width:1296px; height:110px; border:3px solid #191919; }
-.dc .lab { position:absolute; left:16px; top:8px; font-size:14px; font-weight:bold; letter-spacing:2px; }
-.dc .cell { position:absolute; width:316px; line-height:18px; white-space:nowrap; }
-.dc .fig { font-size:18px; font-weight:bold; white-space:nowrap; }
-.dc .sub { font-size:12px; color:#404040; margin-left:6px; white-space:nowrap; }
+.dc .lab { position:absolute; left:16px; top:2px; font-size:13px; font-weight:bold; letter-spacing:2px; }
+.dc .col { position:absolute; top:0; width:300px; height:110px; }
+.dc .f { position:absolute; left:0; font-size:18px; font-weight:bold; white-space:nowrap; }
+.dc .s { position:absolute; left:0; font-size:12px; color:#404040; white-space:nowrap; }
 .foot { position:absolute; left:48px; font-size:20px; line-height:32px; }
+.lead { position:absolute; left:48px; top:156px; width:1296px; height:492px; }
+.lead img { width:1296px; height:280px; display:block; object-fit:cover; }
+.lead .scrim { position:absolute; left:0; top:220px; width:1296px; height:60px; background:linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.55)); }
+.lead .credit { position:absolute; right:12px; top:258px; font-size:11px; color:#FFFFFF; text-align:right; }
+.lead .kick { position:absolute; left:0; top:293px; font-size:16px; font-weight:bold; letter-spacing:2px; }
+.lead .head { position:absolute; left:0; top:308px; font-size:64px; font-weight:bold; line-height:70px; }
+.lead .dek { position:absolute; left:0; top:458px; font-size:19px; }
+.sec { position:absolute; width:240px; height:240px; }
+.sec img { width:240px; height:240px; display:block; object-fit:cover; }
+.sect { position:absolute; width:384px; height:240px; }
+.sect .kick { position:absolute; left:0; top:32px; font-size:13px; font-weight:bold; letter-spacing:1px; }
+.sect .head { position:absolute; left:0; top:50px; font-size:28px; font-weight:bold; line-height:32px; }
+.sect .det { position:absolute; left:0; top:212px; font-size:13px; color:#404040; white-space:nowrap; }
 </style></head><body>
 
 <!-- MASTHEAD 0-112 -->
@@ -48,27 +61,26 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 <div class="dater">36 STORIES &middot; 12 PINS &middot; 19&ndash;22 NOV</div>
 <div class="rule" style="left:48px; top:154px; width:1952px; height:2px;"></div>
 
-<!-- HEROES 156-648 -->
-<div class="hero" style="left:48px;">
-  <img src="hero1.jpg" alt="USS The Sullivans">
-  <div class="kick" style="color:#A63A2E;">BAHRAIN &middot; US BASES</div>
-  <div class="head">IRGC says it hit two Patriot<br>radars at al-Riffa and Awali</div>
-  <div class="dek">Bahrain: an industrial fire, no injuries.</div>
-  <div class="scrim">USS The Sullivans, 2005, US Navy (PD)</div>
-</div>
-<div class="hero" style="left:704px;">
-  <img src="hero2.jpg" alt="Lviv street">
-  <div class="kick" style="color:#2F5D8A;">UKRAINE &middot; 19&ndash;20 NOVEMBER</div>
+<!-- HEROES 156-648 : LEAD 4 + SECONDS 2 -->
+<div class="lead">
+  <img src="lead_lviv.jpg" alt="Lviv street">
+  <div class="scrim"></div>
+  <div class="credit">Lviv, 2017, Francisco Anzola, CC BY-SA</div>
+  <div class="kick" style="color:#2F5D8A;">UKRAINE &middot; 19&ndash;20 NOVEMBER &middot; LEAD</div>
   <div class="head">400 drones, 110 missiles,<br>27 ballistic: 8 killed</div>
   <div class="dek">Six died in Kyiv, two in Lviv. Three Dnipro crossings hit in the capital.</div>
-  <div class="scrim">Lviv, 2017, CC BY-SA</div>
 </div>
-<div class="hero" style="left:1360px;">
-  <img src="hero3.jpg" alt="Antalya coast">
+<div class="sec" style="left:1360px; top:156px;"><img src="sec_bahrain.jpg" alt="USS The Sullivans"></div>
+<div class="sect" style="left:1616px; top:156px;">
+  <div class="kick" style="color:#A63A2E;">BAHRAIN &middot; US BASES</div>
+  <div class="head">IRGC claims it hit two<br>Patriot radars</div>
+  <div class="det">Bahrain: industrial fire, no injuries</div>
+</div>
+<div class="sec" style="left:1360px; top:408px;"><img src="sec_cop31.jpg" alt="Antalya coast"></div>
+<div class="sect" style="left:1616px; top:408px;">
   <div class="kick" style="color:#2E6B4F;">COP31 &middot; ANTALYA, OVERTIME</div>
-  <div class="head">&lsquo;Fossil fuel&rsquo; is gone<br>from the draft</div>
-  <div class="dek">First 1.5C overshoot admission. EU: &lsquo;good deal or no deal&rsquo;.</div>
-  <div class="scrim">Antalya, 2006, CC BY-SA 2.5</div>
+  <div class="head">&lsquo;Fossil fuel&rsquo; gone<br>from the draft</div>
+  <div class="det">First 1.5C overshoot; EU: no deal, no good</div>
 </div>
 
 <!-- REGION STRIP 648-700 -->
@@ -86,7 +98,8 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 </svg>
 <svg width="1232" height="512" viewBox="0 0 1232 512" style="position:absolute; left:48px; top:700px;">
   <path d="M1052,274 Q704,367 356,288" fill="none" stroke="#191919" stroke-width="2" stroke-dasharray="8 6"/>
-  <polyline points="724,148 832,224 936,372" fill="none" stroke="#191919" stroke-width="2"/>
+  <polyline points="708,148 842,240 944,372" fill="none" stroke="#191919" stroke-width="2"/>
+  <circle cx="708" cy="148" r="4.8" fill="#191919"/>
 </svg>
 <div class="pin" style="left:834px; top:880px;">1</div><div class="plab" style="left:858px; top:870px;">BAH</div>
 <div class="badge" style="left:740px; top:814px;">EU &times;4</div>
@@ -100,10 +113,17 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 <!-- EUROPE INSET 992,1004 264x184 -->
 <div style="position:absolute; left:992px; top:1004px; width:264px; height:184px; background:#FDFBF5; border:2px solid #191919;">
   <svg width="264" height="184" viewBox="0 0 264 184">
-    <g fill="#DCD2B8" stroke="#B7AB8E" stroke-width="1.5"><path d="M134.3,147.8 L132.4,157.0 L120.6,151.4 L121.2,148.4 L134.3,147.8 Z"/><path d="M106.3,130.8 L108.9,134.9 L108.3,142.4 L104.5,144.0 L101.6,132.3 L106.3,130.8 Z"/><path d="M107.8,125.4 L106.3,129.8 L103.3,124.8 L107.1,120.5 L107.8,125.4 Z"/><path d="M35.2,67.7 L21.0,70.2 L24.6,64.2 L22.3,58.4 L35.4,51.0 L40.2,54.5 L35.2,67.7 Z"/><path d="M52.0,31.2 L47.2,37.4 L56.6,36.7 L51.5,46.4 L56.1,46.8 L67.4,63.8 L72.8,64.9 L70.0,70.2 L71.8,73.2 L42.0,80.8 L39.7,79.7 L50.2,72.4 L41.9,69.2 L46.6,67.4 L44.1,64.3 L45.0,60.6 L51.6,61.1 L52.2,57.8 L43.8,53.2 L42.9,47.5 L40.5,50.2 L38.0,41.8 L43.1,31.3 L52.0,31.2 Z"/></g>
+    <g fill="#DCD2B8" stroke="#B7AB8E" stroke-width="1.5">
+    <path d="M134.3,147.9 L132.5,157.0 L120.5,151.3 L134.3,147.9 Z"/>
+    <path d="M106.2,130.8 L108.3,142.5 L104.4,143.9 L101.6,132.2 L106.2,130.8 Z"/>
+    <path d="M107.8,125.4 L106.4,129.8 L103.3,124.8 L107.0,120.6 L107.8,125.4 Z"/>
+    <path d="M35.2,67.6 L21.0,70.2 L22.2,58.3 L35.5,51.1 L40.1,54.5 L35.2,67.6 Z"/>
+    <path d="M52.0,31.2 L47.3,37.4 L56.6,36.6 L51.4,46.5 L72.9,64.9 L71.8,73.2 L42.1,80.8 L50.1,72.4 L42.0,69.2 L46.6,67.4 L44.9,60.5 L52.2,57.7 L40.5,50.3 L38.1,41.8 L43.1,31.2 L52.0,31.2 Z"/>
+    <path d="M252.0,12.0 L252.0,172.0 L30.8,172.0 L39.0,162.0 L55.7,165.4 L71.8,157.2 L107.5,152.9 L114.7,155.3 L111.5,172.0 L221.1,172.0 L226.0,156.8 L188.2,156.8 L181.7,140.7 L214.3,126.2 L235.7,132.2 L250.7,126.4 L228.3,107.7 L239.2,96.3 L220.7,101.9 L226.8,108.5 L216.0,112.8 L209.6,107.3 L213.4,102.9 L202.0,100.1 L188.3,123.0 L193.4,131.6 L165.9,136.3 L172.2,151.1 L168.1,149.5 L165.3,158.2 L151.6,136.3 L152.2,127.8 L123.8,104.9 L121.3,114.4 L147.4,136.7 L140.3,135.3 L136.9,149.1 L133.8,137.5 L104.8,112.8 L79.1,120.2 L78.8,126.8 L69.0,131.8 L65.9,144.9 L55.9,156.8 L41.4,161.0 L25.9,155.5 L23.6,120.4 L59.2,114.8 L60.0,103.3 L44.9,88.0 L58.2,88.2 L56.8,81.8 L71.3,79.8 L86.2,62.9 L101.4,60.3 L103.3,40.0 L112.3,36.4 L113.8,43.7 L108.2,49.3 L113.9,57.7 L152.7,55.3 L159.9,50.9 L161.3,38.2 L172.6,40.4 L173.9,32.6 L169.1,28.0 L194.8,23.4 L167.0,24.4 L160.1,19.3 L160.6,12.0 L142.9,12.0 L141.4,15.7 L148.8,23.0 L140.1,30.8 L136.0,45.7 L122.9,49.9 L111.3,26.4 L102.6,33.0 L90.5,31.4 L87.5,12.1 L87.7,12.0 Z"/>
+  </g>
     <g fill="#D95F02"><circle cx="122" cy="48" r="8"/><circle cx="180" cy="24" r="8"/><circle cx="168" cy="78" r="8"/><circle cx="202" cy="156" r="8"/></g>
     <g font-family="DejaVu Sans" font-size="12" font-weight="bold" fill="#191919">
-      <text x="134" y="52">CPH</text><text x="192" y="28">GOF</text><text x="180" y="82">LVV</text><text x="196" y="160">AYT</text>
+      <text x="134" y="52">CPH</text><text x="192" y="28">GOF</text><text x="180" y="82">LVV</text><text x="180" y="160" text-anchor="end">AYT</text>
     </g>
   </svg>
 </div>
@@ -158,14 +178,10 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 <!-- DATE CHECK 704,1822 1296x110 -->
 <div class="dc">
   <div class="lab">DATE CHECK</div>
-  <div class="cell" style="left:24px; top:33px;"><span class="fig" style="font-size:17px;">400 drones &middot; 110 missiles</span><span class="sub">27 ballistic</span></div>
-  <div class="cell" style="left:348px; top:33px;"><span class="fig">Two M6.9 quakes</span><span class="sub">Peru &middot; Banda 09:42Z</span></div>
-  <div class="cell" style="left:672px; top:33px;"><span class="fig">98.5% tariffs gone</span><span class="sub">EU&ndash;Indonesia deal</span></div>
-  <div class="cell" style="left:996px; top:33px;"><span class="fig">856 candidates &middot; 723 seats</span></div>
-  <div class="cell" style="left:24px; top:69px;"><span class="fig">Gaza 1,671</span><span class="sub">dead since the truce</span></div>
-  <div class="cell" style="left:348px; top:69px;"><span class="fig">$55,252 &rarr; $60,230</span><span class="sub">BTC two-year low</span></div>
-  <div class="cell" style="left:672px; top:69px;"><span class="fig">$2.4bn liquidated</span><span class="sub">crypto futures</span></div>
-  <div class="cell" style="left:996px; top:69px;"><span class="fig">Sumo 12&ndash;2</span><span class="sub">leaders tied, final day</span></div>
+  <div class="col" style="left:28px;"><div class="f" style="top:13px;">400 drones &middot; 110 missiles</div><div class="s" style="top:39px;">27 ballistic</div><div class="f" style="top:47px;">1,671</div><div class="s" style="top:73px;">dead since the truce</div></div>
+  <div class="col" style="left:342px;"><div class="f" style="top:13px;">Two M6.9 quakes</div><div class="s" style="top:39px;">Peru &middot; Banda 09:42Z</div><div class="f" style="top:47px;">$55,252 &rarr; $60,230</div><div class="s" style="top:73px;">BTC two-year low</div></div>
+  <div class="col" style="left:656px;"><div class="f" style="top:13px;">98.5%</div><div class="s" style="top:39px;">tariffs removed</div><div class="f" style="top:47px;">$2.4bn</div><div class="s" style="top:73px;">crypto futures</div></div>
+  <div class="col" style="left:970px;"><div class="f" style="top:13px;">856 candidates</div><div class="s" style="top:39px;">723 seats</div><div class="f" style="top:47px;">12-2</div><div class="s" style="top:73px;">sumo leaders, final day</div></div>
 </div>
 
 <!-- FOOTER 1932-2048 -->
