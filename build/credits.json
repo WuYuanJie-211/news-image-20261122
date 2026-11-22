@@ -1,0 +1,35 @@
+[
+  {
+    "author": "U.S. Navy (Photographer's Mate 1st Class Jim Hampshire)",
+    "date": "2005-12-01",
+    "description": "Guided-missile destroyer USS The Sullivans (DDG 68) cruises up the Delaware River, Philadelphia — file photo of the destroyer class homeported with the U.S. 5th Fleet in Bahrain, the base area hit in the 21 Nov 2026 IRGC strikes. U.S. Navy photo, public domain. (The SURFLANT Manama 2022 photo named in research could not be downloaded — navy.mil blocks direct access; substituted with this Commons-hosted US Navy photo of the same ship.)",
+    "fetched": "2026-11-22",
+    "file": "build/uss_sullivans_hero.jpg",
+    "license": "Public domain (U.S. Navy)",
+    "slot": "hero 01 — Bahrain / 5th Fleet",
+    "source": "Wikimedia Commons (U.S. Navy photo)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:USS_The_Sullivans_DDG-68.jpg"
+  },
+  {
+    "author": "Francisco Anzola",
+    "date": "2017-09-17",
+    "description": "Street scene in Lviv, Ukraine — the city hit in Russia's 400-drone / 110-missile barrage of 19–20 Nov 2026 (2 killed, 10+ injured in Lviv).",
+    "fetched": "2026-11-22",
+    "file": "build/lviv_street_hero.jpg",
+    "license": "CC BY-SA",
+    "slot": "hero 02 — Lviv / Ukraine barrage",
+    "source": "Wikimedia Commons (via Flickr)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Out_and_about_in_Lviv.jpg"
+  },
+  {
+    "author": "Crymaker",
+    "date": "2006-10-10",
+    "description": "Beach of Kemer on the Antalya coast, Türkiye — host city of COP31, where talks went into overtime on 21 Nov 2026 deadlocked over fossil-fuel wording.",
+    "fetched": "2026-11-22",
+    "file": "build/antalya_coast_hero.jpg",
+    "license": "CC BY-SA 2.5",
+    "slot": "hero 03 — Antalya / COP31",
+    "source": "Wikimedia Commons (via Wikivoyage)",
+    "source_url": "https://en.wikivoyage.org/wiki/File:Kemer_beach,_Antalya.jpg"
+  }
+]
