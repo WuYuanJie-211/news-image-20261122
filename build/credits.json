@@ -31,5 +31,18 @@
     "slot": "hero 03 — Antalya / COP31",
     "source": "Wikimedia Commons (via Wikivoyage)",
     "source_url": "https://en.wikivoyage.org/wiki/File:Kemer_beach,_Antalya.jpg"
+  },
+  {
+    "slot": "palette — region colours (documented per Superbot v1 synthesis P2)",
+    "regions": {
+      "MIDDLE EAST": "#A63A2E",
+      "EUROPE": "#2F5D8A",
+      "ASIA": "#B97A1E",
+      "AMERICAS": "#4A7A3D",
+      "AFRICA": "#8A5A28",
+      "OCEANIA": "#6A5E8C",
+      "MARKETS+SPORT": "#5A5A5A"
+    },
+    "note": "Region hexes used for the region strip swatches, card left edges and kickers. Detail grey #404040 (was #5A5A5A)."
   }
 ]
