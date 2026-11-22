@@ -17,11 +17,11 @@ MAX_BYTES = 1024 * 1024
 
 
 def check_front() -> None:
-    """v7 self-check: fail loudly if any v7 string regresses in the source.
+    """v8 self-check: fail loudly if any v7/v8 string regresses in the source.
 
     Reads build/front.html (the rendered page) and verifies the strings the
-    v7 fix round depends on. The build fails instead of shipping a page
-    that re-breaks a reviewer blocker.
+    v7 and v8 fix rounds depend on. The build fails instead of shipping a
+    page that re-breaks a reviewer blocker.
     """
     import re
 
@@ -54,6 +54,26 @@ def check_front() -> None:
         problems.append("17:00 UTC missing")
     if html.count("5,640 voters") < 2:
         problems.append("5,640 voters must appear in both the HK card and the stat (B4)")
+    # v8 B1: the DATE CHECK must use the narrowed wording, not the v7
+    # universal claims (Quick's v7 blocker: 35 of 36 stories show no date,
+    # and Texans 19 Nov / trilateral 19 Nov sit in the main list).
+    if "Every story carries the date" in html:
+        problems.append(
+            "v7 DATE CHECK claim still present (B1: use the narrowed wording)"
+        )
+    if html.count("carried above") != 1:
+        problems.append(
+            f"DATE CHECK must say 'carried above' exactly once "
+            f"(found {html.count('carried above')}) (B1)"
+        )
+    if "5,709" in html:
+        problems.append("derived 5,709 printed (B4: never print the derived total)")
+    if "LVV" in html:
+        problems.append("LVV still present (inset label must read LVIV)")
+    if "AYT" in html:
+        problems.append("AYT still present (inset label must read ANTALYA)")
+    if 'font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">B</text>' not in html:
+        problems.append("inset pin B must be 12px (14px renders as a vertical bar)")
     # B3: every CONFIRMED card badge must name two outlets, scoped to the
     # big-cards block (heroes carry their sources in .src, not .so).
     cards = html[html.index("<!-- BIG CARDS"):html.index("<!-- MAP")]
@@ -65,9 +85,18 @@ def check_front() -> None:
             f"CONFIRMED badges ({badges}) != CONFIRMED .so lines ({len(so_lines)}) "
             f"!= two-outlet lines ({len(two)}) (B3)"
         )
+    # 36 story slots: 1 lead hero + 2 side heroes + 10 big cards + 23 list rows.
+    slots = (
+        html.count('<div class="lead">')
+        + html.count('<div class="rhero"')
+        + html.count('<div class="bcard"')
+        + html.count('<div class="row"')
+    )
+    if slots != 36:
+        problems.append(f"story slots must be 36 (found {slots})")
     if problems:
-        raise SystemExit("front.html v7 check failed:\n- " + "\n- ".join(problems))
-    print(f"front.html v7 check ok: {badges} CONFIRMED cards, all with 2 outlets")
+        raise SystemExit("front.html v8 check failed:\n- " + "\n- ".join(problems))
+    print(f"front.html v8 check ok: {badges} CONFIRMED cards, all with 2 outlets; 36 slots")
 
 
 def self_check(data: bytes) -> None:
