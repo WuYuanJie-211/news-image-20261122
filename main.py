@@ -25,9 +25,13 @@ def self_check(data: bytes) -> None:
     width, height = struct.unpack(">II", data[16:24])
     if (width, height) != (1024, 1024):
         raise SystemExit(f"entry.png is {width}x{height}, want 1024x1024")
+    if data[-12:] != b"\x00\x00\x00\x00IEND\xaeB`\x82":
+        raise SystemExit("entry.png is truncated: missing IEND chunk")
 
 
-def main() -> int:
+def main(argv=None) -> int:
+    args = list(sys.argv[1:] if argv is None else argv)
+    verify_only = "--verify-only" in args
     if not os.path.isfile(SRC):
         print(f"missing {SRC}", file=sys.stderr)
         return 1
@@ -35,6 +39,8 @@ def main() -> int:
         data = fh.read()
     self_check(data)
     print(f"entry.png {len(data)} bytes sha256={hashlib.sha256(data).hexdigest()}")
+    if verify_only:
+        return 0
     os.makedirs(os.path.dirname(DST), exist_ok=True)
     shutil.copyfile(SRC, DST)
     return 0
