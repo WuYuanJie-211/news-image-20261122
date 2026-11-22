@@ -31,22 +31,19 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 .b-rep { background:#9C6E00; }
 .b-claim { background:#A63A2E; }
 .lead { position:absolute; left:48px; top:444px; width:1296px; height:296px; }
-.lead img { width:1296px; height:168px; display:block; object-fit:cover; }
-.lead .scrim { position:absolute; left:0; top:108px; width:1296px; height:60px; background:linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.55)); }
-.lead .credit { position:absolute; right:12px; top:146px; font-size:11px; color:#FFFFFF; }
+.lead svg { display:block; }
 .lead .kick { position:absolute; left:0; top:172px; font-size:16px; font-weight:bold; letter-spacing:2px; white-space:nowrap; }
 .lead .bdg { top:170px; right:0; }
 .lead .head { position:absolute; left:0; top:194px; font-size:44px; font-weight:bold; line-height:48px; white-space:nowrap; }
 .lead .dek { position:absolute; left:0; top:246px; font-size:18px; white-space:nowrap; }
 .lead .src { position:absolute; left:0; top:270px; font-size:13px; color:#404040; letter-spacing:1px; white-space:nowrap; }
-.sec { position:absolute; width:240px; height:148px; }
-.sec img { width:240px; height:148px; display:block; object-fit:cover; }
-.sect { position:absolute; width:384px; height:148px; }
-.sect .kick { position:absolute; left:0; top:4px; font-size:13px; font-weight:bold; letter-spacing:1px; white-space:nowrap; }
-.sect .bdg { top:2px; right:0; }
-.sect .head { position:absolute; left:0; top:24px; font-size:26px; font-weight:bold; line-height:30px; }
-.sect .det { position:absolute; left:0; top:92px; font-size:13px; color:#404040; white-space:nowrap; }
-.sect .src { position:absolute; left:0; top:114px; font-size:11px; color:#404040; letter-spacing:0.5px; white-space:nowrap; }
+.rhero { position:absolute; width:312px; height:296px; }
+.rhero svg { display:block; }
+.rhero .kick { position:absolute; left:0; top:172px; font-size:13px; font-weight:bold; letter-spacing:1px; white-space:nowrap; }
+.rhero .bdg { top:170px; right:0; }
+.rhero .head { position:absolute; left:0; top:194px; width:312px; font-size:24px; font-weight:bold; line-height:28px; }
+.rhero .det { position:absolute; left:0; top:256px; font-size:13px; color:#404040; white-space:nowrap; }
+.rhero .src { position:absolute; left:0; top:278px; font-size:11px; color:#404040; letter-spacing:0.5px; white-space:nowrap; }
 .bcard { position:absolute; width:376px; height:244px; }
 .bcard svg { display:block; }
 .bcard .nb { position:absolute; left:12px; top:12px; width:24px; height:24px; border-radius:50%; background:#191919; color:#FFFFFF; font-size:14px; font-weight:bold; text-align:center; line-height:24px; }
@@ -65,8 +62,9 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 .dc { position:absolute; left:48px; top:1720px; width:1952px; height:220px; border:3px solid #B01E1E; background:#FDFBF5; }
 .dc .l { position:absolute; left:16px; font-size:23px; white-space:nowrap; }
 .dc .l b { color:#B01E1E; }
-.dc .col { position:absolute; top:104px; width:950px; font-size:22px; line-height:32px; }
+.dc .col { position:absolute; top:112px; width:950px; font-size:23px; line-height:36px; }
 .dc .col b { color:#B01E1E; }
+.dc .rule { position:absolute; left:16px; top:98px; width:1920px; border-top:1px solid #C9BFA4; }
 .foot { position:absolute; left:48px; font-size:20px; line-height:32px; white-space:nowrap; }
 </style></head><body>
 
@@ -108,29 +106,29 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 
 <!-- HEROES 444-740 -->
 <div class="lead">
-  <img src="lead_lviv.jpg" alt="Lviv street">
+  <svg width="1296" height="168" viewBox="0 0 1296 168"><rect width="1296" height="168" fill="#1E2A4A"/><rect y="120" width="1296" height="48" fill="#7A3B1E" opacity="0.55"/><g fill="#12141F"><rect x="0" y="96" width="90" height="72"/><rect x="100" y="78" width="70" height="90"/><rect x="180" y="104" width="110" height="64"/><rect x="300" y="70" width="80" height="98"/><rect x="390" y="100" width="100" height="68"/><rect x="500" y="82" width="70" height="86"/><rect x="580" y="108" width="120" height="60"/><rect x="710" y="74" width="80" height="94"/><rect x="800" y="100" width="90" height="68"/><rect x="900" y="84" width="70" height="84"/><rect x="980" y="106" width="110" height="62"/><rect x="1100" y="76" width="80" height="92"/><rect x="1190" y="100" width="106" height="68"/></g><g fill="#F2C94C"><rect x="120" y="92" width="8" height="10"/><rect x="140" y="110" width="8" height="10"/><rect x="320" y="86" width="8" height="10"/><rect x="340" y="120" width="8" height="10"/><rect x="520" y="96" width="8" height="10"/><rect x="730" y="90" width="8" height="10"/><rect x="920" y="100" width="8" height="10"/><rect x="1120" y="92" width="8" height="10"/><rect x="1140" y="120" width="8" height="10"/></g><rect y="150" width="1296" height="18" fill="#16283F"/><g stroke="#7FA8C9" stroke-width="3" fill="none"><path d="M180 150 Q230 128 280 150"/><path d="M640 150 Q690 128 740 150"/><path d="M1020 150 Q1070 128 1120 150"/></g><g stroke="#F6F1E5" stroke-width="2"><line x1="200" y1="20" x2="260" y2="55"/><line x1="600" y1="12" x2="660" y2="48"/><line x1="980" y1="24" x2="1030" y2="58"/><line x1="1150" y1="10" x2="1200" y2="44"/></g><g fill="#F6F1E5"><circle cx="260" cy="55" r="4"/><circle cx="660" cy="48" r="4"/><circle cx="1030" cy="58" r="4"/><circle cx="1200" cy="44" r="4"/></g><g><circle cx="340" cy="70" r="18" fill="#E8710A"/><circle cx="340" cy="70" r="9" fill="#F2A900"/><path d="M340 44 L340 96 M314 70 L366 70 M322 52 L358 88 M358 52 L322 88" stroke="#F2A900" stroke-width="4"/><circle cx="760" cy="58" r="22" fill="#E8710A"/><circle cx="760" cy="58" r="11" fill="#F2A900"/><path d="M760 28 L760 88 M730 58 L790 58 M739 37 L781 79 M781 37 L739 79" stroke="#F2A900" stroke-width="4"/><circle cx="1080" cy="76" r="15" fill="#E8710A"/><circle cx="1080" cy="76" r="7" fill="#F2A900"/></g><g fill="#555555" opacity="0.7"><circle cx="340" cy="40" r="10"/><circle cx="760" cy="26" r="12"/><circle cx="1080" cy="50" r="9"/></g></svg>
   <div class="banner">LVIV &middot; 8 KILLED NATIONWIDE</div>
-  <div class="scrim"></div>
-  <div class="credit">Lviv, 2017, Francisco Anzola, CC BY-SA</div>
   <div class="kick" style="color:#2F5D8A;">UKRAINE &middot; 19&ndash;20 NOVEMBER &middot; LEAD</div>
   <div class="bdg b-conf">CONFIRMED</div>
   <div class="head">400 drones, 110 missiles: 8 killed</div>
   <div class="dek">Six died in Kyiv, two in Lviv. Three Dnipro crossings hit in the capital. 27 ballistic.</div>
   <div class="src">Zelenskyy &middot; Euronews &middot; Al Jazeera</div>
 </div>
-<div class="sec" style="left:1360px; top:444px;"><img src="sec_bahrain.jpg" alt="USS The Sullivans"><div class="banner">BAHRAIN &middot; US BASES HIT</div></div>
-<div class="sect" style="left:1616px; top:444px;">
+<div class="rhero" style="left:1360px; top:444px;">
+  <svg width="312" height="168" viewBox="0 0 312 168"><rect width="312" height="168" fill="#3A2E4A"/><rect y="104" width="312" height="64" fill="#7A3B1E" opacity="0.5"/><rect y="132" width="312" height="36" fill="#232323"/><g><rect x="36" y="112" width="120" height="20" fill="#4A5A3D"/><rect x="156" y="118" width="28" height="14" fill="#3A4A2E"/><circle cx="60" cy="134" r="7" fill="#191919"/><circle cx="132" cy="134" r="7" fill="#191919"/><circle cx="168" cy="134" r="7" fill="#191919"/><g fill="#6B7A5A"><rect x="52" y="84" width="12" height="30" transform="rotate(18 58 99)"/><rect x="72" y="84" width="12" height="30" transform="rotate(18 78 99)"/><rect x="92" y="84" width="12" height="30" transform="rotate(18 98 99)"/><rect x="112" y="84" width="12" height="30" transform="rotate(18 118 99)"/></g></g><g><rect x="226" y="70" width="6" height="62" fill="#555555"/><rect x="206" y="52" width="46" height="22" fill="#8A8A8A" transform="rotate(-18 229 63)"/><circle cx="229" cy="63" r="5" fill="#B01E1E"/></g><g stroke="#F6F1E5" stroke-width="2"><line x1="40" y1="8" x2="70" y2="40"/><line x1="150" y1="4" x2="170" y2="36"/><line x1="270" y1="10" x2="250" y2="42"/></g><g fill="#F6F1E5"><circle cx="70" cy="40" r="4"/><circle cx="170" cy="36" r="4"/><circle cx="250" cy="42" r="4"/></g><g><circle cx="229" cy="48" r="14" fill="#E8710A"/><circle cx="229" cy="48" r="7" fill="#F2A900"/><circle cx="90" cy="66" r="11" fill="#E8710A"/><circle cx="90" cy="66" r="5" fill="#F2A900"/></g></svg>
+  <div class="banner">BAHRAIN &middot; CLAIMS US BASES HIT</div>
   <div class="kick" style="color:#A63A2E;">BAHRAIN &middot; US BASES</div>
   <div class="bdg b-claim">CLAIM</div>
-  <div class="head">IRGC claims it hit two<br>Patriot radars</div>
+  <div class="head">IRGC claims it hit two Patriot radars</div>
   <div class="det">Bahrain: industrial fire, no injuries</div>
   <div class="src">IRGC claim &mdash; Al Jazeera &middot; TASS; Bahrain govt</div>
 </div>
-<div class="sec" style="left:1360px; top:596px;"><img src="sec_cop31.jpg" alt="Antalya coast"><div class="banner">ANTALYA &middot; NO DEAL</div></div>
-<div class="sect" style="left:1616px; top:596px;">
+<div class="rhero" style="left:1688px; top:444px;">
+  <svg width="312" height="168" viewBox="0 0 312 168"><rect width="312" height="168" fill="#E8DCC0"/><rect y="140" width="312" height="28" fill="#C9BFA4"/><g><rect x="58" y="26" width="4" height="70" fill="#5A4632"/><rect x="62" y="26" width="34" height="20" fill="#2F5D8A"/><rect x="154" y="26" width="4" height="70" fill="#5A4632"/><rect x="158" y="26" width="34" height="20" fill="#2E7D32"/><rect x="250" y="26" width="4" height="70" fill="#5A4632"/><rect x="254" y="26" width="34" height="20" fill="#B01E1E"/></g><rect x="16" y="96" width="280" height="10" fill="#5A4632"/><rect x="20" y="106" width="272" height="34" fill="#2E6B4F"/><g fill="#191919"><rect x="78" y="82" width="3" height="14"/><circle cx="79" cy="80" r="5"/><rect x="154" y="82" width="3" height="14"/><circle cx="155" cy="80" r="5"/><rect x="230" y="82" width="3" height="14"/><circle cx="231" cy="80" r="5"/></g><g><rect x="140" y="88" width="26" height="8" fill="#5A4632" transform="rotate(-12 153 92)"/><rect x="150" y="80" width="8" height="18" fill="#3A2A1A" transform="rotate(-12 154 89)"/></g><g fill="#FDFBF5" stroke="#191919" stroke-width="1"><path d="M112 118 L148 118 L144 126 L150 134 L145 142 L150 150 L146 158 L112 158 Z"/><path d="M162 118 L198 118 L198 158 L166 158 L170 150 L164 142 L170 134 L164 126 Z"/></g><path d="M150 118 L162 118" stroke="#B01E1E" stroke-width="3"/></svg>
+  <div class="banner">ANTALYA &middot; NO DEAL</div>
   <div class="kick" style="color:#2E6B4F;">COP31 &middot; ANTALYA, NO DEAL</div>
   <div class="bdg b-conf">CONFIRMED</div>
-  <div class="head">COP31 collapses &mdash;<br>no deal</div>
+  <div class="head">COP31 collapses &mdash; no deal</div>
   <div class="det">EU rejects draft &middot; first failure since 2009</div>
   <div class="src">COP31 draft text &middot; Reuters</div>
 </div>
@@ -153,7 +151,7 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 <div class="so">CONFIRMED &middot; BBC</div>
 </div>
 <div class="bcard" style="left:836px; top:740px;">
-<svg width="376" height="104" viewBox="0 0 376 104"><rect width="376" height="104" fill="#FDFBF5"/><rect x="90" y="12" width="70" height="76" fill="#B97A1E"/><rect x="216" y="76" width="70" height="12" fill="#2E7D32"/><path d="M60 88 L316 88" stroke="#191919" stroke-width="3"/></svg>
+<svg width="376" height="104" viewBox="0 0 376 104"><rect width="376" height="104" fill="#FDFBF5"/><path d="M48 88 L336 88" stroke="#191919" stroke-width="3"/><path d="M48 16 L48 88" stroke="#191919" stroke-width="3"/><path d="M60 24 L60 88 M140 40 L140 88 M220 58 L220 88 M300 76 L300 88" stroke="#B97A1E" stroke-width="2" stroke-dasharray="4 4" opacity="0.5"/><path d="M60 24 L140 40 L220 58 L300 76" stroke="#B97A1E" stroke-width="6" fill="none"/><g fill="#B97A1E"><circle cx="60" cy="24" r="7"/><circle cx="140" cy="40" r="7"/><circle cx="220" cy="58" r="7"/><circle cx="300" cy="76" r="7"/></g><g font-family="DejaVu Sans" font-size="16" font-weight="bold" fill="#191919"><text x="60" y="14" text-anchor="middle">50%</text><text x="300" y="64" text-anchor="middle">0%</text></g></svg>
 <div class="nb">6</div><div class="bdg b-off">OFFICIAL</div>
 <div class="kick" style="color:#B97A1E;">ASIA &middot; JAKARTA</div>
 <div class="head">EU&ndash;Indonesia deal, 10 years<br>on: 98.5% tariffs gone</div>
@@ -161,7 +159,7 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 <div class="so">OFFICIAL &middot; EU COUNCIL</div>
 </div>
 <div class="bcard" style="left:1230px; top:740px;">
-<svg width="376" height="104" viewBox="0 0 376 104"><rect width="376" height="104" fill="#2F5D8A"/><rect x="40" y="40" width="90" height="48" fill="#F6F1E5"/><rect x="52" y="30" width="66" height="12" fill="#F6F1E5"/><rect x="70" y="34" width="30" height="4" fill="#191919"/><rect x="170" y="30" width="166" height="14" fill="#191919" opacity="0.35"/><rect x="170" y="30" width="164" height="14" fill="#2E7D32"/><path d="M180 56 l14 14 l26 -30" stroke="#2E7D32" stroke-width="8" fill="none"/></svg>
+<svg width="376" height="104" viewBox="0 0 376 104"><rect width="376" height="104" fill="#2F5D8A"/><rect x="150" y="6" width="34" height="30" fill="#FDFBF5" transform="rotate(8 167 21)"/><path d="M158 20 l8 8 l14 -16" stroke="#2E7D32" stroke-width="4" fill="none" transform="rotate(8 167 21)"/><rect x="110" y="30" width="130" height="12" fill="#F6F1E5"/><rect x="150" y="32" width="50" height="4" fill="#191919"/><rect x="120" y="42" width="110" height="50" fill="#F6F1E5"/><circle cx="175" cy="67" r="17" fill="#2E7D32"/><path d="M166 67 l7 7 l13 -14" stroke="#F6F1E5" stroke-width="5" fill="none"/><rect x="60" y="70" width="30" height="22" fill="#F6F1E5" opacity="0.35"/><rect x="286" y="70" width="30" height="22" fill="#F6F1E5" opacity="0.35"/></svg>
 <div class="nb">7</div><div class="bdg b-off">OFFICIAL</div>
 <div class="kick" style="color:#B97A1E;">ASIA &middot; HONG KONG</div>
 <div class="head">HK votes: turnout 98.79%<br>5,640 voters, results tonight</div>
@@ -179,7 +177,7 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 
 <!-- BIG CARDS 9-13 : 984-1228 -->
 <div class="bcard" style="left:48px; top:984px;">
-<svg width="376" height="104" viewBox="0 0 376 104"><rect width="376" height="104" fill="#1E3A5F"/><circle cx="140" cy="52" r="26" fill="none" stroke="#D8D8D8" stroke-width="10"/><circle cx="236" cy="52" r="26" fill="none" stroke="#D8D8D8" stroke-width="10"/><circle cx="166" cy="52" r="8" fill="#D8D8D8"/><circle cx="188" cy="52" r="8" fill="#D8D8D8"/><circle cx="210" cy="52" r="8" fill="#D8D8D8"/></svg>
+<svg width="376" height="104" viewBox="0 0 376 104"><rect width="376" height="104" fill="#1E3A5F"/><path d="M158,34 A26,26 0 1 0 158,70" stroke="#D8D8D8" stroke-width="12" fill="none"/><path d="M218,34 A26,26 0 1 1 218,70" stroke="#D8D8D8" stroke-width="12" fill="none"/><path d="M164,52 L212,52" stroke="#D8D8D8" stroke-width="6"/><g stroke="#D8D8D8" stroke-width="4" fill="none"><circle cx="180" cy="52" r="7"/><circle cx="196" cy="52" r="7"/></g></svg>
 <div class="nb">9</div><div class="bdg b-conf">CONFIRMED</div>
 <div class="kick" style="color:#4A7A3D;">AMERICAS &middot; SINALOA</div>
 <div class="head">&lsquo;El Chapo Isidro&rsquo; captured<br>11 killed in clashes after</div>
@@ -228,7 +226,7 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
   <circle cx="708" cy="148" r="4.8" fill="#191919"/>
 </svg>
 <div class="pin" style="left:834px; top:1408px;">A</div><div class="plab" style="left:858px; top:1398px;">BAH</div>
-<div class="badge" style="left:1108px; top:1512px;">EU &times;4</div>
+<div class="badge" style="left:976px; top:1512px;">EU &times;4</div>
 <div class="pin" style="left:1054px; top:1420px;">F</div><div class="plab" style="left:1078px; top:1410px;">HKG</div>
 <div class="pin" style="left:404px; top:1516px;">H</div><div class="plab" style="left:330px; top:1506px;">PER</div>
 <div class="pin" style="left:1100px; top:1502px;">G</div><div class="plab" style="left:1124px; top:1492px;">BND</div>
@@ -239,45 +237,46 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 <!-- EUROPE INSET 992,1532 264x184 -->
 <div style="position:absolute; left:976px; top:1532px; width:264px; height:184px; background:#FDFBF5; border:2px solid #191919;">
   <svg width="264" height="184" viewBox="0 0 264 184">
-    <path d="M5,179 L5,137 L24,116 L48,110 L72,89 L96,68 L72,63 L100,40 L134,0 L144,11 L192,32 L192,53 L163,63 L139,84 L182,132 L212,148 L196,170 L158,168 L134,158 L125,168 L106,147 L67,142 L62,147 L38,174 Z" fill="#DCD2B8" stroke="#B7AB8E" stroke-width="1.5"/>
-    <g fill="#D95F02"><circle cx="98" cy="70" r="8"/><circle cx="168" cy="53" r="8"/><circle cx="163" cy="105" r="8"/><circle cx="192" cy="168" r="8"/></g>
+    <path d="M10,150 L10,115 L30,95 L55,85 L80,65 L100,50 L85,40 L115,5 L145,10 L185,28 L190,50 L165,62 L145,80 L180,115 L205,140 L195,165 L170,172 L150,150 L140,170 L118,142 L75,135 L55,140 L35,165 Z" fill="#DCD2B8" stroke="#B7AB8E" stroke-width="1.5"/>
+    <g fill="#D95F02"><circle cx="102" cy="56" r="8"/><circle cx="172" cy="52" r="8"/><circle cx="163" cy="105" r="8"/><circle cx="193" cy="163" r="8"/></g>
     <g font-family="DejaVu Sans" font-size="12" font-weight="bold" fill="#191919">
-      <text x="110" y="74">CPH</text><text x="180" y="57">GOF</text><text x="175" y="109">LVV</text><text x="204" y="172">AYT</text>
+      <text x="114" y="60">CPH</text><text x="184" y="56">GOF</text><text x="175" y="109">LVV</text><text x="205" y="167">AYT</text>
     </g>
-  <g font-family="DejaVu Sans" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><text x="98" y="74">E</text><text x="168" y="57">D</text><text x="163" y="109">B</text><text x="192" y="172">C</text></g></svg>
+  <g font-family="DejaVu Sans" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><text x="102" y="60">E</text><text x="172" y="56">D</text><text x="163" y="109">B</text><text x="193" y="167">C</text></g></svg>
 </div>
 
 <!-- ALSO ON LIST 14-36 -->
 <div class="lst">
 <div class="lh">ALSO IN THIS EDITION &mdash; 23 MORE STORIES</div>
 <div class="row" style="top:34px;"><span class="n">14</span> &middot; Zelenskyy: NATO is the guarantee &mdash; Anadolu</div>
-<div class="row" style="top:54px;"><span class="n">15</span> &middot; Costa: &euro;44bn more in cuts &mdash; Reuters</div>
-<div class="row" style="top:74px;"><span class="n">16</span> &middot; Macron hosts Kamala Harris &mdash; Politico</div>
-<div class="row" style="top:94px;"><span class="n">17</span> &middot; Banda Sea M6.9, tsunami bulletins &mdash; GDACS</div>
-<div class="row" style="top:114px;"><span class="n">18</span> &middot; First Trump&ndash;Putin&ndash;Xi table &mdash; NYT</div>
-<div class="row" style="top:134px;"><span class="n">19</span> &middot; Takaichi gets a cold welcome &mdash; Japan Times</div>
-<div class="row" style="top:154px;"><span class="n">20</span> &middot; Pakistani minister in India &mdash; Dawn</div>
-<div class="row" style="top:174px;"><span class="n">21</span> &middot; Sen&rsquo;s 13-match run ends &mdash; Times of India</div>
-<div class="row" style="top:194px;"><span class="n">22</span> &middot; Onosato takes the title &mdash; News On Japan</div>
-<div class="row" style="top:214px;"><span class="n">23</span> &middot; Supercell kills 3 in Brazil &mdash; Straits Times</div>
-<div class="row" style="top:234px;"><span class="n">24</span> &middot; Hegseth curbs US&ndash;Canada defence &mdash; Washington Post</div>
-<div class="row" style="top:254px;"><span class="n">25</span> &middot; Anthropic falls 6% on day 2 &mdash; CNBC</div>
-<div class="row" style="top:274px;"><span class="n">26</span> &middot; Charity kitchens go dark &mdash; Sudan Tribune</div>
-<div class="row" style="top:294px;"><span class="n">27</span> &middot; Amnesty: probe RSF strikes &mdash; Amnesty</div>
-<div class="row" style="top:314px;"><span class="n">28</span> &middot; Troops mass on Ethiopia&ndash;Eritrea border &mdash; DW</div>
-<div class="row" style="top:334px;"><span class="n">29</span> &middot; 1,671 dead since the truce &mdash; Reuters</div>
-<div class="row" style="top:354px;"><span class="n">30</span> &middot; Pugh swims the strait &mdash; Straits Times</div>
-<div class="row" style="top:374px;"><span class="n">31</span> &middot; 350,000 displaced since August &mdash; UN</div>
-<div class="row" style="top:394px;"><span class="n">32</span> &middot; Fred Nile dies at 92 &mdash; ABC News</div>
-<div class="row" style="top:414px;"><span class="n">33</span> &middot; Election one week out &mdash; ABC News</div>
-<div class="row" style="top:434px;"><span class="n">34</span> &middot; Bitcoin slides to $55,252 &mdash; Reuters</div>
-<div class="row" style="top:454px;"><span class="n">35</span> &middot; Zverev, Alcaraz into final &mdash; Straits Times</div>
-<div class="row" style="top:474px;"><span class="n">36</span> &middot; Texans 26-3 Colts &mdash; NFL.com</div>
+<div class="row" style="top:53px;"><span class="n">15</span> &middot; Costa: &euro;44bn more in cuts &mdash; Reuters</div>
+<div class="row" style="top:72px;"><span class="n">16</span> &middot; Macron hosts Kamala Harris &mdash; Politico</div>
+<div class="row" style="top:91px;"><span class="n">17</span> &middot; Banda Sea M6.9, tsunami bulletins &mdash; GDACS</div>
+<div class="row" style="top:110px;"><span class="n">18</span> &middot; First Trump&ndash;Putin&ndash;Xi table &mdash; NYT</div>
+<div class="row" style="top:129px;"><span class="n">19</span> &middot; Takaichi gets a cold welcome &mdash; Japan Times</div>
+<div class="row" style="top:148px;"><span class="n">20</span> &middot; Pakistani minister in India &mdash; Dawn</div>
+<div class="row" style="top:167px;"><span class="n">21</span> &middot; Sen&rsquo;s 13-match run ends &mdash; Times of India</div>
+<div class="row" style="top:186px;"><span class="n">22</span> &middot; Onosato takes the title &mdash; News On Japan</div>
+<div class="row" style="top:205px;"><span class="n">23</span> &middot; Supercell kills 3 in Brazil &mdash; Straits Times</div>
+<div class="row" style="top:224px;"><span class="n">24</span> &middot; Hegseth curbs US&ndash;Canada defence &mdash; Washington Post</div>
+<div class="row" style="top:243px;"><span class="n">25</span> &middot; Anthropic falls 6% on day 2 &mdash; CNBC</div>
+<div class="row" style="top:262px;"><span class="n">26</span> &middot; Charity kitchens go dark &mdash; Sudan Tribune</div>
+<div class="row" style="top:281px;"><span class="n">27</span> &middot; Amnesty: probe RSF strikes &mdash; Amnesty</div>
+<div class="row" style="top:300px;"><span class="n">28</span> &middot; Troops mass on Ethiopia&ndash;Eritrea border &mdash; DW</div>
+<div class="row" style="top:319px;"><span class="n">29</span> &middot; 1,671 dead since the truce &mdash; Reuters</div>
+<div class="row" style="top:338px;"><span class="n">30</span> &middot; Pugh swims the strait &mdash; Straits Times</div>
+<div class="row" style="top:357px;"><span class="n">31</span> &middot; 350,000 displaced since August &mdash; UN</div>
+<div class="row" style="top:376px;"><span class="n">32</span> &middot; Fred Nile dies at 92 &mdash; ABC News</div>
+<div class="row" style="top:395px;"><span class="n">33</span> &middot; Election one week out &mdash; ABC News</div>
+<div class="row" style="top:414px;"><span class="n">34</span> &middot; Bitcoin slides to $55,252 &mdash; Reuters</div>
+<div class="row" style="top:433px;"><span class="n">35</span> &middot; Zverev, Alcaraz into final &mdash; Straits Times</div>
+<div class="row" style="top:452px;"><span class="n">36</span> &middot; Texans 26-3 Colts &mdash; NFL.com</div>
 </div>
 
 <!-- DATE CHECK 1720-1940 -->
 <div class="dc">
   <div class="l" style="top:30px;"><b>DATE CHECK &check;</b> This paper is dated Sunday 22 November 2026; every story is dated to the day it was first reported.</div>
+  <div class="rule"></div>
   <div class="col" style="left:16px;"><b>LEFT OUT:</b> ICJ Myanmar genocide verdict, 19 Nov &mdash; first reported before today&rsquo;s edition &middot; FBI breach probe, reported 20&ndash;21 Nov, unconfirmed</div>
   <div class="col" style="left:1000px;"><b>NOT YET:</b> ATP final, 18:00 CET &middot; Hong Kong seat results, counting tonight</div>
 </div>
