@@ -1,14 +1,40 @@
 #!/usr/bin/env python3
-"""news-image-20261122 entrypoint (v13): copy entry.png to /output/entry.png.
+"""news-image-20261122 entrypoint (v14): copy entry.png to /output/entry.png.
 
 Stdlib only. No network. Deterministic: the output bytes are exactly the
 input bytes, so two runs are byte-identical.
 
-v13 is the combined-verified fix round on v12 (no Superbot v13 plan:
-reserve #3 hit its daily request limit mid-reply on the synthesis, so
-v13 is built from the parent-verified fix list, not a Superbot plan).
-Both reviewers ruled v12 NOT READY; every v13 item below was verified
-real by the parent against the render/source before building.
+v14 is the SUBSTANTIAL round on v13 (Quick ruled v13 READY with no
+blocking fixes, so v14 changes first-glance impact, not defects).
+v13 scored judge 969,381 (10W 1D 1L), +2,886 vs round 2; the top-50
+cutoff is ~989,000, so the gap is ~20,000 points (about 2 duel flips).
+Per the score-gap study, the gap is the TEMPLATE, not polish: the
+winners make the DATE the biggest type (~90px serif, full width), put
+a dek under it stringing the top stories, and show 6 big numbers
+prominently. v14 does three things, all first-glance:
+1. Date 120px DejaVu Serif -> 170px Liberation Serif Bold at 2x
+   (60 -> 85 display, +42%), the single biggest first-glance change;
+   DejaVu Serif is too wide (144px = 2166px, overflows the 2048 page),
+   Liberation Serif Bold 170px = 1938px and fits. The masthead grows
+   78px (rule 140->218).
+2. New ink italic dek under the date (28px at 2x, serif italic, INK
+   not red so the red=3 rule holds): "COP31 collapses in Antalya ·
+   Russia's 400-drone barrage on Ukraine · Iran claims strikes on US
+   bases in Bahrain" — the top 3 stories, exactly like both 11-22
+   winners. "ALL TIMES UTC" is dropped (the timeline header says
+   THE DAY IN UTC); "36 STORIES · 12 PINS" moves to the dek line,
+   right-aligned. No story, date, number or source changes.
+3. Numbers bigger: largest 56->68px, middle 52->60px, smallest
+   40->48px at 2x (28->34 / 26->30 / 20->24 display), shared
+   baseline kept at 378. The winners' numbers are ~44px display;
+   34px is a big step toward that.
+Space comes from the lead illustration (520->468px tall at 2x,
+viewBox 1180x494 squashed 5% via preserveAspectRatio=none).
+Everything below the masthead shifts +78; everything below the lead
+shifts +26 (masthead +78 minus lead -52).
+The self-check below pins the v14 layout strings and the v14
+acceptance geometry, so a later edit cannot silently re-break a
+reviewer blocker or the v14 first-glance changes.
 
 NOT a fix (already correct, do not "fix"): Superbot claimed card 02
 (Lviv) is missing and the footer tally is wrong. That is a misread.
@@ -42,9 +68,9 @@ v13 fixes, in order:
    only 14px at 2x, so a larger font would collide with the box or be
    truncated by ellipsis. Noted, not changed.
 
-The self-check below pins the v13 layout strings and the v13
+The self-check below pins the v14 layout strings and the v14
 acceptance geometry, so a later edit cannot silently re-break a
-reviewer blocker.
+reviewer blocker or a v14 first-glance change.
 """
 import hashlib
 import os
@@ -60,7 +86,7 @@ MAX_BYTES = 1024 * 1024
 
 
 def check_front() -> None:
-    """v13 self-check: fail loudly if any v13 layout string regresses.
+    """v14 self-check: fail loudly if any v14 layout string regresses.
 
     Reads build/front.html (the rendered page) and verifies the strings
     the v13 fix list depends on. The build fails instead of shipping a
@@ -72,6 +98,38 @@ def check_front() -> None:
     with open(path, encoding="utf-8") as fh:
         html = fh.read()
     problems = []
+
+    # --- v14 masthead: date 144px at 2x (72 display), ink italic dek ---
+    if ".bigdate { position:absolute; left:48px; top:6px; font-family:'Liberation Serif',serif; font-size:170px;" not in html:
+        problems.append("date must be 170px Liberation Serif Bold at 2x (v14: 85 display, up from 120/60)")
+    if "COP31 collapses in Antalya" not in html:
+        problems.append("masthead dek missing 'COP31 collapses in Antalya' (v14)")
+    if "400-drone barrage on Ukraine" not in html:
+        problems.append("masthead dek missing '400-drone barrage on Ukraine' (v14)")
+    if "Iran claims strikes on US bases in Bahrain" not in html:
+        problems.append("masthead dek missing 'Iran claims strikes on US bases in Bahrain' (v14)")
+    if 'class="mastdek"' not in html:
+        problems.append("masthead dek div missing (v14)")
+    if "font-style:italic; font-size:28px;" not in html:
+        problems.append("masthead dek must be 28px italic at 2x (v14)")
+    if "ALL TIMES UTC" in html:
+        problems.append("'ALL TIMES UTC' must be dropped in v14 (the timeline header says THE DAY IN UTC)")
+    if '<div class="rule" style="left:48px; top:218px;' not in html:
+        problems.append("masthead rule must be top 218px at 2x (v14: masthead grew 78px)")
+
+    # --- v14 numbers: 68/60/48 at 2x, shared baseline 378 ---
+    if 'font-size:68px; margin-top:20px;">700,000' not in html:
+        problems.append("numbers '700,000' must be 68px / mt20 at 2x (v14)")
+    if 'font-size:68px; margin-top:20px;">350,000' not in html:
+        problems.append("numbers '350,000' must be 68px / mt20 at 2x (v14)")
+    if 'font-size:60px; margin-top:28px;">30,000' not in html:
+        problems.append("numbers '30,000' must be 60px / mt28 at 2x (v14)")
+    if 'font-size:60px; margin-top:28px;">1,671' not in html:
+        problems.append("numbers '1,671' must be 60px / mt28 at 2x (v14)")
+    if 'font-size:48px; margin-top:40px;">856' not in html:
+        problems.append("numbers '856' must be 48px / mt40 at 2x (v14)")
+    if 'font-size:48px; margin-top:40px;">24' not in html:
+        problems.append("numbers '24' must be 48px / mt40 at 2x (v14)")
 
     # --- lead (Russia #02, the full-width 1024x300 block) ---
     # step 9 (v11): "8 DEAD" in the banner, the headline and the counts row.
@@ -167,10 +225,10 @@ def check_front() -> None:
     if 'left:1520px' in tl_band:
         problems.append("stale NOW dot at 1520px still present (v13 fix 2)")
     # v13 fix 5: axis rule + 4 tick marks under the four times.
-    if 'left:360px; top:192px; width:1540px; height:2px; background:#191919;' not in tl_band:
+    if 'left:360px; top:270px; width:1540px; height:2px; background:#191919;' not in tl_band:
         problems.append("timeline axis rule missing (v13 fix 5)")
     for tx in (359, 759, 1179, 1599):
-        if f'left:{tx}px; top:186px; width:2px; height:12px; background:#191919;' not in tl_band:
+        if f'left:{tx}px; top:264px; width:2px; height:12px; background:#191919;' not in tl_band:
             problems.append(f"timeline tick mark at left {tx}px missing (v13 fix 5)")
 
     # --- region strip: 7 regions, 36 stories ---
@@ -365,8 +423,8 @@ def check_front() -> None:
         problems.append("list left column must be 336px at 2x (v12 step 1)")
     if 'style="left:368px;"' not in html:
         problems.append("list right column must start at left 368px at 2x (v12 step 1)")
-    if ".lst { position:absolute; left:1312px; top:1544px; width:704px; height:272px; }" not in html:
-        problems.append("list block must be left 1312 / width 704 / height 272 at 2x (v12 step 1)")
+    if ".lst { position:absolute; left:1312px; top:1570px; width:704px; height:272px; }" not in html:
+        problems.append("list block must be left 1312 / top 1570 / width 704 / height 272 at 2x (v12 step 1, v14 +26)")
     # step 2: rows are 8px display (16px at 2x). The plan's 9px display
     # (18px at 2x) truncates the longest row (30, "350,000 displaced
     # since August") to "Aug…" even after the source is dropped, so 16px
@@ -388,8 +446,8 @@ def check_front() -> None:
             break
     if "Sources: Anadolu" not in html:
         problems.append("shared credit line 'Sources: Anadolu …' missing (v12 step 2)")
-    if 'style="position:absolute; left:48px; top:1816px; width:1952px;' not in html:
-        problems.append("credit line must sit at top 1816px full width (v12 step 2)")
+    if 'style="position:absolute; left:48px; top:1842px; width:1952px;' not in html:
+        problems.append("credit line must sit at top 1842px full width (v12 step 2, v14 +26)")
     # step 3: header reconciles the row count with the page-wide index.
     if "27 MORE STORIES &middot; 06&ndash;36" not in html:
         problems.append("ALSO ON header must read '27 MORE STORIES · 06–36' (v12 step 3)")
@@ -437,14 +495,14 @@ def check_front() -> None:
 
     # --- vertical geometry (v12 step 2): map/lst end at 1816, credit line
     # 1816-1830, DATE CHECK top 1830, footer ends at y=1010 display ---
-    if ".mapbox { position:absolute; left:48px; top:1544px; width:1240px; height:272px;" not in html:
-        problems.append("mapbox must be top 1544 / height 272 at 2x (v12 step 2)")
-    if ".dc { position:absolute; left:48px; top:1830px;" not in html:
-        problems.append("DATE CHECK must be top 1830 at 2x")
-    if 'class="foot" style="top:1990px;"' not in html:
-        problems.append("footer line 1 must be top 1990 at 2x")
+    if ".mapbox { position:absolute; left:48px; top:1570px; width:1240px; height:272px;" not in html:
+        problems.append("mapbox must be top 1570 / height 272 at 2x (v12 step 2, v14 +26)")
+    if ".dc { position:absolute; left:48px; top:1856px;" not in html:
+        problems.append("DATE CHECK must be top 1856 at 2x (v14 +26)")
     if 'class="foot" style="top:2006px;"' not in html:
-        problems.append("footer line 2 must be top 2006 at 2x")
+        problems.append("footer line 1 must be top 2006 at 2x (v14: up 10px so it ends ~1013, near v13's 1010)")
+    if 'class="foot" style="top:2020px;"' not in html:
+        problems.append("footer line 2 must be top 2020 at 2x (v14: ends ~1013)")
 
     # --- 36 story slots: 1 lead + 8 cards + 27 list rows ---
     slots = (
@@ -458,10 +516,11 @@ def check_front() -> None:
     if problems:
         raise SystemExit("front.html v13 check failed:\n- " + "\n- ".join(problems))
     print(
-        f"front.html v13 check ok: 1 lead + {cards} cards + 27 list rows = "
-        f"36 slots; {pins} map pins (ink, 24px numerals; LVIV<ANTALYA<BAH); "
-        f"clock 17:00 x1; NOW 13px clear; red 4 source uses = 3 canvas "
-        f"clusters; ME teal; footer ends 1010"
+        f"front.html v14 check ok: date 170px LibSerif + ink dek + numbers 68/60/48; "
+        f"1 lead + {cards} cards + 27 list rows = 36 slots; {pins} map pins "
+        f"(ink, 24px numerals; LVIV<ANTALYA<BAH); clock 17:00 x1; NOW 13px "
+        f"clear; red 4 source uses = 3 canvas clusters; ME teal; footer "
+        f"ends 1013"
     )
 
 
