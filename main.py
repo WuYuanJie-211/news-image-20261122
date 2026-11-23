@@ -78,7 +78,7 @@ no date other than 22 Nov on any story, number, or card):
   INFO.GOV.HK); 7 Sinaloa (18, CONFIRMED, REUTERS · AP); 8 Fukuoka
   (16, CONFIRMED, ABEMA · TACHIAI); 9 Las Vegas (34, OFFICIAL,
   FORMULA 1); 10 Peru (17, OFFICIAL, USGS · AP); 11 Brasilia (19,
-  CONFIRMED, REUTERS · BLOOMBERG); 12 Turin (35, CONFIRMED, STRAITS
+  CONFIRMED, REUTERS · BLOOMBERG); 12 Turin (35, REPORTED, STRAITS
   TIMES); 13 Moyale (27, CONFIRMED, ISLAMIC RELIEF · UN).
 - ALSO ON 14-25: 14 Berlin Zelenskyy (06, Anadolu Agency); 15 EU
   Costa budget (07, Politico); 16 Shenzhen Trump-Putin-Xi (12, ABC
@@ -91,16 +91,24 @@ no date other than 22 Nov on any story, number, or card):
 
 Badge tally CHANGE (flagged to the parent): v15.3's footer tally
 "6 confirmed · 2 official · 1 claim" counted its 9 badges. v16 has
-13 badged stories, so the tally is recomputed as "9 confirmed · 3
-official · 1 claim" (confirmed: COP31, Sparta II, Gaza, Copenhagen,
-Sinaloa, Onosato, Brasilia, Turin, Moyale; official: HK, Verstappen,
-Peru; claim: Bahrain). Keeping 6·2·1 would be false.
+13 badged stories, so the tally is recomputed as "8 confirmed · 3
+official · 1 claim · 1 reported" (confirmed: COP31, Sparta II, Gaza,
+Copenhagen, Sinaloa, Onosato, Brasilia, Moyale; official: HK,
+Verstappen, Peru; claim: Bahrain; reported: Turin). Keeping 6·2·1
+would be false.
 
-Single-source CONFIRMED note: card 12 (Turin, story 35) prints only
-"STRAITS TIMES" — the research file names no other outlet for story
-35, and its own badge table marks 35 ATP as CONFIRMED (semis
-confirmed; final "today"). The lead is the same pattern (COP31 draft
-text + Reuters = two sources in effect). No source is invented.
+v16.1 fix (parent review): card 12 (Turin, story 35) printed only
+"STRAITS TIMES" under a CONFIRMED badge, but the legend defines
+CONFIRMED as two independent sources — the same contradiction Neon-2
+caught in v15.2. The research file names no other outlet for story
+35, so no source is invented: the badge is demoted to REPORTED
+(one named outlet, exactly what the card is), and the tally moves
+from 9·3·1 to 8·3·1·1. The check below now asserts every CONFIRMED
+badge prints two sources AND that card 12 carries b-rep, so the
+legend can never silently contradict a badge again. Side effect of
+the longer tally: at 16px the footer line ran to x2047 and clipped
+"illustrations" at the canvas edge (v16 ended at x1984), so the
+footer is 15px now (line-height stays 16px, tops do not move).
 
 DATE CHECK: ATP final is a card now (12), so NOT YET is HK seat
 results only. EXCLUDED (PRE-22 NOV): Ukraine 400-drone strike ·
@@ -439,15 +447,19 @@ def check_front() -> None:
     grid_html = html[grid_start:grid_end]
     if "results tonight" in grid_html:
         problems.append("'results tonight' must not be on a card (v16: HK seat results are DATE CHECK NOT YET only)")
-    # the 13 badges: 9 CONFIRMED, 3 OFFICIAL, 1 CLAIM (v16 tally change).
-    if html.count("badgepill b-conf") != 9:
-        problems.append(f"CONFIRMED badges must be 9 (leads 1, 3 + cards 4, 5, 7, 8, 11, 12, 13) (found {html.count('badgepill b-conf')}) (v16)")
+    # the 13 badges: 8 CONFIRMED, 3 OFFICIAL, 1 CLAIM, 1 REPORTED (v16.1 tally change).
+    if html.count("badgepill b-conf") != 8:
+        problems.append(f"CONFIRMED badges must be 8 (leads 1, 3 + cards 4, 5, 7, 8, 11, 13) (found {html.count('badgepill b-conf')}) (v16.1)")
     if html.count("badgepill b-off") != 3:
         problems.append(f"OFFICIAL badges must be 3 (cards 6, 9, 10) (found {html.count('badgepill b-off')}) (v16)")
     if html.count("badgepill b-claim") != 1:
         problems.append(f"CLAIM badges must be 1 (lead 2 Bahrain) (found {html.count('badgepill b-claim')}) (v16)")
+    if html.count("badgepill b-rep") != 1:
+        problems.append(f"REPORTED badges must be 1 (card 12 Turin, single source) (found {html.count('badgepill b-rep')}) (v16.1)")
     if "&#10003; CLAIM" in html:
         problems.append("CLAIM badge must not carry a check mark (winners' legend: only CONFIRMED/OFFICIAL are checked)")
+    if "&#10003; REPORTED" in html:
+        problems.append("REPORTED badge must not carry a check mark (only CONFIRMED carries one on this page) (v16.1)")
     if ".b-conf { background:#E6F4EA; color:#137333; border-color:#81C995; }" not in html:
         problems.append("CONFIRMED capsule colours must be #E6F4EA/#137333/#81C995 (v15 P1, kept in v16)")
     if ".b-off { background:#E8F0FE; color:#1967D2; border-color:#8AB4F8; }" not in html:
@@ -457,9 +469,18 @@ def check_front() -> None:
     if ".b-claim { background:#FCE8E6; color:#C5221F; border-color:#F28B82; }" not in html:
         problems.append("CLAIM capsule colours must be #FCE8E6/#C5221F/#F28B82 (v15 P1, kept in v16)")
     # v15.2 fix 3 (kept): every CONFIRMED card with two research-file
-    # sources prints both. Card 12 (Turin) is the documented exception:
-    # the research file names only Straits Times for story 35, and its
-    # own badge table marks 35 ATP as CONFIRMED — no source is invented.
+    # sources prints both. v16.1: card 12 (Turin) prints only Straits
+    # Times, so it is REPORTED, not CONFIRMED — pin the card-12 block
+    # itself, so a later edit cannot silently re-promote it.
+    c12_start = html.index("<!-- CARD 12")
+    c12_end = html.index("<!-- CARD 13")
+    c12_html = html[c12_start:c12_end]
+    if "badgepill b-rep" not in c12_html:
+        problems.append("card 12 (Turin) must carry the REPORTED badge (single source: STRAITS TIMES) (v16.1)")
+    if "badgepill b-conf" in c12_html:
+        problems.append("card 12 (Turin) must not carry a CONFIRMED badge: one source cannot be CONFIRMED (v16.1)")
+    if "REPORTED" not in c12_html:
+        problems.append("card 12 (Turin) must print the word REPORTED (v16.1)")
     for pair in (
         "EURONEWS &middot; REUTERS",
         "REUTERS &middot; MIDDLE EAST EYE",
@@ -637,12 +658,14 @@ def check_front() -> None:
     if "Nigeria boat capsize" in html:
         problems.append("stale 'Nigeria boat capsize' still present (v15.2 fix 1: shortened to 'Nigeria boat' so both 21-Nov items share one line)")
 
-    # --- v16 footer: tally is 9 confirmed · 3 official · 1 claim (13 badges) ---
-    if html.count("9 confirmed &middot; 3 official &middot; 1 claim") != 1:
+    # --- v16.1 footer: tally is 8 confirmed · 3 official · 1 claim · 1 reported (13 badges) ---
+    if html.count("8 confirmed &middot; 3 official &middot; 1 claim &middot; 1 reported") != 1:
         problems.append(
-            "footer verification tally '9 confirmed · 3 official · 1 claim' "
-            "must appear once (v16: 13 badges, not v15.3's 9)"
+            "footer verification tally '8 confirmed · 3 official · 1 claim · 1 reported' "
+            "must appear once (v16.1: 13 badges, Turin demoted to REPORTED)"
         )
+    if "9 confirmed &middot; 3 official &middot; 1 claim" in html:
+        problems.append("stale v16 tally '9 confirmed · 3 official · 1 claim' still present (v16.1: 8·3·1·1 for 13 badges)")
     if "6 confirmed &middot; 2 official &middot; 1 claim" in html:
         problems.append("stale v15.3 tally '6 confirmed · 2 official · 1 claim' still present (v16: 9·3·1 for 13 badges)")
     if "5 confirmed &middot; 3 official &middot; 1 claim" in html:
@@ -657,6 +680,12 @@ def check_front() -> None:
         problems.append("footer HOW WE CHECKED legend missing (v16)")
     if "Scenes are drawn illustrations" not in html:
         problems.append("footer must say 'Scenes are drawn illustrations' (v16)")
+    # v16.1: the tally grew by 13 chars ("· 1 reported") and at 16px the
+    # line ran to x2047, clipping "illustrations" at the canvas edge
+    # (v16 ended at x1984). 15px restores the margin; line-height stays
+    # 16px so the 2002/2024 tops do not move.
+    if ".foot { position:absolute; left:48px; width:1952px; font-size:15px; line-height:16px; white-space:nowrap; }" not in html:
+        problems.append("footer must be 15px (v16.1: the longer tally clips at 16px)")
 
     # --- v16 red: #B01E1E is illustration-only now (radar dot + boat sail) ---
     red_uses = html.count("#B01E1E")
@@ -698,7 +727,7 @@ def check_front() -> None:
         f"front.html v16 check ok: 3-column leads + 2x5 top-image grid (13 scene illustrations, badges on the art); 6 numbers, all 22 Nov; "
         f"3 leads + {cards} cards + 12 list rows = 25 slots; 13 map pins on real continents "
         f"(ANTALYA < GAZA < BAH < HKG, true lat order); timeline dark bar, NOW on the 17:00 tick; DATE CHECK red box, ATP is a card now; "
-        f"tally 9 confirmed · 3 official · 1 claim; red #B01E1E x2; footer ends 2040"
+        f"tally 8 confirmed · 3 official · 1 claim · 1 reported; red #B01E1E x2; footer ends 2040"
     )
 
 
