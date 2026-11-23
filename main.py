@@ -58,10 +58,12 @@ Five structural changes, in impact order:
    and pin 3 clears the box top edge by 11px.
 
 4. Renumber + rewrite ALSO ON. Strict visual-order numbering across
-   the whole page: leads 1-3, grid 4-13, ALSO ON 14-25. Cut from 24
-   fragments to 12 high-quality items. Every item: number + region
-   colour dot + complete short sentence WITH a place + parenthesised
-   source. Font 17px (was 16px), rows 38px pitch, 2 columns x 6 rows.
+   the whole page: leads 1-3, grid 4-13, ALSO ON 14-22 (v16.3: 9 items,
+   down from 12 — the 4 non-22-Nov rows are removed, Victoria added).
+   Cut from 24 fragments to 9 high-quality items. Every item: number
+   + region colour dot + complete short sentence WITH a place +
+   parenthesised source. Font 17px (was 16px), rows 38px pitch,
+   2 columns (5+4 rows).
 
 5. Compress top chrome. The UTC timeline is now a dark navy bar
    (#14213D, top-1 style) with white text and an amber NOW; the
@@ -87,17 +89,13 @@ no date other than 22 Nov on any story, number, or card):
   BLOOMBERG); 12 Turin (35, REPORTED, STRAITS TIMES; head is
   present-tense "set for" — the semis were Sat 21 Nov); 13 Delhi
   (14, REPORTED, DAWN; first Pakistani minister in India since 2023).
-- ALSO ON 14-25: 14 Berlin Zelenskyy (06, Anadolu Agency); 15 EU
-  Costa budget (07, Politico); 16 Shenzhen Trump-Putin-Xi (12, ABC
-  News); 17 Moyale (27, Islamic Relief · UN — demoted from card 13
-  in v16.2: its report is UN News 17 Nov / Dawan Africa 21 Nov, no
-  22-Nov anchor); 18 Brazil Supercell (20, Straits Times); 19
-  Washington Hegseth memo (21, Washington Post); 20 Khartoum
-  kitchens (24, Sudan Tribune); 21 Badme troops (26, DW); 22 Hormuz
-  Pugh swim (29, Straits Times); 23 Sydney Fred Nile (31, ABC News);
-  24 Markets Bitcoin (33, Reuters); 25 New York Anthropic (22,
-  CNBC — "fell 6% Friday": CNBC 20 Nov, a Friday; 22 Nov is a
-  Sunday, US market closed).
+- ALSO ON 14-22 (v16.3): 14 Berlin Zelenskyy (06, Anadolu Agency);
+  15 EU Costa budget (07, Politico); 16 Shenzhen Trump-Putin-Xi (12,
+  ABC News); 17 Brazil Supercell (20, Straits Times); 18 Washington
+  Hegseth memo (21, Washington Post); 19 Hormuz Pugh swim (29,
+  Straits Times); 20 Sydney Fred Nile (31, ABC News); 21 Markets
+  Bitcoin (33, Reuters); 22 Victoria Labor pre-mortem (32, ABC News —
+  the story is dated 22 Nov in the research file).
 
 Badge tally (v16.2): "7 confirmed · 3 official · 1 claim · 2
 reported" for the 13 badged stories (confirmed: COP31, Sparta II,
@@ -178,6 +176,49 @@ Neon-2 is right):
    over the conference centre (v15.3 had the stamp + thermometer;
    Neon-2 asked for the hook back).
 
+v16.3 fix (dual Neon hard review of v16.2, BOTH NOT READY, agreeing
+on the same 3 items; region bar, map pins, badges, DATE CHECK,
+timeline and the NO DEAL stamp all passed):
+1. Date contradiction in ALSO ON (highest priority). The section
+   title says "ALSO ON SUNDAY 22 NOVEMBER" but row 25 said
+   "Anthropic shares fell 6% Friday" and rows 17 Moyale (UN News
+   17 Nov / Dawan Africa 21 Nov), 20 Khartoum (Sudan Tribune 21 Nov)
+   and 21 Badme (APAnews 19–20 Nov) are confirmed non-22-Nov. Fixed
+   properly, not by retitling: every cut story in the research file
+   was checked for a 22-Nov date, and only ONE qualifies — 32
+   Victoria election (ABC News 22 Nov: Labor MPs run an election
+   "pre-mortem" a week out from the 29 Nov poll). The rest fail:
+   13 Takaichi (Japan Times 20–21 Nov), 25 El Obeid (Amnesty 21
+   Nov), 30 Yemen (19–20 Nov), and 15 Lakshya Sen (Times of India
+   22 Nov report, but the semi-final was Sat 21 Nov — the same
+   pattern Neon-2 flagged on the ATP semis in v16.1, so it is NOT
+   used). Result: ALSO ON shrinks 12 → 9 items (14–22), Victoria
+   takes row 22; story total 25 → 22; the region bar is recomputed
+   from the new tags (ME 3 · EU 5 · AS 4 · AM 5 · OC 2 · MKT+SPORT
+   3 = 22) and the AFRICA chip is dropped — no verified 22-Nov
+   Africa story exists in the research file (Nigeria 21 Nov,
+   Khartoum 21 Nov, El Obeid 21 Nov, Badme 19–20 Nov, Moyale
+   17/21 Nov), so Africa is 0. The "ALSO ON SUNDAY 22 NOVEMBER"
+   title stays: the 8 kept rows are the day's top stories as of
+   22 Nov morning (the research file's own framing, dual-Neon-READY
+   in v15.3) and neither Neon flagged them.
+2. Sources: line truncated at the right edge ("...or attribut").
+   The redundant "· Drawn scenes are illustrations" is deleted from
+   that line (the footer HOW WE CHECKED already says "Scenes are
+   drawn illustrations"), and the five outlets cited only by the
+   removed rows are dropped (DW, Sudan Tribune, Islamic Relief, UN,
+   CNBC). The line is ~60 chars shorter now and fits at 12px.
+3. Card 13 DELHI flag covered: the "13 · DELHI" kickpill (SVG y
+   8–32, measured on the render) covered ~95% of the Indian flag
+   (only a 3px sliver of saffron showed at x=131–133). Both flags +
+   poles move down 22px (flags y=36–78, poles y=34–96) — the
+   suggested 14px still tucks 4px of the saffron stripe under the
+   pill (pill bottom is y=32), so 22px clears it by 4px. Moving the
+   Indian flagpole right instead would push the flag into the left
+   figure's head, so it is not used. Both flags stay fully and
+   symmetrically visible; no overlap with the figures (x≥140) or
+   the table (x=140–234) or the REPORTED badge (top y=86).
+
 DATE CHECK: title "DATE CHECK ✓ As of 22 Nov, 17:00 UTC.".
 EXCLUDED (PRE-22 NOV): Ukraine 400-drone strike (19–20 Nov) /
 Nigeria boat · EU–Indonesia (21 Nov). LEFT OUT: ICJ verdict, 19
@@ -239,10 +280,12 @@ def check_front() -> None:
         problems.append("masthead dek must be 28px italic at 2x (v16)")
     if '<div class="rule" style="left:48px; top:218px; width:1952px; height:2px;"></div>' not in html:
         problems.append("masthead rule must be top 218px at 2x (v16)")
-    if "25 STORIES &middot; 13 PINS" not in html:
-        problems.append("masthead tally must be '25 STORIES · 13 PINS' (v16: 3 leads + 10 cards + 12 list rows, 13 map pins)")
+    if "22 STORIES &middot; 13 PINS" not in html:
+        problems.append("masthead tally must be '22 STORIES · 13 PINS' (v16.3: 3 leads + 10 cards + 9 list rows, 13 map pins)")
     if "33 STORIES" in html or "34 STORIES" in html:
         problems.append("stale '33/34 STORIES' still present (v16 has 25)")
+    if "25 STORIES" in html:
+        problems.append("stale '25 STORIES' still present (v16.3 has 22: ALSO ON shrank 12 → 9)")
     if "11 PINS" in html:
         problems.append("stale '11 PINS' still present (v16 has 13)")
 
@@ -331,24 +374,39 @@ def check_front() -> None:
         )
     if "190+" in html:
         problems.append("'190+ nations' must not appear (v15: not in the research file)")
-    if "700,000 displaced" not in html:
-        problems.append("ALSO ON row 17 must keep the full value '700,000 displaced' (v16.2: Moyale demoted from card 13 to a list row)")
+    # v16.3: Moyale is gone entirely (its report predates 22 Nov) —
+    # the old required assertion for "700,000 displaced" is deleted.
+    for gone in (
+        "700,000 displaced",
+        "<b>Moyale:</b>",
+        "<b>Khartoum:</b>",
+        "<b>Badme:</b>",
+        "Anthropic shares fell 6% Friday",
+    ):
+        if gone in html:
+            problems.append(f"stale non-22-Nov ALSO ON row '{gone[:30]}' still present (v16.3: removed — Moyale 17/21 Nov, Khartoum 21 Nov, Badme 19–20 Nov, Anthropic 'Friday')")
 
-    # --- v16 region chips: one thin 28px row; counts for the new 25 stories ---
+    # --- v16 region chips: one thin 28px row; counts for the 22 stories ---
     if ".key { position:absolute; top:446px; height:28px; }" not in html:
         problems.append("region chips must be one thin 28px row at top 446 at 2x (v16 change 5: was 36px at 474)")
     for reg in (
         "MIDDLE EAST 3", "EUROPE 5", "ASIA 4", "AMERICAS 5",
-        "AFRICA 3", "OCEANIA 1", "MKT+SPORT 4",
+        "OCEANIA 2", "MKT+SPORT 3",
     ):
         if reg not in html:
-            problems.append(f"region chip missing {reg} (v16.2: recounted from the card/list tags)")
-    for stale in ("MIDDLE EAST 4", "ASIA 7", "AMERICAS 7", "AFRICA 4", "OCEANIA 2", "MKT+SPORT 3"):
+            problems.append(f"region chip missing {reg} (v16.3: recounted from the card/list tags for 22 stories; AFRICA dropped — no verified 22-Nov Africa story)")
+    _keys = html.count('<div class="key"')
+    if _keys != 6:
+        problems.append(f"region bar must be 6 chips now (found {_keys}) (v16.3: AFRICA dropped)")
+    for stale in ("MIDDLE EAST 4", "ASIA 7", "AMERICAS 7", "AFRICA 4"):
         if stale in html:
             problems.append(f"stale v15.3 region count '{stale}' still present (v16)")
     for stale in ("EUROPE 6", "ASIA 5", "MKT+SPORT 2"):
         if stale in html:
             problems.append(f"stale v16.1 region count '{stale}' still present (v16.2: the bar was never recounted for the 25 stories)")
+    for stale in ("AFRICA 3", "OCEANIA 1", "MKT+SPORT 4"):
+        if stale in html:
+            problems.append(f"stale v16.2 region count '{stale}' still present (v16.3: ALSO ON shrank 12 → 9, AFRICA is 0)")
     # v16.2 fix 1: RECOMPUTE the bar from the tags. v16.1's bar was
     # carried over from v15.3 without recounting, and Neon-1's READY
     # only added the bar's own numbers. Count the structured tags
@@ -377,9 +435,9 @@ def check_front() -> None:
                 f"card/list tags but the bar says {_bar.get(_region)} "
                 f"(v16.2 fix 1: recount from the tags, never carry counts over)"
             )
-    if sum(_counted.values()) != 25:
+    if sum(_counted.values()) != 22:
         problems.append(
-            f"region tags must total 25 stories (counted {sum(_counted.values())}) (v16.2 fix 1)"
+            f"region tags must total 22 stories (counted {sum(_counted.values())}) (v16.3: 3 leads + 10 cards + 9 rows)"
         )
     if "#A63A2E" in html:
         problems.append(
@@ -619,6 +677,17 @@ def check_front() -> None:
         problems.append("card 13 (Delhi) must print the word REPORTED (v16.2)")
     if "ASIA &middot; DIPLOMACY" not in c13_html:
         problems.append("card 13 (Delhi) must be tagged ASIA · DIPLOMACY (v16.2: the swap is region-neutral)")
+    # v16.3: both flags + poles sit below the kickpill (pill bottom is
+    # SVG y=32, measured on the render; the suggested 14px still tucks
+    # 4px of the saffron stripe). Flags start y=36, poles y=34–96.
+    if '<rect x="70" y="36" width="64" height="42" fill="#FF9933"/>' not in c13_html:
+        problems.append("card 13 Indian flag must start at y=36 (v16.3: the kickpill bottom is y=32; at y=14 the pill covered ~95% of it)")
+    if '<line x1="66" y1="34" x2="66" y2="96"' not in c13_html:
+        problems.append("card 13 Indian flagpole must run y=34–96 (v16.3: flags + poles down 22px)")
+    if '<line x1="308" y1="34" x2="308" y2="96"' not in c13_html:
+        problems.append("card 13 Pakistani flagpole must run y=34–96 (v16.3: both flags move together, symmetrically)")
+    if '<rect x="70" y="14" width="64" height="42" fill="#FF9933"/>' in c13_html:
+        problems.append("stale card 13 Indian flag at y=14 still present (v16.3: the pill covered it)")
 
     # --- v16 map: real continents, 13 small region-coloured pins, numbers only ---
     if "<!-- MAP" not in html or "<!-- DATE CHECK" not in html:
@@ -726,55 +795,64 @@ def check_front() -> None:
                 f"(need HKG < PER/BSB) (v16)"
             )
 
-    # --- v16 ALSO ON: 12 items, 2 cols x 6 rows, place + sentence + source ---
+    # --- v16 ALSO ON: 9 items, 2 cols (5+4), place + sentence + source ---
     if ".lst2 { position:absolute; left:48px; top:1620px; width:1150px; height:264px; }" not in html:
         problems.append("ALSO ON block must be left 48 / top 1620 / 1150x264 at 2x (v16 change 4)")
     if ".lst2 .row { font-size:17px; line-height:18px; height:38px; overflow:hidden; }" not in html:
         problems.append("ALSO ON rows must be 17px / lh 18 / 38px pitch at 2x (v16 change 4)")
     if ".lst { position:absolute;" in html:
         problems.append("old v15 '.lst' CSS still present (v16: .lst2)")
-    if "ALSO ON SUNDAY 22 NOVEMBER &mdash; 12 MORE STORIES" not in html:
-        problems.append("ALSO ON header must read 'ALSO ON SUNDAY 22 NOVEMBER — 12 MORE STORIES' (v16 change 4)")
-    if "24 MORE STORIES" in html or "25 MORE STORIES" in html:
-        problems.append("stale '24/25 MORE STORIES' still present (v16 has 12)")
+    if "ALSO ON SUNDAY 22 NOVEMBER &mdash; 9 MORE STORIES" not in html:
+        problems.append("ALSO ON header must read 'ALSO ON SUNDAY 22 NOVEMBER — 9 MORE STORIES' (v16.3: 12 → 9, the 4 non-22-Nov rows are gone, Victoria added)")
+    if "24 MORE STORIES" in html or "25 MORE STORIES" in html or "12 MORE STORIES" in html:
+        problems.append("stale '24/25/12 MORE STORIES' still present (v16.3 has 9)")
     rows = re.findall(r'<div class="row">.*?</div>', html)
-    if len(rows) != 12:
-        problems.append(f"ALSO ON rows must be 12 (found {len(rows)}) (v16 change 4)")
-    for num in ("14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"):
+    if len(rows) != 9:
+        problems.append(f"ALSO ON rows must be 9 (found {len(rows)}) (v16.3)")
+    for num in ("14", "15", "16", "17", "18", "19", "20", "21", "22"):
         if f'<span class="n">{num}</span>' not in html:
-            problems.append(f"ALSO ON number {num} missing (v16 change 4: strict 14-25 numbering)")
+            problems.append(f"ALSO ON number {num} missing (v16.3: strict 14-22 numbering)")
+    for num in ("23", "24", "25"):
+        if f'<span class="n">{num}</span>' in html:
+            problems.append(f"stale ALSO ON number {num} still present (v16.3: rows end at 22)")
     for item in (
         "<b>Berlin:</b> Zelenskyy calls NATO membership the best guarantee",
         "<b>EU:</b> Costa proposes &euro;44bn more cuts, 3% Big Tech tax",
         "<b>Shenzhen:</b> first Trump&ndash;Putin&ndash;Xi meeting called positive",
-        "<b>Moyale:</b> ~700,000 displaced as Ethiopia clashes grind on",
         "<b>Brazil:</b> Supercell storm kills 3, damages thousands of homes",
         "<b>Washington:</b> Hegseth memo curbs US&ndash;Canada defence ties",
-        "<b>Khartoum:</b> charity kitchens shut down, starvation looms",
-        "<b>Badme:</b> troops mass on the Ethiopia&ndash;Eritrea border",
         "<b>Hormuz:</b> Pugh swims the strait in 3 days to flag war damage",
         "<b>Sydney:</b> ex-NSW MP Fred Nile dies aged 92",
         "<b>Markets:</b> Bitcoin falls to $55,252, then rebounds",
-        "<b>New York:</b> Anthropic shares fell 6% Friday on day 2 after IPO",
+        "<b>Victoria:</b> Labor MPs run election &lsquo;pre-mortem&rsquo; as polls point to a death spiral",
     ):
         if item not in html:
-            problems.append(f"ALSO ON item '{item[:40]}...' missing (v16 change 4; v16.2: row 17 is Moyale now, row 25 says Friday)")
+            problems.append(f"ALSO ON item '{item[:40]}...' missing (v16.3: 9 rows, Victoria is the only clean 22-Nov substitute)")
     for rsrc in (
         "(Anadolu Agency)", "(Politico)", "(ABC News)",
-        "(Islamic Relief &middot; UN)",
-        "(Straits Times)", "(Washington Post)", "(Sudan Tribune)",
-        "(DW)", "(Reuters)", "(CNBC)",
+        "(Straits Times)", "(Washington Post)", "(Reuters)",
     ):
         if rsrc not in html:
-            problems.append(f"ALSO ON source '{rsrc}' missing (v16 change 4: every item carries its source)")
-    if "Sources: Reuters, BBC, NYT, AP, Euronews, Al Jazeera, TASS, Politico, Dawn, DW, ABC News, Straits Times, Washington Post, Sudan Tribune, Info.gov.hk, Formula 1, Abema, Tachiai, Islamic Relief, UN, CNBC, Bloomberg, Middle East Eye, USGS, Anadolu Agency" not in html:
-        problems.append("shared credit line missing (v16; v16.2: Bloomberg, Middle East Eye, USGS, Anadolu Agency added)")
+            problems.append(f"ALSO ON source '{rsrc}' missing (v16.3: every item carries its source)")
+    if "Sources: Reuters, BBC, NYT, AP, Euronews, Al Jazeera, TASS, Politico, Dawn, ABC News, Straits Times, Washington Post, Info.gov.hk, Formula 1, Abema, Tachiai, Bloomberg, Middle East Eye, USGS, Anadolu Agency" not in html:
+        problems.append("shared credit line missing (v16.3: DW, Sudan Tribune, Islamic Relief, UN, CNBC dropped with their rows; 'Drawn scenes are illustrations' removed as redundant)")
     if 'style="position:absolute; left:48px; top:1886px; width:1952px;' not in html:
         problems.append("credit line must sit at top 1886px full width (v16)")
-    if "Drawn scenes are illustrations" not in html:
-        problems.append("credit line must say 'Drawn scenes are illustrations' (v16)")
-    if "Figures checked in 2+ sources or attributed" not in html:
+    # v16.3: the credit line must NOT repeat "Drawn scenes are
+    # illustrations" — the footer HOW WE CHECKED already says
+    # "Scenes are drawn illustrations", and the repetition is what
+    # pushed the line past the canvas edge (it truncated at
+    # "...or attribut" in v16.2).
+    _credit_start = html.index('top:1886px;')
+    _credit_end = html.index("</div>", _credit_start)
+    _credit = html[_credit_start:_credit_end]
+    if "Drawn scenes are illustrations" in _credit:
+        problems.append("credit line must not repeat 'Drawn scenes are illustrations' (v16.3: the footer already says it; the repetition truncated the line)")
+    if "Figures checked in 2+ sources or attributed" not in _credit:
         problems.append("credit line must say 'Figures checked in 2+ sources or attributed' (v16)")
+    for _dead in ("Sudan Tribune", "Islamic Relief", "CNBC", "DW,", "UN,"):
+        if _dead in _credit:
+            problems.append(f"credit line must not cite '{_dead}' (v16.3: its story left the page)")
 
     # --- v16 DATE CHECK: full-width red box, ATP final is a card now ---
     if ".dc { position:absolute; left:48px; top:1900px; width:1952px; height:94px; border:3px solid #C62828; background:#FDF2F2; }" not in html:
@@ -875,20 +953,20 @@ def check_front() -> None:
     if ".dc { position:absolute; left:48px; top:1900px;" not in html:
         problems.append("DATE CHECK must be top 1900 at 2x (v16)")
 
-    # --- 25 story slots: 3 leads + 10 cards + 12 list rows ---
+    # --- 22 story slots: 3 leads + 10 cards + 9 list rows ---
     slots = (
         html.count('<div class="lead"')
         + html.count('<div class="card2"')
         + html.count('<div class="row">')
     )
-    if slots != 25:
-        problems.append(f"story slots must be 25 (found {slots}) (v16: 3 leads + 10 cards + 12 rows)")
+    if slots != 22:
+        problems.append(f"story slots must be 22 (found {slots}) (v16.3: 3 leads + 10 cards + 9 rows)")
 
     if problems:
         raise SystemExit("front.html v16 check failed:\n- " + "\n- ".join(problems))
     print(
         f"front.html v16 check ok: 3-column leads + 2x5 top-image grid (13 scene illustrations, badges on the art); 6 numbers, all 22 Nov; "
-        f"3 leads + {cards} cards + 12 list rows = 25 slots; 13 map pins on real continents "
+        f"3 leads + {cards} cards + 9 list rows = 22 slots; 13 map pins on real continents "
         f"(ANTALYA < GAZA < DELHI < BAH < HKG, true lat order); timeline dark bar, NOW on the 17:00 tick; DATE CHECK red box, As of 22 Nov 17:00 UTC; "
         f"tally 7 confirmed · 3 official · 1 claim · 2 reported; red #B01E1E x2; footer ends 2040"
     )
