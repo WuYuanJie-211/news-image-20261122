@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
-"""news-image-20261122 entrypoint: copy entry.png to /output/entry.png.
+"""news-image-20261122 entrypoint (v10): copy entry.png to /output/entry.png.
 
 Stdlib only. No network. Deterministic: the output bytes are exactly the
 input bytes, so two runs are byte-identical.
+
+v10 is the Superbot-plan redesign: one full-width lead (Russia #02), 8
+horizontal cards, 27 ALSO ON rows, 36 story slots total, and a 4-column
+DATE CHECK. The self-check below pins the v10 layout strings so a later
+edit cannot silently re-break a reviewer blocker.
 """
 import hashlib
 import os
+import re
 import shutil
 import struct
 import sys
@@ -17,112 +23,130 @@ MAX_BYTES = 1024 * 1024
 
 
 def check_front() -> None:
-    """v9 self-check: fail loudly if any v7/v8/v9 string regresses in the source.
+    """v10 self-check: fail loudly if any v10 layout string regresses.
 
-    Reads build/front.html (the rendered page) and verifies the strings the
-    v7, v8 and v9 fix rounds depend on. The build fails instead of shipping a
+    Reads build/front.html (the rendered page) and verifies the strings
+    the v10 redesign depends on. The build fails instead of shipping a
     page that re-breaks a reviewer blocker.
     """
-    import re
-
     path = os.path.join(HERE, "build", "front.html")
     if not os.path.isfile(path):
         raise SystemExit(f"missing {path}")
     with open(path, encoding="utf-8") as fh:
         html = fh.read()
-    low = html.lower()
     problems = []
-    if "weekend" in low:
-        problems.append("WEEKEND still on the page (B1: use EARLIER THIS WEEK)")
-    if "overnight" in low:
-        problems.append("overnight still on the page (B2: use 19-20 Nov)")
-    if "cet" in low:
-        problems.append("CET still on the page (use 17:00 UTC)")
-    if "5,640 votes cast" in html:
-        problems.append("5,640 votes cast still present (B4: use 5,640 voters)")
-    if "SIN</div>" in html:
-        problems.append("standalone SIN pin label still present (use SINALOA)")
-    if "LVIV &middot; 8 KILLED NATIONWIDE" in html:
-        problems.append("old LVIV banner still present (use UKRAINE · 8 KILLED)")
-    if "10 years<br>on" in html or "10 years on" in html:
-        problems.append("10 years on still present (use after 10 years of talks)")
-    if "EARLIER THIS WEEK" not in html:
-        problems.append("EARLIER THIS WEEK missing (B1)")
+
+    # --- lead (Russia #02, the full-width 1024x300 block) ---
     if "UKRAINE &middot; 8 KILLED" not in html:
-        problems.append("UKRAINE · 8 KILLED banner missing")
-    if "17:00 UTC" not in html:
-        problems.append("17:00 UTC missing")
-    if html.count("5,640 voters") < 2:
-        problems.append("5,640 voters must appear in both the HK card and the stat (B4)")
-    # v8 B1: the DATE CHECK must use the narrowed wording, not the v7
-    # universal claims (Quick's v7 blocker: 35 of 36 stories show no date,
-    # and Texans 19 Nov / trilateral 19 Nov sit in the main list).
-    if "Every story carries the date" in html:
-        problems.append(
-            "v7 DATE CHECK claim still present (B1: use the narrowed wording)"
-        )
-    if html.count("carried above") != 1:
-        problems.append(
-            f"DATE CHECK must say 'carried above' exactly once "
-            f"(found {html.count('carried above')}) (B1)"
-        )
-    if "5,709" in html:
-        problems.append("derived 5,709 printed (B4: never print the derived total)")
-    if "LVV" in html:
-        problems.append("LVV still present (inset label must read LVIV)")
-    if "AYT" in html:
-        problems.append("AYT still present (inset label must read ANTALYA)")
-    if 'font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">B</text>' not in html:
-        problems.append("inset pin B must be 12px (14px renders as a vertical bar)")
-    # v9 blocker: the LEFT OUT row must use the DATE CHECK's own test
-    # (completed pre-edition, not carried), not the old stricter test
-    # (first reported before today's edition) that Quick's v8 blocker
-    # objected to. The source encodes the apostrophe as &rsquo;, so check
-    # both the entity form and the literal form, anywhere in the file.
-    if (
-        "first reported before today&rsquo;s edition" in html
-        or "first reported before today's edition" in html
+        problems.append("lead banner 'UKRAINE · 8 KILLED' missing")
+    if "400 DRONES," not in html:
+        problems.append("lead headline '400 DRONES,' missing")
+    if "MISSILES STRIKE" not in html:
+        problems.append("lead headline 'MISSILES STRIKE' missing")
+    if "UKRAINE: 8 DEAD" not in html:
+        problems.append("lead headline 'UKRAINE: 8 DEAD' missing")
+    if "Six died in Kyiv, two in Lviv" not in html:
+        problems.append("lead dek 'Six died in Kyiv, two in Lviv' missing")
+    if "27 of the missiles were ballistic" not in html:
+        problems.append("lead dek ballistic count missing")
+    if "Zelenskyy &middot; Euronews &middot; Al Jazeera" not in html:
+        problems.append("lead sources 'Zelenskyy · Euronews · Al Jazeera' missing")
+
+    # Lead headline must be exactly 3 lines (2 <br>) and each line short
+    # enough to fit the 740px text column at 68px (<=18 chars). This is
+    # the check that catches the v10 first-render wrap bug (5 lines).
+    m = re.search(r'<div class="head">(.*?)</div>', html, re.S)
+    if not m:
+        problems.append("lead .head not found")
+    else:
+        lines = m.group(1).split("<br>")
+        if len(lines) != 3:
+            problems.append(f"lead headline must be 3 lines (found {len(lines)})")
+        for line in lines:
+            if len(line.strip()) > 18:
+                problems.append(
+                    f"lead headline line too long ({len(line.strip())} chars): "
+                    f"{line.strip()!r}"
+                )
+
+    # --- numbers row: 6 people-counts + rate chip ---
+    for num in ("700,000", "350,000", "30,000", "1,671", "856", "24"):
+        if num not in html:
+            problems.append(f"numbers row missing {num}")
+    if "98.79%" not in html:
+        problems.append("rate chip '98.79%' missing")
+    if "5,640 VOTERS" not in html:
+        problems.append("rate chip '5,640 VOTERS' missing")
+
+    # --- timeline: 4 events + NOW 22:00 ---
+    for ev in ("PERU M6.9", "BANDA SEA M6.9", "HK POLLS CLOSE", "ATP FINAL"):
+        if ev not in html:
+            problems.append(f"timeline missing {ev}")
+    if "NOW 22:00" not in html:
+        problems.append("timeline 'NOW 22:00' missing")
+
+    # --- region strip: 7 regions, 36 stories ---
+    for reg in (
+        "MIDDLE EAST 4", "EUROPE 7", "ASIA 8", "AMERICAS 7",
+        "AFRICA 5", "OCEANIA 2", "MKT+SPORT 3",
     ):
+        if reg not in html:
+            problems.append(f"region strip missing {reg}")
+
+    # --- cards: 8 horizontal cards, each with a verification dot + source ---
+    # (scope the source count to the cards block: the lead carries its own
+    # .src div, so a whole-file count is 9, not 8)
+    cards_start = html.index("<!-- SECONDARY CARDS")
+    cards_end = html.index("<!-- MAP")
+    cards_html = html[cards_start:cards_end]
+    cards = cards_html.count('<div class="card"')
+    if cards != 8:
+        problems.append(f"cards must be 8 (found {cards})")
+    vdots = cards_html.count('<div class="vdot"')
+    if vdots != 8:
+        problems.append(f"card verification dots must be 8 (found {vdots})")
+    srcs = cards_html.count('<div class="src">')
+    if srcs != 8:
+        problems.append(f"card sources must be 8 (found {srcs})")
+    # the 9 featured stories: 6 CONFIRMED, 2 OFFICIAL, 1 CLAIM
+    if html.count("6 confirmed &middot; 2 official &middot; 1 claim") != 1:
         problems.append(
-            "old LEFT OUT reason still present (v9 blocker: use "
-            "'completed before edition, not carried')"
+            "footer verification tally '6 confirmed · 2 official · 1 claim' "
+            "must appear once"
         )
-    if html.count("completed before edition, not carried") != 1:
-        problems.append(
-            f"LEFT OUT must say 'completed before edition, not carried' "
-            f"exactly once (found {html.count('completed before edition, not carried')}) "
-            f"(v9 blocker)"
-        )
-    if html.count("completed pre-edition items not carried above") != 1:
-        problems.append(
-            f"DATE CHECK must say 'completed pre-edition items not carried "
-            f"above' exactly once "
-            f"(found {html.count('completed pre-edition items not carried above')}) "
-            f"(B1)"
-        )
-    # B3: every CONFIRMED card badge must name two outlets, scoped to the
-    # big-cards block (heroes carry their sources in .src, not .so).
-    cards = html[html.index("<!-- BIG CARDS"):html.index("<!-- MAP")]
-    badges = len(re.findall(r'<div class="bdg b-conf">CONFIRMED</div>', cards))
-    so_lines = re.findall(r'<div class="so">CONFIRMED &middot; ([^<]+)</div>', cards)
-    two = [x for x in so_lines if "&middot;" in x]
-    if not (badges == len(so_lines) == len(two)):
-        problems.append(
-            f"CONFIRMED badges ({badges}) != CONFIRMED .so lines ({len(so_lines)}) "
-            f"!= two-outlet lines ({len(two)}) (B3)"
-        )
-    # 36 story slots: 1 lead hero + 2 side heroes + 10 big cards + 23 list rows.
+
+    # --- map: 12 pins ---
+    map_start = html.index("<!-- MAP")
+    map_end = html.index("<!-- DATE CHECK")
+    map_html = html[map_start:map_end]
+    pins = map_html.count("<circle cx=")
+    if pins != 12:
+        problems.append(f"map pins must be 12 (found {pins})")
+
+    # --- DATE CHECK: 4 columns, as-of settled to 17:00 UTC ---
+    if "As of 22 Nov, 17:00 UTC" not in html:
+        problems.append("DATE CHECK as-of 'As of 22 Nov, 17:00 UTC' missing")
+    if "Includes items that broke 19&ndash;21 Nov" not in html:
+        problems.append("DATE CHECK 'Includes items that broke 19–21 Nov' missing")
+    for col in ("HELD", "LEFT OUT", "NOT YET", "CORRECTIONS"):
+        if col not in html:
+            problems.append(f"DATE CHECK column {col} missing")
+
+    # --- 36 story slots: 1 lead + 8 cards + 27 list rows ---
     slots = (
-        html.count('<div class="lead">')
-        + html.count('<div class="rhero"')
-        + html.count('<div class="bcard"')
-        + html.count('<div class="row"')
+        html.count('<div class="leadtext">')
+        + html.count('<div class="card"')
+        + html.count('<div class="row">')
     )
     if slots != 36:
         problems.append(f"story slots must be 36 (found {slots})")
+
     if problems:
-        raise SystemExit("front.html v9 check failed:\n- " + "\n- ".join(problems))
-    print(f"front.html v9 check ok: {badges} CONFIRMED cards, all with 2 outlets; 36 slots")
+        raise SystemExit("front.html v10 check failed:\n- " + "\n- ".join(problems))
+    print(
+        f"front.html v10 check ok: 1 lead + {cards} cards + 27 list rows = "
+        f"36 slots; {pins} map pins"
+    )
 
 
 def self_check(data: bytes) -> None:
