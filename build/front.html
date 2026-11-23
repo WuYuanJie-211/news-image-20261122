@@ -47,29 +47,29 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 .card .toprule { position:absolute; left:0; top:0; width:476px; height:4px; }
 .card .num { position:absolute; left:8px; top:12px; width:28px; height:28px; border-radius:50%; background:#191919; color:#FFFFFF; font-size:16px; font-weight:bold; text-align:center; line-height:28px; z-index:2; }
 .card .vdot { position:absolute; left:144px; top:24px; width:12px; height:12px; border-radius:50%; z-index:2; }
-.card .kick { position:absolute; left:180px; top:16px; font-size:18px; font-weight:bold; letter-spacing:1px; white-space:nowrap; }
-.card .head { position:absolute; left:180px; top:48px; width:284px; font-size:26px; font-weight:bold; line-height:30px; }
-.card .dek { position:absolute; left:180px; top:118px; width:284px; font-size:22px; line-height:26px; color:#191919; }
-.card .src { position:absolute; left:180px; top:196px; font-size:15px; letter-spacing:0.5px; color:#404040; white-space:nowrap; }
+.card .kick { position:absolute; left:180px; top:16px; width:268px; font-size:18px; font-weight:bold; letter-spacing:1px; line-height:22px; }
+.card .head { position:absolute; left:180px; top:64px; width:284px; font-size:26px; font-weight:bold; line-height:30px; }
+.card .dek { position:absolute; left:180px; top:134px; width:284px; font-size:22px; line-height:26px; color:#191919; }
+.card .src { position:absolute; left:180px; top:212px; font-size:15px; letter-spacing:0.5px; color:#404040; white-space:nowrap; }
 /* ---- MAP + ALSO ON 1552-1848 ---- */
-.mapbox { position:absolute; left:48px; top:1544px; width:1240px; height:286px; background:#EFE7D2; overflow:hidden; }
+.mapbox { position:absolute; left:48px; top:1544px; width:1240px; height:272px; background:#EFE7D2; overflow:hidden; }
 .mapbox .mlab { position:absolute; left:16px; top:10px; font-size:18px; font-weight:bold; letter-spacing:2px; }
 .pin { position:absolute; border-radius:50%; color:#FFFFFF; font-weight:bold; text-align:center; }
 .pslug { position:absolute; font-size:16px; font-weight:bold; white-space:nowrap; }
-.lst { position:absolute; left:1312px; top:1544px; width:688px; height:286px; }
+.lst { position:absolute; left:1312px; top:1544px; width:704px; height:272px; }
 .lst .lh { font-size:18px; font-weight:bold; letter-spacing:1px; white-space:nowrap; }
 .lst .col { position:absolute; top:20px; width:336px; overflow:hidden; }
-.lst .col.r .row { line-height:20.4px; }
-.lst .row { font-size:16px; line-height:19px; white-space:nowrap; }
+.lst .col.r .row { line-height:19.38px; }
+.lst .row { font-size:16px; line-height:18px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding-right:8px; }
 .lst .row .n { font-weight:bold; color:#191919; }
 /* ---- DATE CHECK 1856-2008 ---- */
-.dc { position:absolute; left:48px; top:1830px; width:1952px; height:152px; border:3px solid #B01E1E; background:#FDFBF5; }
+.dc { position:absolute; left:48px; top:1830px; width:1952px; height:152px; border:1px solid rgba(25,25,25,0.4); background:#FDFBF5; }
 .dc .l { position:absolute; left:16px; top:10px; width:1920px; font-size:22px; white-space:nowrap; }
-.dc .l b { color:#B01E1E; }
+.dc .l b { color:#191919; }
 .dc .drule { position:absolute; left:16px; top:48px; width:1920px; border-top:2px solid #A68B5B; }
 .dc .col { position:absolute; top:60px; width:460px; font-size:22px; line-height:28px; }
 .dc .col .h { font-weight:bold; font-size:20px; letter-spacing:1px; }
-.dc .col .h .notyet { color:#B01E1E; }
+.dc .col .h .notyet { color:#D98E00; }
 /* ---- FOOTER 2016-2048 ---- */
 .foot { position:absolute; left:48px; width:1952px; font-size:16px; line-height:16px; white-space:nowrap; }
 </style></head><body>
@@ -80,14 +80,14 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 <div class="mastsmall" style="right:48px;">36 STORIES &middot; 12 PINS</div>
 <div class="rule" style="left:48px; top:140px; width:1952px; height:2px;"></div>
 
-<!-- THE DAY IN UTC 148-204 : one row, four events at 10px display (20px at 2x), red NOW at 17:00 -->
+<!-- THE DAY IN UTC 148-204 : one row, four events at 10px display (20px at 2x), time-free NOW dot on the ATP tick -->
 <div class="tlbg"></div>
 <div class="tllab">THE DAY IN UTC</div>
 <div class="tick" style="left:360px;"><b>00:09</b> &middot; PERU M6.9</div>
 <div class="tick" style="left:760px;"><b>09:42</b> &middot; BANDA SEA M6.9</div>
 <div class="tick" style="left:1180px;"><b>10:00</b> &middot; HK POLLS CLOSE</div>
 <div class="tick" style="left:1600px;"><b>17:00</b> &middot; ATP FINAL</div>
-<div class="nowmark" style="left:1820px;"><span class="ring"></span>NOW 17:00</div>
+<div class="nowmark" style="left:1520px;"><span class="ring"></span>NOW</div>
 
 <!-- THE DAY IN NUMBERS 212-388 : six counts, shared baseline, log-scale bars, 3 numeral steps, rate chip -->
 <div class="nlab">THE DAY IN NUMBERS</div>
@@ -193,44 +193,46 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 <!-- MAP + ALSO ON 1552-1848 : schematic map, circles sized by region story count, story number inside, slug beside; 27 list items in 2 columns -->
 <div class="mapbox">
 <div class="mlab">THE WORLD &middot; 12 PINS</div>
-<svg width="1240" height="296" viewBox="0 0 1240 296" style="position:absolute; left:0; top:0;"><g stroke="#D8CDB2" stroke-width="1"><line x1="0" y1="60" x2="1240" y2="60"/><line x1="0" y1="120" x2="1240" y2="120"/><line x1="0" y1="180" x2="1240" y2="180"/><line x1="0" y1="240" x2="1240" y2="240"/><line x1="200" y1="0" x2="200" y2="296"/><line x1="450" y1="0" x2="450" y2="296"/><line x1="700" y1="0" x2="700" y2="296"/><line x1="950" y1="0" x2="950" y2="296"/><line x1="1150" y1="0" x2="1150" y2="296"/></g><g font-family="DejaVu Sans" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><circle cx="640" cy="66" r="26" fill="#2F5D8A"/><text x="640" y="74" font-size="22">05</text><circle cx="700" cy="56" r="26" fill="#2F5D8A"/><text x="700" y="64" font-size="22">04</text><circle cx="716" cy="108" r="26" fill="#2F5D8A"/><text x="716" y="116" font-size="22">02</text><circle cx="760" cy="148" r="26" fill="#2F5D8A"/><text x="760" y="156" font-size="22">03</text><circle cx="820" cy="120" r="20" fill="#A63A2E"/><text x="820" y="127" font-size="18">01</text><circle cx="642" cy="168" r="22" fill="#8A5A28"/><text x="642" y="176" font-size="20">23</text><circle cx="754" cy="171" r="22" fill="#8A5A28"/><text x="754" y="179" font-size="20">27</text><circle cx="1013" cy="138" r="28" fill="#B97A1E"/><text x="1013" y="147" font-size="24">10</text><circle cx="1064" cy="187" r="28" fill="#B97A1E"/><text x="1064" y="196" font-size="24">11</text><circle cx="358" cy="196" r="26" fill="#4A7A3D"/><text x="358" y="204" font-size="22">17</text><circle cx="455" cy="204" r="26" fill="#4A7A3D"/><text x="455" y="212" font-size="22">19</text><circle cx="251" cy="133" r="26" fill="#4A7A3D"/><text x="251" y="141" font-size="22">18</text></g><g font-family="DejaVu Sans" font-size="16" font-weight="bold" fill="#191919"><text x="600" y="71" text-anchor="end">CPH</text><text x="700" y="24" text-anchor="middle">GOF</text><text x="748" y="113">LVIV</text><text x="792" y="160">ANTALYA</text><text x="846" y="125">BAH</text><text x="642" y="204" text-anchor="middle">BAY</text><text x="754" y="208" text-anchor="middle">MOY</text><text x="978" y="143" text-anchor="end">HKG</text><text x="1064" y="228" text-anchor="middle">BND</text><text x="358" y="234" text-anchor="middle">PER</text><text x="455" y="242" text-anchor="middle">BSB</text><text x="220" y="138" text-anchor="end">SINALOA</text></g></svg>
+<svg width="1240" height="296" viewBox="0 0 1240 296" style="position:absolute; left:0; top:0;"><g stroke="#D8CDB2" stroke-width="1"><line x1="0" y1="60" x2="1240" y2="60"/><line x1="0" y1="120" x2="1240" y2="120"/><line x1="0" y1="180" x2="1240" y2="180"/><line x1="0" y1="240" x2="1240" y2="240"/><line x1="200" y1="0" x2="200" y2="296"/><line x1="450" y1="0" x2="450" y2="296"/><line x1="700" y1="0" x2="700" y2="296"/><line x1="950" y1="0" x2="950" y2="296"/><line x1="1150" y1="0" x2="1150" y2="296"/></g><g font-family="DejaVu Sans" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><circle cx="630" cy="62" r="26" fill="#191919"/><text x="630" y="71" font-size="24">05</text><circle cx="702" cy="48" r="26" fill="#191919"/><text x="702" y="57" font-size="24">04</text><circle cx="718" cy="108" r="26" fill="#191919"/><text x="718" y="117" font-size="24">02</text><circle cx="780" cy="145" r="26" fill="#191919"/><text x="780" y="154" font-size="24">03</text><circle cx="838" cy="112" r="26" fill="#191919"/><text x="838" y="121" font-size="24">01</text><circle cx="642" cy="168" r="26" fill="#191919"/><text x="642" y="177" font-size="24">23</text><circle cx="740" cy="185" r="26" fill="#191919"/><text x="740" y="194" font-size="24">27</text><circle cx="1013" cy="138" r="26" fill="#191919"/><text x="1013" y="147" font-size="24">10</text><circle cx="1064" cy="187" r="26" fill="#191919"/><text x="1064" y="196" font-size="24">11</text><circle cx="358" cy="196" r="26" fill="#191919"/><text x="358" y="205" font-size="24">17</text><circle cx="455" cy="204" r="26" fill="#191919"/><text x="455" y="213" font-size="24">19</text><circle cx="251" cy="133" r="26" fill="#191919"/><text x="251" y="142" font-size="24">18</text></g><g font-family="DejaVu Sans" font-size="16" font-weight="bold" fill="#191919"><text x="590" y="67" text-anchor="end">CPH</text><text x="702" y="16" text-anchor="middle">GOF</text><text x="750" y="113">LVIV</text><text x="812" y="157">ANTALYA</text><text x="864" y="117">BAH</text><text x="642" y="204" text-anchor="middle">BAY</text><text x="740" y="222" text-anchor="middle">MOY</text><text x="978" y="143" text-anchor="end">HKG</text><text x="1064" y="228" text-anchor="middle">BND</text><text x="358" y="234" text-anchor="middle">PER</text><text x="455" y="242" text-anchor="middle">BSB</text><text x="220" y="138" text-anchor="end">SINALOA</text></g></svg>
 </div>
 <div class="lst">
-<div class="lh">ALSO IN THIS EDITION &mdash; 27 MORE STORIES</div>
-<div class="col" style="left:0; width:348px;">
-<div class="row"><span class="n">06</span> &middot; Zelenskyy: NATO guarantee &mdash; Anadolu</div>
-<div class="row"><span class="n">07</span> &middot; Costa: &euro;44bn more cuts &mdash; Reuters</div>
-<div class="row"><span class="n">08</span> &middot; Macron hosts Harris &mdash; Politico</div>
-<div class="row"><span class="n">11</span> &middot; Banda Sea M6.9 &mdash; GDACS</div>
-<div class="row"><span class="n">12</span> &middot; First Trump&ndash;Putin&ndash;Xi table &mdash; NYT</div>
-<div class="row"><span class="n">13</span> &middot; Takaichi cold welcome &mdash; Japan Times</div>
-<div class="row"><span class="n">14</span> &middot; Pakistani minister in India &mdash; Dawn</div>
-<div class="row"><span class="n">15</span> &middot; Sen&rsquo;s run ends &mdash; Times of India</div>
-<div class="row"><span class="n">16</span> &middot; Onosato wins title &mdash; News On Japan</div>
-<div class="row"><span class="n">17</span> &middot; Peru M6.9, no damage &mdash; USGS</div>
-<div class="row"><span class="n">19</span> &middot; Bolsonaro in intensive care &mdash; Reuters</div>
-<div class="row"><span class="n">20</span> &middot; Supercell kills 3 &mdash; Straits Times</div>
-<div class="row"><span class="n">21</span> &middot; Hegseth memo curbs defence &mdash; WaPo</div>
-<div class="row"><span class="n">22</span> &middot; Anthropic falls 6% on day 2 &mdash; CNBC</div>
+<div class="lh">ALSO IN THIS EDITION &mdash; 27 MORE STORIES &middot; 06&ndash;36</div>
+<div class="col" style="left:0; width:336px;">
+<div class="row"><span class="n">06</span> &middot; Zelenskyy: NATO guarantee</div>
+<div class="row"><span class="n">07</span> &middot; Costa: &euro;44bn more cuts</div>
+<div class="row"><span class="n">08</span> &middot; Macron hosts Harris</div>
+<div class="row"><span class="n">11</span> &middot; Banda Sea M6.9</div>
+<div class="row"><span class="n">12</span> &middot; First Trump&ndash;Putin&ndash;Xi table</div>
+<div class="row"><span class="n">13</span> &middot; Takaichi cold welcome</div>
+<div class="row"><span class="n">14</span> &middot; Pakistani minister in India</div>
+<div class="row"><span class="n">15</span> &middot; Sen&rsquo;s run ends</div>
+<div class="row"><span class="n">16</span> &middot; Onosato wins title</div>
+<div class="row"><span class="n">17</span> &middot; Peru M6.9, no damage</div>
+<div class="row"><span class="n">19</span> &middot; Bolsonaro in intensive care</div>
+<div class="row"><span class="n">20</span> &middot; Supercell kills 3</div>
+<div class="row"><span class="n">21</span> &middot; Hegseth memo curbs defence</div>
+<div class="row"><span class="n">22</span> &middot; Anthropic falls 6% on day 2</div>
 </div>
-<div class="col r" style="left:352px;">
-<div class="row"><span class="n">24</span> &middot; Kitchens go dark &mdash; Sudan Tribune</div>
-<div class="row"><span class="n">25</span> &middot; Amnesty: probe RSF strikes &mdash; Amnesty</div>
-<div class="row"><span class="n">26</span> &middot; Troops mass on border &mdash; DW</div>
-<div class="row"><span class="n">27</span> &middot; 700,000 displaced &mdash; Islamic Relief</div>
-<div class="row"><span class="n">28</span> &middot; 1,671 dead since the truce &mdash; Reuters</div>
-<div class="row"><span class="n">29</span> &middot; Pugh swims the strait &mdash; Straits Times</div>
-<div class="row"><span class="n">30</span> &middot; 350,000 displaced since August &mdash; UN</div>
-<div class="row"><span class="n">31</span> &middot; Fred Nile dies at 92 &mdash; ABC News</div>
-<div class="row"><span class="n">32</span> &middot; Election one week out &mdash; ABC News</div>
-<div class="row"><span class="n">33</span> &middot; Bitcoin slides to $55,252 &mdash; Reuters</div>
-<div class="row"><span class="n">34</span> &middot; Verstappen wins Vegas &mdash; Formula1.com</div>
-<div class="row"><span class="n">35</span> &middot; Zverev, Alcaraz in final &mdash; ST</div>
-<div class="row"><span class="n">36</span> &middot; Texans 26-3 Colts &mdash; NFL.com</div>
+<div class="col r" style="left:368px;">
+<div class="row"><span class="n">24</span> &middot; Kitchens go dark</div>
+<div class="row"><span class="n">25</span> &middot; Amnesty: probe RSF strikes</div>
+<div class="row"><span class="n">26</span> &middot; Troops mass on border</div>
+<div class="row"><span class="n">27</span> &middot; 700,000 displaced</div>
+<div class="row"><span class="n">28</span> &middot; 1,671 dead since the truce</div>
+<div class="row"><span class="n">29</span> &middot; Pugh swims the strait</div>
+<div class="row"><span class="n">30</span> &middot; 350,000 displaced since August</div>
+<div class="row"><span class="n">31</span> &middot; Fred Nile dies at 92</div>
+<div class="row"><span class="n">32</span> &middot; Election one week out</div>
+<div class="row"><span class="n">33</span> &middot; Bitcoin slides to $55,252</div>
+<div class="row"><span class="n">34</span> &middot; Verstappen wins Vegas</div>
+<div class="row"><span class="n">35</span> &middot; Zverev, Alcaraz in final</div>
+<div class="row"><span class="n">36</span> &middot; Texans 26-3 Colts</div>
 </div>
 </div>
 
-<!-- DATE CHECK 1856-2008 : four-column status table, red border, as-of settled to 17:00 UTC -->
+<div style="position:absolute; left:48px; top:1816px; width:1952px; font-size:12px; color:#404040; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Sources: Anadolu &middot; Reuters &middot; Politico &middot; GDACS &middot; NYT &middot; Japan Times &middot; Dawn &middot; Times of India &middot; News On Japan &middot; USGS &middot; Straits Times &middot; WaPo &middot; CNBC &middot; Sudan Tribune &middot; Amnesty &middot; DW &middot; Islamic Relief &middot; UN &middot; ABC News &middot; Formula1.com &middot; ST &middot; NFL.com</div>
+
+<!-- DATE CHECK 1830-1982 (2x) : four-column status table, ink border, as-of settled to 17:00 UTC -->
 <div class="dc">
   <div class="l"><b>DATE CHECK &check;</b> As of 22 Nov, 17:00 UTC. Includes items that broke 19&ndash;21 Nov.</div>
   <div class="drule"></div>
