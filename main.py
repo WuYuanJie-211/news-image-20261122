@@ -1,8 +1,30 @@
 #!/usr/bin/env python3
-"""news-image-20261122 entrypoint (v14): copy entry.png to /output/entry.png.
+"""news-image-20261122 entrypoint (v14.1): copy entry.png to /output/entry.png.
 
 Stdlib only. No network. Deterministic: the output bytes are exactly the
 input bytes, so two runs are byte-identical.
+
+v14.1 fixes Quick's two v14 blockers (NOT READY 18:19), both pixel
+collisions introduced by v14's own changes:
+1. Numbers merge: bold numerals at 68/60px are wider than their
+   nominal slots, so 700,000 ran into 350,000 (one unbroken ink run
+   x157-190) and 350,000 into 30,000 (x303-333). The v14 builder
+   measured text boxes, not ink. Fix: shorten the display to 700K /
+   350K / 30K (the VALUES stay 700,000 / 350,000 / 30,000 — the full
+   values still appear in the ALSO ON rows); the ink gaps are now
+   51/50/85/55/99px display, all >= 12px. The self-check now measures
+   the RENDERED ink (decoded PNG pixels), not text boxes, and FAILS
+   if neighbouring numbers' ink touches.
+2. Footer pushed down: the v14 +26/+78 shift put footer line 1 on
+   the DATE CHECK box's bottom border (ink y=1002-1017, past the
+   ~1013 reported) with the two lines nearly touching. Fix: take 32px
+   at 2x from the lead illustration (468 -> 436 tall, squash 5% ->
+   12%) and shift everything below the lead up 32px; re-space the
+   footer so the DATE CHECK border clears line 1 ink by 6px display
+   and the two lines' ink by 3px; footer ink now ends at y=1013.
+   The DATE CHECK box itself is already full (content ends 1px above
+   its border), so its height cannot be cut — the room must come from
+   above.
 
 v14 is the SUBSTANTIAL round on v13 (Quick ruled v13 READY with no
 blocking fixes, so v14 changes first-glance impact, not defects).
@@ -28,10 +50,12 @@ prominently. v14 does three things, all first-glance:
    40->48px at 2x (28->34 / 26->30 / 20->24 display), shared
    baseline kept at 378. The winners' numbers are ~44px display;
    34px is a big step toward that.
-Space comes from the lead illustration (520->468px tall at 2x,
-viewBox 1180x494 squashed 5% via preserveAspectRatio=none).
+Space comes from the lead illustration (520->468px tall at 2x in v14,
+viewBox 1180x494 squashed 5% via preserveAspectRatio=none; v14.1 takes
+32px more, 468->436, squash 12%, to re-space the footer per Quick v14
+fix 3).
 Everything below the masthead shifts +78; everything below the lead
-shifts +26 (masthead +78 minus lead -52).
+shifts +26 (masthead +78 minus lead -52) in v14, then -32 in v14.1.
 The self-check below pins the v14 layout strings and the v14
 acceptance geometry, so a later edit cannot silently re-break a
 reviewer blocker or the v14 first-glance changes.
@@ -78,6 +102,7 @@ import re
 import shutil
 import struct
 import sys
+import zlib
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "entry.png")
@@ -117,13 +142,17 @@ def check_front() -> None:
     if '<div class="rule" style="left:48px; top:218px;' not in html:
         problems.append("masthead rule must be top 218px at 2x (v14: masthead grew 78px)")
 
-    # --- v14 numbers: 68/60/48 at 2x, shared baseline 378 ---
-    if 'font-size:68px; margin-top:20px;">700,000' not in html:
-        problems.append("numbers '700,000' must be 68px / mt20 at 2x (v14)")
-    if 'font-size:68px; margin-top:20px;">350,000' not in html:
-        problems.append("numbers '350,000' must be 68px / mt20 at 2x (v14)")
-    if 'font-size:60px; margin-top:28px;">30,000' not in html:
-        problems.append("numbers '30,000' must be 60px / mt28 at 2x (v14)")
+    # --- v14.1 numbers: 700K / 350K / 30K at 68/68/60px at 2x ---
+    # v14's full "700,000" / "350,000" / "30,000" merged in the ink
+    # (Quick v14: unbroken runs x157-190 and x303-333). The display
+    # shortens to K form; the VALUES stay 700,000 / 350,000 / 30,000
+    # (full values in the ALSO ON rows, checked below).
+    if 'font-size:68px; margin-top:20px;">700K' not in html:
+        problems.append("numbers '700K' must be 68px / mt20 at 2x (v14.1)")
+    if 'font-size:68px; margin-top:20px;">350K' not in html:
+        problems.append("numbers '350K' must be 68px / mt20 at 2x (v14.1)")
+    if 'font-size:60px; margin-top:28px;">30K' not in html:
+        problems.append("numbers '30K' must be 60px / mt28 at 2x (v14.1)")
     if 'font-size:60px; margin-top:28px;">1,671' not in html:
         problems.append("numbers '1,671' must be 60px / mt28 at 2x (v14)")
     if 'font-size:48px; margin-top:40px;">856' not in html:
@@ -176,9 +205,17 @@ def check_front() -> None:
                 )
 
     # --- numbers row: 6 people-counts + rate chip ---
-    for num in ("700,000", "350,000", "30,000", "1,671", "856", "24"):
+    for num in ("700K", "350K", "30K", "1,671", "856", "24"):
         if num not in html:
             problems.append(f"numbers row missing {num}")
+    # v14.1: the VALUES behind the K display still appear in full in
+    # the ALSO ON rows (row 27 "700,000 displaced", row 30 "350,000
+    # displaced since August"). If a row is ever reworded, the value
+    # must stay visible somewhere on the page.
+    if "700,000 displaced" not in html:
+        problems.append("ALSO ON row 27 must keep the full value '700,000 displaced' (v14.1)")
+    if "350,000 displaced since August" not in html:
+        problems.append("ALSO ON row 30 must keep the full value '350,000 displaced since August' (v14.1)")
     if "98.79%" not in html:
         problems.append("rate chip '98.79%' missing")
     if "5,640 VOTERS" not in html:
@@ -423,8 +460,8 @@ def check_front() -> None:
         problems.append("list left column must be 336px at 2x (v12 step 1)")
     if 'style="left:368px;"' not in html:
         problems.append("list right column must start at left 368px at 2x (v12 step 1)")
-    if ".lst { position:absolute; left:1312px; top:1570px; width:704px; height:272px; }" not in html:
-        problems.append("list block must be left 1312 / top 1570 / width 704 / height 272 at 2x (v12 step 1, v14 +26)")
+    if ".lst { position:absolute; left:1312px; top:1538px; width:704px; height:272px; }" not in html:
+        problems.append("list block must be left 1312 / top 1538 / width 704 / height 272 at 2x (v12 step 1, v14 +26, v14.1 -32)")
     # step 2: rows are 8px display (16px at 2x). The plan's 9px display
     # (18px at 2x) truncates the longest row (30, "350,000 displaced
     # since August") to "Aug…" even after the source is dropped, so 16px
@@ -446,8 +483,8 @@ def check_front() -> None:
             break
     if "Sources: Anadolu" not in html:
         problems.append("shared credit line 'Sources: Anadolu …' missing (v12 step 2)")
-    if 'style="position:absolute; left:48px; top:1842px; width:1952px;' not in html:
-        problems.append("credit line must sit at top 1842px full width (v12 step 2, v14 +26)")
+    if 'style="position:absolute; left:48px; top:1810px; width:1952px;' not in html:
+        problems.append("credit line must sit at top 1810px full width (v12 step 2, v14 +26, v14.1 -32)")
     # step 3: header reconciles the row count with the page-wide index.
     if "27 MORE STORIES &middot; 06&ndash;36" not in html:
         problems.append("ALSO ON header must read '27 MORE STORIES · 06–36' (v12 step 3)")
@@ -495,14 +532,19 @@ def check_front() -> None:
 
     # --- vertical geometry (v12 step 2): map/lst end at 1816, credit line
     # 1816-1830, DATE CHECK top 1830, footer ends at y=1010 display ---
-    if ".mapbox { position:absolute; left:48px; top:1570px; width:1240px; height:272px;" not in html:
-        problems.append("mapbox must be top 1570 / height 272 at 2x (v12 step 2, v14 +26)")
-    if ".dc { position:absolute; left:48px; top:1856px;" not in html:
-        problems.append("DATE CHECK must be top 1856 at 2x (v14 +26)")
-    if 'class="foot" style="top:2006px;"' not in html:
-        problems.append("footer line 1 must be top 2006 at 2x (v14: up 10px so it ends ~1013, near v13's 1010)")
-    if 'class="foot" style="top:2020px;"' not in html:
-        problems.append("footer line 2 must be top 2020 at 2x (v14: ends ~1013)")
+    if ".mapbox { position:absolute; left:48px; top:1538px; width:1240px; height:272px;" not in html:
+        problems.append("mapbox must be top 1538 / height 272 at 2x (v12 step 2, v14 +26, v14.1 -32)")
+    if ".dc { position:absolute; left:48px; top:1824px;" not in html:
+        problems.append("DATE CHECK must be top 1824 at 2x (v14 +26, v14.1 -32)")
+    # v14.1: footer re-spaced per Quick v14 fix 3 — 6px display between
+    # the DATE CHECK border and line 1 ink, 3px between the two lines'
+    # ink, footer ink ends at y=1013. The room comes from the lead
+    # illustration (468 -> 436 tall at 2x), so everything below the
+    # lead sits 32px higher at 2x than in v14.
+    if 'class="foot" style="top:1990px;"' not in html:
+        problems.append("footer line 1 must be top 1990 at 2x (v14.1: 6px clear of the DATE CHECK border, ink ends 1013)")
+    if 'class="foot" style="top:2012px;"' not in html:
+        problems.append("footer line 2 must be top 2012 at 2x (v14.1: 3px clear of line 1 ink, ends 1013)")
 
     # --- 36 story slots: 1 lead + 8 cards + 27 list rows ---
     slots = (
@@ -516,12 +558,136 @@ def check_front() -> None:
     if problems:
         raise SystemExit("front.html v13 check failed:\n- " + "\n- ".join(problems))
     print(
-        f"front.html v14 check ok: date 170px LibSerif + ink dek + numbers 68/60/48; "
+        f"front.html v14.1 check ok: date 170px LibSerif + ink dek + numbers 700K/350K/30K; "
         f"1 lead + {cards} cards + 27 list rows = 36 slots; {pins} map pins "
         f"(ink, 24px numerals; LVIV<ANTALYA<BAH); clock 17:00 x1; NOW 13px "
         f"clear; red 4 source uses = 3 canvas clusters; ME teal; footer "
         f"ends 1013"
     )
+
+
+def _decode_png_grey(data: bytes):
+    """Decode a non-interlaced 8-bit PNG to greyscale rows. Stdlib only.
+
+    Returns (width, height, px) where px is a bytearray of width*height
+    greyscale values (0 = black). Handles colour types 0 (grey), 2 (RGB)
+    and 6 (RGBA) at 8 bits; chrome-headless-shell writes one of these.
+    """
+    if data[:8] != b"\x89PNG\r\n\x1a\n":
+        raise SystemExit("not a PNG")
+    pos = 8
+    width = height = None
+    colortype = None
+    idat = b""
+    while pos < len(data):
+        length = struct.unpack(">I", data[pos:pos + 4])[0]
+        ctype = data[pos + 4:pos + 8]
+        chunk = data[pos + 8:pos + 8 + length]
+        if ctype == b"IHDR":
+            width, height, bitdepth, colortype = struct.unpack(">IIBB", chunk[:10])
+            if chunk[12] != 0:
+                raise SystemExit("interlaced PNG not supported by the ink check")
+            if bitdepth != 8 or colortype not in (0, 2, 6):
+                raise SystemExit(
+                    f"unsupported PNG: bitdepth {bitdepth} colortype {colortype}"
+                )
+        elif ctype == b"IDAT":
+            idat += chunk
+        elif ctype == b"IEND":
+            break
+        pos += 12 + length
+    raw = zlib.decompress(idat)
+    channels = {0: 1, 2: 3, 6: 4}[colortype]
+    stride = width * channels
+    px = bytearray(width * height)
+    prev = bytearray(stride)
+    p = 0
+    for y in range(height):
+        f = raw[p]
+        p += 1
+        line = bytearray(raw[p:p + stride])
+        p += stride
+        if f == 0:
+            pass
+        elif f == 1:
+            for i in range(channels, stride):
+                line[i] = (line[i] + line[i - channels]) & 0xFF
+        elif f == 2:
+            for i in range(stride):
+                line[i] = (line[i] + prev[i]) & 0xFF
+        elif f == 3:
+            for i in range(stride):
+                a = line[i - channels] if i >= channels else 0
+                line[i] = (line[i] + ((a + prev[i]) >> 1)) & 0xFF
+        elif f == 4:
+            for i in range(stride):
+                a = line[i - channels] if i >= channels else 0
+                b = prev[i]
+                c = prev[i - channels] if i >= channels else 0
+                pa, pb, pc = abs(b - c), abs(a - c), abs(a + b - 2 * c)
+                pr = a if (pa <= pb and pa <= pc) else (b if pb <= pc else c)
+                line[i] = (line[i] + pr) & 0xFF
+        else:
+            raise SystemExit(f"unknown PNG filter {f}")
+        if colortype == 0:
+            px[y * width:(y + 1) * width] = line
+        else:
+            step = 3 if colortype == 2 else 4
+            for x in range(width):
+                r, g, b = line[x * step], line[x * step + 1], line[x * step + 2]
+                px[y * width + x] = (r * 299 + g * 587 + b * 114) // 1000
+        prev = line
+    return width, height, px
+
+
+def check_number_ink(data: bytes) -> None:
+    """v14.1 (Quick fix 2): fail if neighbouring numbers' INK touches.
+
+    Measures the RENDERED dark pixels in the numbers band (display
+    y 162-188, x 0-900, rate chip excluded), not text bounding boxes.
+    Bold numerals are wider than their nominal slots — v14's "18px
+    gaps" were a text-box measurement, and the ink actually merged
+    (700,000/350,000 one run x157-190; 350,000/30,000 one run x303-333).
+    Columns with dark ink merge into a group when separated by < 12px;
+    there must be exactly 6 groups (one per numeral) with >= 12px
+    between neighbours.
+    """
+    width, height, px = _decode_png_grey(data)
+    if (width, height) != (1024, 1024):
+        raise SystemExit(f"ink check needs 1024x1024, got {width}x{height}")
+    dark_cols = []
+    for x in range(900):
+        dark = any(px[y * width + x] < 100 for y in range(162, 189))
+        dark_cols.append(dark)
+    groups = []
+    inrun = False
+    for x in range(900):
+        if dark_cols[x] and not inrun:
+            start = x
+            inrun = True
+        elif not dark_cols[x] and inrun:
+            groups.append([start, x - 1])
+            inrun = False
+    if inrun:
+        groups.append([start, 899])
+    merged = []
+    for g in groups:
+        if merged and g[0] - merged[-1][1] - 1 < 12:
+            merged[-1][1] = g[1]
+        else:
+            merged.append(list(g))
+    if len(merged) != 6:
+        raise SystemExit(
+            f"numbers ink check failed: {len(merged)} ink groups, want 6 "
+            f"(neighbouring numbers merged?): {merged}"
+        )
+    gaps = [merged[i + 1][0] - merged[i][1] - 1 for i in range(5)]
+    if min(gaps) < 12:
+        raise SystemExit(
+            f"numbers ink check failed: inter-number gaps {gaps}, "
+            f"all must be >= 12px display"
+        )
+    print(f"numbers ink check ok: 6 groups, gaps {gaps} display px")
 
 
 def self_check(data: bytes) -> None:
@@ -547,6 +713,7 @@ def main(argv=None) -> int:
     with open(SRC, "rb") as fh:
         data = fh.read()
     self_check(data)
+    check_number_ink(data)
     print(f"entry.png {len(data)} bytes sha256={hashlib.sha256(data).hexdigest()}")
     if verify_only:
         return 0
