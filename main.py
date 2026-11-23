@@ -1,36 +1,50 @@
 #!/usr/bin/env python3
-"""news-image-20261122 entrypoint (v12): copy entry.png to /output/entry.png.
+"""news-image-20261122 entrypoint (v13): copy entry.png to /output/entry.png.
 
 Stdlib only. No network. Deterministic: the output bytes are exactly the
 input bytes, so two runs are byte-identical.
 
-v12 is the Superbot v12 fix-plan round on v11 (Quick NOT READY: the right
-ALSO ON column had NO right margin, so rows 25/28/30/34 were clipped by
-the canvas edge, and row 06 was cut to "Anadol" by an overflow:hidden
-with no ellipsis). The v12 geometry rebuilds the ALSO ON block as a real
-2-column grid (list origin x=656 display, left 656-824, gutter 824-840,
-right 840-1008, 16px right margin; both columns 168px), drops the
-per-row source (one shared credit line under the block), settles red to
-exactly 4 canvas clusters, lets kickers wrap to two lines with a common
-body offset, and turns the timeline chip into a time-free NOW dot on the
-17:00 tick (placed left of the tick so it cannot overlap the label). The self-check below pins the v12 layout strings and the
-v12 acceptance geometry, so a later edit cannot silently re-break a
-reviewer blocker.
+v13 is the combined-verified fix round on v12 (no Superbot v13 plan:
+reserve #3 hit its daily request limit mid-reply on the synthesis, so
+v13 is built from the parent-verified fix list, not a Superbot plan).
+Both reviewers ruled v12 NOT READY; every v13 item below was verified
+real by the parent against the render/source before building.
 
-Grid reconciliation (Superbot's steps 1 and 9 disagree, neither gives
-two 176px columns): the mapbox ends at x=644 display and the list
-starts at x=656 (the v11 origin), so two equal columns + a 16px gutter
-+ a 16px right margin fit in 656-1008 display as 168px each. The gate
-(no ink within 2px of x=1008 / x=832 / the canvas edge) is met by this
-grid: the gutter 824-840 contains x=832, and the right column ends at
-x=1008. Row type is 9px display (18px at 2x); the plan's 12px
-line-height cannot fit 14 rows in the 252px row area, so the pitches
-are 18px (left) / 19.38px (right) at 2x, which balance 14/13 rows to
-the same baseline. Pin badges are r=26 at 2x (the plan's "20px" does
-not map to the 2x coordinate system); numerals are 12px display
-(24px at 2x) tabular, as specified. Row type is 8px display (16px at
-2x): the plan's 9px display truncates the longest row (30) to "Aug…",
-so 16px is used and every row fits in full.
+NOT a fix (already correct, do not "fix"): Superbot claimed card 02
+(Lviv) is missing and the footer tally is wrong. That is a misread.
+Story 02 IS the lead ("02 · UKRAINE · 19-20 NOVEMBER · LEAD"), so the
+page has 1 lead (02) + 8 cards + 27 rows = 36 stories, and the footer
+"6 confirmed · 2 official · 1 claim" is correct (confirmed = lead 02 +
+cards 03, 04, 05, 18, 23). No card 02 is added, the tally is untouched.
+
+v13 fixes, in order:
+1. Card 04 credit line overflow: "CONFIRMED · EURONEWS · FRANCE 24"
+   ended past the card's right edge (x~759 vs card edge 754). Now
+   "CONFIRMED · EURONEWS · F24", ending inside the card.
+2. NOW touches "17:00": the band read "NOW17:00 · ATP FINAL". The NOW
+   marker moved left (1520 -> 1500px at 2x), giving a 13px display gap
+   to "17:00" (>= 8px required).
+3. Red recoloured off red: the Middle East category colour #A63A2E
+   reads as red, so it is now teal #2E7A7A (swatch, card 01 kicker,
+   card 01 top rule). The COP31 flag in card 03 and both ship funnels
+   in card 04 are now neutral grey #6B6B6B. The only red left is the
+   accent red #B01E1E: banner fill, NOW marker, card-01 radar dot
+   (4 source uses = 3 canvas clusters).
+4. Map pin latitudes: BAH (26N) sat above ANTALYA (37N) and level with
+   LVIV (50N). Reordered so LVIV cy < ANTALYA cy < BAH cy (100 < 135
+   < 175 at 2x). GOF label nudged off the map top edge (to the right
+   of its pin); BAH label given a 4px gap from pin 01.
+5. UTC strip tick: a visible axis (thin rule + a tick mark under each
+   of the four times, including one at 17:00) is now drawn under the
+   time labels, so the NOW dot aligns to a real tick.
+6. Sources line under the map: left at 12px (6px display). The gap
+   between the mapbox bottom (1816) and the DATE CHECK top (1830) is
+   only 14px at 2x, so a larger font would collide with the box or be
+   truncated by ellipsis. Noted, not changed.
+
+The self-check below pins the v13 layout strings and the v13
+acceptance geometry, so a later edit cannot silently re-break a
+reviewer blocker.
 """
 import hashlib
 import os
@@ -46,10 +60,10 @@ MAX_BYTES = 1024 * 1024
 
 
 def check_front() -> None:
-    """v12 self-check: fail loudly if any v12 layout string regresses.
+    """v13 self-check: fail loudly if any v13 layout string regresses.
 
     Reads build/front.html (the rendered page) and verifies the strings
-    the v12 fix plan depends on. The build fails instead of shipping a
+    the v13 fix list depends on. The build fails instead of shipping a
     page that re-breaks a reviewer blocker.
     """
     path = os.path.join(HERE, "build", "front.html")
@@ -79,8 +93,12 @@ def check_front() -> None:
         problems.append("lead sources 'Zelenskyy · Euronews · Al Jazeera' missing")
 
     # step 11 (v11): lead kicker carries the story number, closing the 02 hole.
+    # v13 correction: story 02 IS the lead (Superbot's "missing card 02"
+    # is a misread); the kicker must stay, and no card 02 may be added.
     if "02 &middot; UKRAINE" not in html:
         problems.append("lead kicker '02 · UKRAINE' missing")
+    if html.count('<div class="card"') != 8:
+        problems.append("cards must be exactly 8 (no card 02 may be added)")
 
     # Lead headline must be exactly 3 lines (2 <br>) and each line short
     # enough to fit the 740px text column at 68px (<=18 chars). This is
@@ -117,9 +135,13 @@ def check_front() -> None:
     if ".nfig .bar { height:12px; background:#A89B7E;" not in html:
         problems.append("numbers bars must be 12px #A89B7E (step 3)")
 
-    # --- timeline: 4 events + ONE clock at 17:00 (v12 step 7) ---
+    # --- timeline: 4 events + ONE clock at 17:00 (v12 step 7, v13 fixes 2+5) ---
     # The 17:00 tick keeps its label; the right chip is a time-free NOW
     # dot aligned to that tick, so the band carries exactly one "17:00".
+    # v13 fix 2: the NOW marker moved left (1500px at 2x) so it clears
+    # "17:00" by >= 8px display (measured 13px on the render).
+    # v13 fix 5: a visible axis (rule + one tick per time, incl. 17:00)
+    # is drawn under the labels, so the NOW dot aligns to a real tick.
     for ev in ("PERU M6.9", "BANDA SEA M6.9", "HK POLLS CLOSE", "ATP FINAL"):
         if ev not in html:
             problems.append(f"timeline missing {ev}")
@@ -133,12 +155,23 @@ def check_front() -> None:
     if tl_band.count("17:00") != 1:
         problems.append(
             f"timeline band must carry exactly one '17:00' "
-            f"(found {tl_band.count('17:00')}) (v12 step 7, gate 3)"
+            f"(found {tl_band.count('17:00')}) (v12 step 7, gate 5)"
         )
     if ">NOW</div>" not in tl_band:
         problems.append("timeline NOW dot missing (v12 step 7)")
-    if 'class="nowmark" style="left:1520px;"' not in tl_band:
-        problems.append("NOW dot must sit at left 1520px, on the 17:00 tick")
+    if 'class="nowmark" style="left:1500px;"' not in tl_band:
+        problems.append(
+            "NOW dot must sit at left 1500px at 2x (v13 fix 2: 13px clear "
+            "of '17:00'; 1520px left only ~3px)"
+        )
+    if 'left:1520px' in tl_band:
+        problems.append("stale NOW dot at 1520px still present (v13 fix 2)")
+    # v13 fix 5: axis rule + 4 tick marks under the four times.
+    if 'left:360px; top:192px; width:1540px; height:2px; background:#191919;' not in tl_band:
+        problems.append("timeline axis rule missing (v13 fix 5)")
+    for tx in (359, 759, 1179, 1599):
+        if f'left:{tx}px; top:186px; width:2px; height:12px; background:#191919;' not in tl_band:
+            problems.append(f"timeline tick mark at left {tx}px missing (v13 fix 5)")
 
     # --- region strip: 7 regions, 36 stories ---
     for reg in (
@@ -147,6 +180,20 @@ def check_front() -> None:
     ):
         if reg not in html:
             problems.append(f"region strip missing {reg}")
+    # v13 fix 3: the Middle East category colour is teal #2E7A7A, not
+    # the deep red #A63A2E (which reads as red). It must appear exactly
+    # 3 times (legend swatch, card 01 kicker, card 01 top rule), and the
+    # old red must be gone from the whole file.
+    if "#A63A2E" in html:
+        problems.append(
+            "Middle East colour #A63A2E still present (v13 fix 3: must be "
+            "teal #2E7A7A, #A63A2E reads as red)"
+        )
+    if html.count("#2E7A7A") != 3:
+        problems.append(
+            f"Middle East teal #2E7A7A must occur exactly 3 times "
+            f"(found {html.count('#2E7A7A')}) (v13 fix 3)"
+        )
 
     # --- cards: 8 horizontal cards, each with a verification dot + source ---
     # (scope the source count to the cards block: the lead carries its own
@@ -164,6 +211,8 @@ def check_front() -> None:
     if srcs != 8:
         problems.append(f"card sources must be 8 (found {srcs})")
     # the 9 featured stories: 6 CONFIRMED, 2 OFFICIAL, 1 CLAIM
+    # (v13 correction: confirmed = lead 02 + cards 03, 04, 05, 18, 23;
+    # Superbot's "missing 6th confirmed" is the lead, not a missing card)
     if html.count("6 confirmed &middot; 2 official &middot; 1 claim") != 1:
         problems.append(
             "footer verification tally '6 confirmed · 2 official · 1 claim' "
@@ -178,15 +227,36 @@ def check_front() -> None:
     # ruling 4 (v11): CLAIM dot is amber, not red-brown.
     if 'vdot" style="background:#D98E00;"' not in cards_html:
         problems.append("card 01 CLAIM dot must be amber #D98E00 (ruling 4)")
-    if 'vdot" style="background:#A63A2E;"' in cards_html:
-        problems.append("a card vdot is still #A63A2E (ruling 4: CLAIM is amber)")
 
-    # ruling 4 (v11): card 04 flame and card 05 target are burnt orange, so
-    # they read as illustration, not status.
-    if 'M66 46 L72 26 L78 46 Z" fill="#C65D00"' not in html:
-        problems.append("card 04 flame must be burnt orange #C65D00 (ruling 4)")
-    if 'M84 46 L90 32 L96 46 Z" fill="#D98E00"' not in html:
-        problems.append("card 04 second flame must be #D98E00 (ruling 4)")
+    # v13 fix 1: card 04 credit line must fit inside the card. "FRANCE 24"
+    # overflowed past the card's right edge (x~759 vs edge 754); it is now
+    # "F24". The old long form must be gone.
+    if "FRANCE 24" in cards_html:
+        problems.append(
+            "card 04 source still 'FRANCE 24' (v13 fix 1: overflows the "
+            "card; must be 'F24')"
+        )
+    if "CONFIRMED &middot; EURONEWS &middot; F24" not in cards_html:
+        problems.append("card 04 source must be 'CONFIRMED · EURONEWS · F24' (v13 fix 1)")
+
+    # v13 fix 3: the COP31 flag in card 03 is neutral grey, not red.
+    if 'x="129" y="20" width="26" height="15" fill="#B01E1E"' in html:
+        problems.append("COP31 flag still red #B01E1E (v13 fix 3: must be neutral)")
+    if 'x="129" y="20" width="26" height="15" fill="#6B6B6B"' not in html:
+        problems.append("COP31 flag must be neutral grey #6B6B6B (v13 fix 3)")
+
+    # v13 fix 3: the ship funnels in card 04 are neutral grey, not orange/red.
+    # (v11 ruling 4 called them "burnt orange" #C65D00/#D98E00; both
+    # reviewers counted them as red in v12, so they go to ink-neutral grey.)
+    if 'M66 46 L72 26 L78 46 Z" fill="#C65D00"' in html:
+        problems.append("card 04 funnel 1 still #C65D00 (v13 fix 3: must be neutral)")
+    if 'M84 46 L90 32 L96 46 Z" fill="#D98E00"' in html:
+        problems.append("card 04 funnel 2 still #D98E00 (v13 fix 3: must be neutral)")
+    if 'M66 46 L72 26 L78 46 Z" fill="#6B6B6B"' not in html:
+        problems.append("card 04 funnel 1 must be neutral grey #6B6B6B (v13 fix 3)")
+    if 'M84 46 L90 32 L96 46 Z" fill="#6B6B6B"' not in html:
+        problems.append("card 04 funnel 2 must be neutral grey #6B6B6B (v13 fix 3)")
+    # card 05 target centre/slash stay burnt orange (a target, not a flag/ship).
     if 'r="8" fill="#C65D00"' not in html:
         problems.append("card 05 target centre must be burnt orange (ruling 4)")
     if 'M56 40 L104 88" stroke="#C65D00"' not in html:
@@ -243,7 +313,7 @@ def check_front() -> None:
     # colour may remain on a pin (the region strip carries the colours).
     if map_html.count('fill="#191919"/>') < 12:
         problems.append("all 12 map pins must be ink #191919 (v12 step 5)")
-    for region_fill in ("#2F5D8A", "#A63A2E", "#8A5A28", "#B97A1E", "#4A7A3D"):
+    for region_fill in ("#2F5D8A", "#2E7A7A", "#8A5A28", "#B97A1E", "#4A7A3D"):
         if region_fill in map_html:
             problems.append(
                 f"region fill {region_fill} still on a map pin (v12 step 5)"
@@ -254,6 +324,36 @@ def check_front() -> None:
             f"all 12 pin numerals must be 24px at 2x "
             f"(found {map_html.count('font-size=\"24\"')}) (v12 step 8)"
         )
+    # v13 fix 4: pin latitudes in north-south order. Parse the three
+    # Europe/Middle East pin circle cy values (2x) and require
+    # LVIV (50N) < ANTALYA (37N) < BAH (26N). In v12 BAH sat above
+    # ANTALYA and level with LVIV (112 vs 145 vs 108); v13 is 100/135/175.
+    pin_cy = {}
+    for m in re.finditer(
+        r'<circle cx="(\d+)" cy="(\d+)" r="26"[^>]*><text x="\d+" y="\d+"[^>]*>(\d+)</text>',
+        map_html,
+    ):
+        pin_cy[m.group(3)] = int(m.group(2))
+    for want in ("01", "02", "03"):
+        if want not in pin_cy:
+            problems.append(f"map pin {want} circle not found (v13 fix 4)")
+    if all(k in pin_cy for k in ("01", "02", "03")):
+        if not (pin_cy["02"] < pin_cy["03"] < pin_cy["01"]):
+            problems.append(
+                f"pin latitudes wrong: LVIV cy={pin_cy['02']}, ANTALYA "
+                f"cy={pin_cy['03']}, BAH cy={pin_cy['01']} (v13 fix 4: "
+                f"need LVIV < ANTALYA < BAH)"
+            )
+    # v13 fix 4: GOF label off the map top edge (was y=16, crowding the
+    # ALSO ON header); BAH label clear of pin 01 (was touching at x=864).
+    if '<text x="702" y="16" text-anchor="middle">GOF</text>' in map_html:
+        problems.append("GOF label still at the map top edge (v13 fix 4)")
+    if '<text x="734" y="54">GOF</text>' not in map_html:
+        problems.append("GOF label must sit right of its pin at (734, 54) (v13 fix 4)")
+    if '<text x="864" y="117">BAH</text>' in map_html:
+        problems.append("BAH label still touching pin 01 (v13 fix 4)")
+    if '<text x="868" y="180">BAH</text>' not in map_html:
+        problems.append("BAH label must sit at (868, 180), 4px clear of pin 01 (v13 fix 4)")
 
     # --- ALSO ON list: 27 rows in a real 2-column grid (v12 steps 1-4) ---
     # step 1 grid, display px (1024 file): list origin 656, left 656-824,
@@ -318,17 +418,19 @@ def check_front() -> None:
     if ".dc .col .h .notyet { color:#D98E00; }" not in html:
         problems.append("DATE CHECK NOT YET must be amber (v12 step 5)")
 
-    # --- red, settled to exactly 4 canvas clusters (v12 step 5, gate 2) ---
-    # The brand red #B01E1E occurs 5 times in the source, which renders as
-    # 4 clusters: the NOW text + its ring are adjacent (1 cluster), the
-    # lead banner (1), the card 01 radar dot (1), the card 03 flag (1).
-    # Every other former red use (DATE CHECK title/border, NOT YET, all
-    # 12 pins) is now ink or amber.
+    # --- red, settled to the accent reds only (v13 fix 3, gate 3) ---
+    # The brand red #B01E1E occurs 4 times in the source, which renders
+    # as 3 clusters: the lead banner (1), the NOW text + its ring
+    # adjacent (1), the card 01 radar dot (1). In v12 it was 5 uses =
+    # 4 clusters (the 4th was the COP31 flag, now neutral grey). The
+    # Middle East category is teal, the COP31 flag and ship funnels are
+    # grey, so no other red remains on the canvas.
     red_uses = html.count("#B01E1E")
-    if red_uses != 5:
+    if red_uses != 4:
         problems.append(
-            f"brand red #B01E1E must occur 5 times in source (= 4 canvas "
-            f"clusters) (found {red_uses}) (v12 step 5, gate 2)"
+            f"brand red #B01E1E must occur 4 times in source (= 3 canvas "
+            f"clusters: banner, NOW, radar dot) (found {red_uses}) "
+            f"(v13 fix 3, gate 3)"
         )
     if "#B01E1E" in map_html:
         problems.append("no brand red may remain on a map pin (v12 step 5)")
@@ -354,11 +456,12 @@ def check_front() -> None:
         problems.append(f"story slots must be 36 (found {slots})")
 
     if problems:
-        raise SystemExit("front.html v12 check failed:\n- " + "\n- ".join(problems))
+        raise SystemExit("front.html v13 check failed:\n- " + "\n- ".join(problems))
     print(
-        f"front.html v12 check ok: 1 lead + {cards} cards + 27 list rows = "
-        f"36 slots; {pins} map pins (ink, 24px numerals); clock 17:00 x1; "
-        f"red 5 source uses = 4 canvas clusters; footer ends 1010"
+        f"front.html v13 check ok: 1 lead + {cards} cards + 27 list rows = "
+        f"36 slots; {pins} map pins (ink, 24px numerals; LVIV<ANTALYA<BAH); "
+        f"clock 17:00 x1; NOW 13px clear; red 4 source uses = 3 canvas "
+        f"clusters; ME teal; footer ends 1010"
     )
 
 
