@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""news-image-20261122 entrypoint (v15.2): copy entry.png to /output/entry.png.
+"""news-image-20261122 entrypoint (v15.3): copy entry.png to /output/entry.png.
 
 Stdlib only. No network. Deterministic: the output bytes are exactly the
 input bytes, so two runs are byte-identical.
@@ -93,11 +93,12 @@ READY, Neon-2 NOT READY with 3 must-fixes + 2 nice-to-haves):
   list to card 28 in the same slot. No re-sort: Neon-2 accepts
   keeping the order, so the grid is now 01/04/05/28 over 10/18/16/34.
   The page is now 33 stories (1 lead + 8 cards + 24 rows); ASIA
-  8->7, MIDDLE EAST stays 4. The Gaza pin sits at a schematic spot
+  8->7, MIDDLE EAST stays 4. The Gaza pin sat at a schematic spot
   (775,218) in the eastern Med with its label below (775,258) —
   24px clear of BAH, 31px of ANTALYA; its true lat/lon would collide
-  with the ANTALYA/BAH pins, so the schematic placement is
-  deliberate. The DATE CHECK exclusion line 2 carries both 21 Nov
+  with the ANTALYA/BAH pins, so the schematic placement was
+  deliberate. (v15.3 reverses this: Neon-2 caught the dodge — the pin
+  was the southernmost, below BND/PER. See the v15.3 note below.) The DATE CHECK exclusion line 2 carries both 21 Nov
   items ("Nigeria boat · EU-Indonesia · 21 Nov", 402px at 22px) so
   the box stays two lines; the longer "…deal · 21 Nov" wording
   (457px) was measured too tight against the 460px column.
@@ -125,6 +126,23 @@ READY, Neon-2 NOT READY with 3 must-fixes + 2 nice-to-haves):
   slots.
 - Timeline: the 17:00 node + NOW nudged right 16px (tick 1527, NOW
   left 1487) so NOW clears the 10:00 CLOSE label.
+
+v15.3 (Neon-2 re-review of v15.2, 2026-11-23 ~22:05; Neon-1 READY,
+Neon-2 NOT READY on ONE item only): the 28 GAZA pin at (775,218)
+was the southernmost pin, below BAH/BND/PER, its GAZA label hugging
+the map's bottom edge — Gaza is 31.5N, north of Bahrain 26N. Moved:
+03 ANTALYA (780,135)->(762,122), label to the left of the pin
+(730,127); 28 GAZA (775,218)->(805,155), label to the left of the
+pin (773,160); 01 BAH (838,175)->(856,186), label at (890,191).
+The BAH nudge is the knock-on the fix needs: the 03-01 gap is only
+~70px centre-to-centre, and no third r=26 pin fits between them
+otherwise (measured: any cy in (122,175) near x780-840 is <52px
+from 03 or 01). Pin order now Antalya 122 < Gaza 155 < Bahrain 186
+< BND 187 < PER 196, so Gaza is well clear of the bottom edge and
+of the Sources line. NOTE: 10 HKG still sits at cy=138, north of
+BAH — the same schematic distortion as before (HK 22.3N is south of
+Bahrain 26N); the reviewer did not flag it, and moving it down
+would put it south of BND, so it is left alone.
 
 Deliberate deviations from Neon's literal plan, all verified, not
 guessed:
@@ -636,20 +654,47 @@ def check_front() -> None:
             )
     if '<text x="734" y="54">GOF</text>' not in map_html:
         problems.append("GOF label must sit right of its pin at (734, 54) (v13 fix 4)")
-    if '<text x="868" y="180">BAH</text>' not in map_html:
-        problems.append("BAH label must sit at (868, 180), 4px clear of pin 01 (v13 fix 4)")
+    if '<text x="890" y="191">BAH</text>' not in map_html:
+        problems.append("BAH label must sit at (890, 191), right of pin 01 (v15.3: pin moved to (856, 186))")
+    if '<text x="730" y="127" text-anchor="end">ANTALYA</text>' not in map_html:
+        problems.append("ANTALYA label must sit left of pin 03 at (730, 127) (v15.3)")
     # v15.2 fix 2: SINALOA moves right of pin 18 (x283, 6px clear of
     # the pin's right edge at 277) so it no longer touches pin 34.
     if '<text x="283" y="138">SINALOA</text>' not in map_html:
         problems.append("SINALOA label must sit right of pin 18 at (283, 138), clear of pin 34 (v15.2 fix 2)")
     if '<text x="220" y="138" text-anchor="end">SINALOA</text>' in map_html:
         problems.append("stale SINALOA label left of pin 18 still present (v15.2 fix 2: it touched pin 34)")
-    # v15.2 fix 1: pin 28 GAZA sits at the schematic eastern-Med spot
-    # (775,218), label below at (775,258).
-    if '<circle cx="775" cy="218" r="26" fill="#191919"/><text x="775" y="227" font-size="24">28</text>' not in map_html:
-        problems.append("map pin 28 GAZA must sit at (775, 218) (v15.2 fix 1)")
-    if '<text x="775" y="258" text-anchor="middle">GAZA</text>' not in map_html:
-        problems.append("GAZA label must sit below pin 28 at (775, 258) (v15.2 fix 1)")
+    # v15.3: pin 28 GAZA sits just below 03 ANTALYA, above 01 BAH —
+    # (805,155), label left at (773,160). The BAH nudge to (856,186)
+    # is the knock-on: no third r=26 pin fits the ~70px 03-01 gap.
+    if '<circle cx="805" cy="155" r="26" fill="#191919"/><text x="805" y="164" font-size="24">28</text>' not in map_html:
+        problems.append("map pin 28 GAZA must sit at (805, 155) (v15.3: just below ANTALYA, above BAH)")
+    if '<text x="773" y="160" text-anchor="end">GAZA</text>' not in map_html:
+        problems.append("GAZA label must sit left of pin 28 at (773, 160) (v15.3)")
+    if '<circle cx="775" cy="218" r="26" fill="#191919"/>' in map_html:
+        problems.append("stale v15.2 GAZA pin at (775, 218) still present (v15.3: southernmost, below BND/PER)")
+    if '<text x="775" y="258" text-anchor="middle">GAZA</text>' in map_html:
+        problems.append("stale v15.2 GAZA label below the pin at (775, 258) still present (v15.3)")
+    # v15.3: pin north-south order — Antalya > Gaza > Bahrain, and
+    # Gaza is NOT southernmost (BND and PER stay the southernmost).
+    # (10 HKG at cy=138 still sits north of BAH — pre-existing
+    # schematic distortion, reviewer did not flag it, left alone.)
+    if all(k in pin_cy for k in ("03", "28", "01", "11", "17")):
+        if not (pin_cy["03"] < pin_cy["28"] < pin_cy["01"]):
+            problems.append(
+                f"pin latitudes wrong: ANTALYA cy={pin_cy['03']}, GAZA "
+                f"cy={pin_cy['28']}, BAH cy={pin_cy['01']} "
+                f"(need ANTALYA < GAZA < BAH) (v15.3)"
+            )
+        if not (pin_cy["28"] < pin_cy["11"] and pin_cy["28"] < pin_cy["17"]):
+            problems.append(
+                f"GAZA must not be southernmost: GAZA cy={pin_cy['28']}, "
+                f"BND cy={pin_cy['11']}, PER cy={pin_cy['17']} (v15.3)"
+            )
+    else:
+        for want in ("28", "11", "17"):
+            if want not in pin_cy:
+                problems.append(f"map pin {want} circle not found (v15.3 order check)")
 
     # --- ALSO ON list: 26 rows in a real 2-column grid ---
     if '.lst .col { position:absolute; top:20px; width:336px; overflow:hidden; }' not in html:
@@ -764,9 +809,9 @@ def check_front() -> None:
     if problems:
         raise SystemExit("front.html v15 check failed:\n- " + "\n- ".join(problems))
     print(
-        f"front.html v15.2 check ok: COP31 lead + serif heads + capsule badges (two sources on every CONFIRMED card, full-width badge rows); 6 numbers, all 22 Nov (7th replaces 856); "
+        f"front.html v15.3 check ok: COP31 lead + serif heads + capsule badges (two sources on every CONFIRMED card, full-width badge rows); 6 numbers, all 22 Nov (7th replaces 856); "
         f"1 lead + {cards} cards + 24 list rows = 33 slots; 11 map pins "
-        f"(28 GAZA in, 09 JKT out; SINALOA clear of 34); timeline 5 nodes, NOW stacked on the 17:00 tick (nudged right 16px); DATE CHECK red box, Nigeria + EU–Indonesia excluded, OFFICIAL "
+        f"(28 GAZA (805,155) below ANTALYA (762,122), above BAH (856,186); SINALOA clear of 34); timeline 5 nodes, NOW stacked on the 17:00 tick (nudged right 16px); DATE CHECK red box, Nigeria + EU–Indonesia excluded, OFFICIAL "
         f"REVISIONS; red #B01E1E x4; footer ends 1013"
     )
 
