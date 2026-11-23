@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""news-image-20261122 entrypoint (v15): copy entry.png to /output/entry.png.
+"""news-image-20261122 entrypoint (v15.1): copy entry.png to /output/entry.png.
 
 Stdlib only. No network. Deterministic: the output bytes are exactly the
 input bytes, so two runs are byte-identical.
@@ -18,19 +18,25 @@ duels on date compliance. v15 leads with the COP31 collapse in Antalya
 draft never mentioned fossil fuels, first COP text to admit a 1.5C
 overshoot, first failure since Copenhagen 2009), labelled
 "03 - TURKEY - 22 NOVEMBER - LEAD". The Ukraine strike leaves the
-story slots entirely and moves into DATE CHECK exclusions. The page is
-now 35 stories (1 lead + 8 cards + 26 rows); F1 (Verstappen wins Las
-Vegas, OFFICIAL, 22 Nov) is promoted from the list to the eighth card.
-THE DAY IN NUMBERS is rebuilt: six even columns across x24-1000, each
-~156px with an 8px gap, all figures 68px, no bars, no standalone
-98.79% box (the turnout IS one of the six numbers now). The six
-numbers, every one verified in news-20261122.md: 98.79% HK turnout
-(5,640 voters, OFFICIAL, 22 Nov); 0 fossil-fuel mentions in the COP31
-draft (Reuters, collapsed 22 Nov); 6.9, two M6.9 quakes in one day
-(Peru 00:09 UTC, Banda Sea 09:42 UTC); 98.5% tariffs gone,
-EU-Indonesia (signed 21 Nov, OFFICIAL); 11 killed after the Sinaloa
-capture (AP, 22 Nov follow-up); 700K displaced in Moyale (Islamic
-Relief; the full value still appears in ALSO ON row 27).
+story slots entirely and moves into DATE CHECK exclusions. v15.1 goes
+one further: the Nigeria boat (story 23, 21 Nov only — no 22 Nov hook
+in the research file) is excluded too, and Onosato (story 16, wins the
+7th Emperor's Cup 22 Nov, CONFIRMED) is promoted from the list to a
+card. The page is now 34 stories (1 lead + 8 cards + 25 rows); F1
+(Verstappen wins Las Vegas, OFFICIAL, 22 Nov) is the eighth card's
+stablemate, not the only 22 Nov result on the page. THE DAY IN
+NUMBERS is rebuilt: six even columns across x24-1000, each ~156px
+with an 8px gap, all figures 68px, no bars, no standalone 98.79% box
+(the turnout IS one of the six numbers now). The six numbers, every
+one verified in news-20261122.md and every one a 22 Nov figure:
+98.79% HK turnout (5,640 voters, OFFICIAL, 22 Nov); 0 fossil-fuel
+mentions in the COP31 draft (Reuters, collapsed 22 Nov); 6.9, two
+M6.9 quakes in one day (Peru 00:09 UTC, Banda Sea 09:42 UTC); 856
+candidates in Hong Kong (INFO.GOV.HK, elections 22 Nov); 11 killed
+after the Sinaloa capture (AP, 22 Nov follow-up); 75th career win,
+Verstappen (FORMULA 1, Las Vegas GP 22 Nov). The 98.5% tariff figure
+stays on card 09's head; 700K displaced still appears in full in ALSO
+ON row 27.
 
 P1 — serif headlines everywhere (lead 72px at 2x = 36 display,
 line-height 1.05; card titles 29px at 2x = 14.5 display, line-height
@@ -46,18 +52,22 @@ lead badge is restyled to the same CONFIRMED capsule.
 P2 — DATE CHECK becomes a full-width red box: bg #FDF2F2, 3px solid
 #C62828 border, 10px solid red bar on the left, title "DATE CHECK"
 in #C62828 bold. HELD becomes EXCLUDED (PRE-22 NOV), listing the
-Ukraine 400-drone strike with its original date (19-20 Nov). LEFT
-OUT, NOT YET (POST-17:00 UTC) and CORRECTIONS stay. The old
-"Includes items that broke 19-21 Nov" line is deleted: no wording
-admits non-22-Nov items were included.
+Ukraine 400-drone strike with its original date (19-20 Nov) and, in
+v15.1, the Nigeria boat capsize (21 Nov). LEFT OUT and NOT YET
+(POST-17:00 UTC) stay; CORRECTIONS becomes OFFICIAL REVISIONS in
+v15.1 (HK: 5,640 registered voters, subsector — agency data, not
+author errata). The old "Includes items that broke 19-21 Nov" line is
+deleted: no wording admits non-22-Nov items were included.
 
 P3 — the map land goes darker (#D5CEC0 fill, #AFA695 grid) and the
-UTC timeline grows to six nodes: five timed events (00:09 Peru,
-01:00 HK polls open, 09:42 Banda Sea, 10:00 HK polls close, 17:00
-ATP final) plus NOW anchored on the last tick at 17:00 UTC. (The
-sixth timed event Neon sketched, a COP31/F1 time, is not in the
-research file, so the sixth node is the NOW marker itself on the
-17:00 tick.)
+UTC timeline has five timed events (00:09 Peru, 01:00 HK polls open,
+09:42 Banda Sea, 10:00 HK polls close, 17:00 ATP final) plus NOW
+stacked on the 17:00 tick (text above the ring, ring centred on the
+1511 tick; the sixth tick at 1799 is deleted and the axis ends at
+1720). No verified sixth timed event exists in the research file (no
+COP31 plenary time), so no sixth node is added. The map covers all 8
+cards in v15.1: pins 09 JKT + 34 LAS + 16 FUK in; 19 BSB, 23 BAY,
+27 MOY out (11 pins total).
 
 P4 — the lead counts row spreads space-between across the 1180px
 illustration width (0 fossil-fuel mentions / 35% electrification by
@@ -79,10 +89,19 @@ guessed:
   and the credit line sits at 1810, so moving the box up 40px would
   mean cropping map labels. The box IS full-width and red, which is
   the substance of P2.
-- Neon's exclusion example "Nigeria boat capsize, 21 Nov" is NOT in
-  the exclusion list: story 23 stays a card, and its dek now carries
-  its date ("21 Nov - search on"), so listing it as excluded would
-  contradict the page. The exclusion column holds the Ukraine strike.
+- Neon's exclusion example "Nigeria boat capsize, 21 Nov" was NOT in
+  the v15 exclusion list: story 23 stayed a card, and its dek carried
+  its date ("21 Nov - search on"). v15.1 reverses that call: both
+  Neons flagged the 21 Nov dek on a 22 Nov card, and the research file
+  gives no 22 Nov hook for the boat (all sources 21 Nov; "search
+  ongoing" is 21 Nov reporting), so story 23 is excluded (DATE CHECK)
+  and Onosato (16, 22 Nov, CONFIRMED) takes its card slot. The
+  exclusion column now holds the Ukraine strike and the Nigeria boat.
+- v15.1 verification note: Neon-2 claimed all 8 card heads are still
+  sans-serif. Checked against build/front.html (.card .head is
+  Liberation Serif Bold 29px) and 2x crops of cards 01/05/34 — all
+  three are visibly bold serif. Neon-1 was right; the heads are NOT
+  changed in v15.1.
 - Neon's "190+ nations at COP31" number is dropped: no nation count
   is in the research file. The sixth number is 700K (Moyale),
   verified there.
@@ -93,7 +112,7 @@ v14.1's first-glance wins are kept: the 170px Liberation Serif Bold
 date, the ink italic dek (re-strung to the new top 3), the masthead
 rule at 218, the 12-pin map geometry (now 11 pins), the ALSO ON
 two-column list, the footer spacing (ink ends 1013). The self-check
-below pins the v15 layout strings and geometry, so a later edit
+below pins the v15.1 layout strings and geometry, so a later edit
 cannot silently re-break a reviewer fix.
 """
 import hashlib
@@ -111,10 +130,10 @@ MAX_BYTES = 1024 * 1024
 
 
 def check_front() -> None:
-    """v15 self-check: fail loudly if any v15 layout string regresses.
+    """v15.1 self-check: fail loudly if any v15.1 layout string regresses.
 
     Reads build/front.html (the rendered page) and verifies the strings
-    the v15 plan depends on. The build fails instead of shipping a
+    the v15.1 plan depends on. The build fails instead of shipping a
     page that re-breaks a reviewer fix or a verified fact.
     """
     path = os.path.join(HERE, "build", "front.html")
@@ -144,10 +163,10 @@ def check_front() -> None:
         problems.append("'ALL TIMES UTC' must stay dropped (the timeline header says THE DAY IN UTC)")
     if '<div class="rule" style="left:48px; top:218px;' not in html:
         problems.append("masthead rule must be top 218px at 2x (v15)")
-    if "35 STORIES &middot; 11 PINS" not in html:
-        problems.append("masthead tally must be '35 STORIES · 11 PINS' (v15: 35 stories, Ukraine pin gone)")
-    if "36 STORIES" in html:
-        problems.append("stale '36 STORIES' still present (v15 has 35)")
+    if "34 STORIES &middot; 11 PINS" not in html:
+        problems.append("masthead tally must be '34 STORIES · 11 PINS' (v15.1: 34 stories, Nigeria excluded)")
+    if "35 STORIES" in html or "36 STORIES" in html:
+        problems.append("stale '35/36 STORIES' still present (v15.1 has 34)")
 
     # --- v15 numbers: six even columns, 68px figures, no bars, no chip ---
     # Columns x48/376/704/1032/1360/1688 at 2x (312 wide, 16 gap) =
@@ -157,29 +176,42 @@ def check_front() -> None:
             problems.append(f"numbers column at left {left} missing (v15 P0: six even columns)")
     if ".nfig { position:absolute; top:290px; width:312px; }" not in html:
         problems.append("numbers columns must be 312px wide at 2x (v15 P0)")
-    for fig in ("98.79%", "0", "6.9", "98.5%", "11", "700K"):
+    for fig in ("98.79%", "0", "6.9", "856", "11", "75th"):
         if f'font-size:68px; margin-top:20px;">{fig}</div>' not in html:
-            problems.append(f"numbers figure '{fig}' must be 68px / mt20 at 2x (v15 P0)")
+            problems.append(f"numbers figure '{fig}' must be 68px / mt20 at 2x (v15.1: all six are 22 Nov figures)")
     for lab in (
         "HK turnout &middot; 5,640 voters",
         "fossil-fuel mentions in draft",
         "two M6.9 quakes, one day",
-        "tariffs gone &middot; EU&ndash;Indonesia",
+        "candidates &middot; Hong Kong",
         "killed after Sinaloa capture",
-        "displaced &middot; Moyale &middot; Nov",
+        "career win &middot; Verstappen",
     ):
         if lab not in html:
-            problems.append(f"numbers label '{lab}' missing (v15 P0)")
+            problems.append(f"numbers label '{lab}' missing (v15.1)")
     for src in (
         "INFO.GOV.HK",
         "COP31 DRAFT &middot; REUTERS",
         "PERU 00:09 &middot; BANDA 09:42 UTC",
-        "EU COUNCIL &middot; 21 NOV",
+        "INFO.GOV.HK &middot; 22 NOV",
         "AP &middot; 22 NOV",
-        "ISLAMIC RELIEF",
+        "FORMULA 1 &middot; 22 NOV",
     ):
         if src not in html:
-            problems.append(f"numbers source '{src}' missing (v15 P0)")
+            problems.append(f"numbers source '{src}' missing (v15.1)")
+    # v15.1: no 21 Nov date may survive outside the DATE CHECK
+    # exclusions (numbers #4 lost its 'EU COUNCIL · 21 NOV' source;
+    # card 23's '21 Nov · search on' dek left with the card).
+    if "21 NOV" in html:
+        problems.append("'21 NOV' must not appear anywhere (v15.1 fixes 1+3)")
+    n21 = html.count("21 Nov")
+    if n21 != 1 or "Nigeria boat capsize &middot; 21 Nov" not in html:
+        problems.append(
+            f"'21 Nov' must appear exactly once (DATE CHECK EXCLUDED: "
+            f"Nigeria) (found {n21}) (v15.1 fix 3)"
+        )
+    if ">50%<" in html:
+        problems.append("'50%' must not appear as a label (v15.1 fix 6: card 09 chart drops the 50% label; it conflicts with the 98.5% head)")
     if "ratechip" in html:
         problems.append("standalone 98.79% rate chip must be deleted (v15 P0: it is numbers column 1 now)")
     if 'class="bar"' in html:
@@ -245,18 +277,22 @@ def check_front() -> None:
         problems.append("lead illustration must show the struck 'FOSSIL FUELS' (v15 P0)")
     if "NO DEAL" not in html:
         problems.append("lead illustration must show the 'NO DEAL' stamp (v15 P0)")
-    # v15 visual fix: the stamp sits on the draft's lower half (rect
-    # y 310-400, rotate -8 about its centre), clear of the struck
-    # 'FOSSIL FUELS' (baseline 302) — the earlier position (-12 about
-    # 530,295) hid the word's tail under the stamp.
-    if 'rotate(-8 550 355)"><rect x="400" y="310" width="300" height="90"' not in html:
-        problems.append("NO DEAL stamp must sit at rect (400,310) rotate -8, clear of FOSSIL FUELS (v15 visual fix)")
+    # v15.1 fix 9: the stamp sits fully inside the white paper (rect
+    # x344-599, rotate -8 about (494,355)); the right edge ends ~26px
+    # inside the paper edge at x630 (>=8px display margin), clear of
+    # the struck 'FOSSIL FUELS' (baseline 302). The 45px text sits
+    # inside the rect with ~17px padding — at 51px the L foot poked
+    # through the rect's right border.
+    if 'rotate(-8 494 355)"><rect x="344" y="316" width="255" height="78"' not in html:
+        problems.append("NO DEAL stamp must sit at rect (344,316) rotate -8 about (494,355), inside the white paper (v15.1 fix 9)")
+    if 'font-size="45" font-weight="bold" fill="#C62828">NO DEAL</text>' not in html:
+        problems.append("NO DEAL text must be 45px, inside the stamp rect (v15.1 fix 9: 51px overflowed the rect)")
     if "NOV 9&ndash;21" not in html:
         problems.append("lead illustration must show the 'NOV 9-21' calendar chip (v15 P0)")
     if "+1 DAY" not in html:
         problems.append("lead illustration must show the '+1 DAY' calendar chip (v15 P0)")
 
-    # --- v15 timeline: six nodes, NOW anchored on the last tick ---
+    # --- v15.1 timeline: five nodes, NOW stacked on the 17:00 tick ---
     for ev in ("PERU M6.9", "HK POLLS OPEN", "BANDA SEA M6.9", "HK POLLS CLOSE", "ATP FINAL"):
         if ev not in html:
             problems.append(f"timeline missing {ev}")
@@ -274,23 +310,24 @@ def check_front() -> None:
         )
     if ">NOW</div>" not in tl_band:
         problems.append("timeline NOW dot missing (v15 P3)")
-    if 'class="nowmark" style="left:1791px;"' not in tl_band:
+    if 'class="nowmark" style="left:1471px;"' not in tl_band:
         problems.append(
-            "NOW dot must sit at left 1791px at 2x, ring centred on the "
-            "last tick at 1799px (v15 P3: anchored on the last tick)"
+            "NOW marker must sit at left 1471px at 2x (64px wide, centred), "
+            "ring centred 8px left of the 17:00 tick at 1511px, clear of "
+            "the '1' glyph (v15.1 fix 8: stacked NOW)"
         )
-    if 'left:1500px' in tl_band:
-        problems.append("stale NOW dot at 1500px still present (v15 P3)")
-    if 'left:360px; top:270px; width:1540px; height:2px; background:#191919;' not in tl_band:
-        problems.append("timeline axis rule missing (v15 P3)")
-    for tx in (359, 647, 935, 1223, 1511, 1799):
+    if 'left:1791px' in tl_band or 'left:1799px' in tl_band:
+        problems.append("stale NOW at 1791px / tick at 1799px still present (v15.1 fix 8: NOW is on the 17:00 tick)")
+    if 'left:360px; top:270px; width:1360px; height:2px; background:#191919;' not in tl_band:
+        problems.append("timeline axis rule must end at 1720px (width 1360px) (v15.1 fix 8)")
+    for tx in (359, 647, 935, 1223, 1511):
         if f'left:{tx}px; top:264px; width:2px; height:12px; background:#191919;' not in tl_band:
-            problems.append(f"timeline tick mark at left {tx}px missing (v15 P3: six 6px ticks)")
+            problems.append(f"timeline tick mark at left {tx}px missing (v15.1 fix 8: five 6px ticks)")
 
-    # --- region strip: EUROPE 6 (Ukraine excluded), 35 stories total ---
+    # --- region strip: EUROPE 6 (Ukraine excluded), AFRICA 4 (Nigeria excluded), 34 stories total ---
     for reg in (
         "MIDDLE EAST 4", "EUROPE 6", "ASIA 8", "AMERICAS 7",
-        "AFRICA 5", "OCEANIA 2", "MKT+SPORT 3",
+        "AFRICA 4", "OCEANIA 2", "MKT+SPORT 3",
     ):
         if reg not in html:
             problems.append(f"region strip missing {reg}")
@@ -323,7 +360,7 @@ def check_front() -> None:
     if srcs != 8:
         problems.append(f"card sources must be 8 (found {srcs})")
     # the 9 featured stories: 5 CONFIRMED, 3 OFFICIAL, 1 CLAIM
-    # (v15: confirmed = lead 03 + cards 04, 05, 18, 23; official =
+    # (v15.1: confirmed = lead 03 + cards 04, 05, 16, 18; official =
     # cards 09, 10, 34; claim = card 01)
     if html.count("5 confirmed &middot; 3 official &middot; 1 claim") != 1:
         problems.append(
@@ -355,7 +392,7 @@ def check_front() -> None:
     if ".card .src .bdg2 { display:inline-block; height:30px; line-height:26px; padding:0 12px; border-radius:6px; font-size:17px; font-weight:bold; border:2px solid; vertical-align:middle; }" not in html:
         problems.append("card badge must be 30px high / 6px radius / 17px bold at 2x (v15 P1)")
     if cards_html.count('bdg2 b-conf') != 4:
-        problems.append(f"CONFIRMED badges must be 4 (cards 04, 05, 18, 23) (found {cards_html.count('bdg2 b-conf')})")
+        problems.append(f"CONFIRMED badges must be 4 (cards 04, 05, 16, 18) (found {cards_html.count('bdg2 b-conf')})")
     if cards_html.count('bdg2 b-off') != 3:
         problems.append(f"OFFICIAL badges must be 3 (cards 09, 10, 34) (found {cards_html.count('bdg2 b-off')})")
     if cards_html.count('bdg2 b-claim') != 1:
@@ -370,6 +407,9 @@ def check_front() -> None:
         problems.append("card 04 source must fit the badge row (v15 P1: one short source)")
 
     # v15 P1: card heads are Liberation Serif Bold 29px / lh 33 at 2x.
+    # v15.1: Neon-2 claimed the 8 heads are sans-serif — verified
+    # false on 2026-11-23 (CSS is Liberation Serif Bold; 2x crops of
+    # cards 01/05/34 are visibly bold serif). Heads NOT changed.
     if ".card .head { position:absolute; left:180px; top:64px; width:284px; font-family:'Liberation Serif',serif; font-size:29px; font-weight:bold; line-height:33px; }" not in html:
         problems.append("card head must be 29px Liberation Serif Bold / lh 33 at 2x (v15 P1)")
     if ".card .kick { position:absolute; left:180px; top:16px; width:268px;" not in html:
@@ -411,15 +451,29 @@ def check_front() -> None:
         problems.append("card 10 dek must be '856 candidates · / 723 seats' (step 5)")
     if "results tonight" in cards_html:
         problems.append("'results tonight' must not be on card 10 (step 5)")
-    # step 6 (v11): card 09 thumbnail keeps 50%, drops the 0% label.
-    if "50%" not in cards_html:
-        problems.append("card 09 '50%' label missing (step 6)")
+    # v15.1 fix 6: card 09 is a before/after bar now (100% -> 1.5% left);
+    # the 50% label is gone — it conflicted with the 98.5% head.
+    if ">50%<" in cards_html:
+        problems.append("card 09 '50%' label must be gone (v15.1 fix 6)")
+    if "1.5% left" not in cards_html:
+        problems.append("card 09 before/after bar must label '1.5% left' (v15.1 fix 6)")
+    if "BEFORE" not in cards_html:
+        problems.append("card 09 before/after bar must label 'BEFORE' (v15.1 fix 6)")
     if ">0%<" in cards_html:
         problems.append("card 09 '0%' label must be dropped (step 6)")
-    # v15: card 23's dek dates the boat (21 Nov) — it stays a card, so
-    # it is NOT in the DATE CHECK exclusion list.
-    if "21 Nov &middot; search on" not in cards_html:
-        problems.append("card 23 dek must date the boat '21 Nov · search on' (v15 P0)")
+    # v15.1 fix 3: card 23 is gone (21 Nov only, excluded); card 16 is
+    # Onosato, 22 Nov, CONFIRMED (evening refresh: 7th Emperor's Cup,
+    # playoff win over Wakamotoharu, both 13-2).
+    if "Mourners&rsquo; boat" in cards_html or "21 Nov &middot; search on" in cards_html:
+        problems.append("card 23 must be gone (v15.1 fix 3: 21 Nov only, excluded)")
+    if "Onosato wins" not in cards_html:
+        problems.append("card 16 head 'Onosato wins' missing (v15.1 fix 3)")
+    if "7th Emperor&rsquo;s Cup" not in cards_html:
+        problems.append("card 16 head '7th Emperor's Cup' missing (v15.1 fix 3)")
+    if "Beats Wakamotoharu" not in cards_html:
+        problems.append("card 16 dek 'Beats Wakamotoharu' missing (v15.1 fix 3)")
+    if "ABEMA" not in cards_html:
+        problems.append("card 16 source 'ABEMA' missing (v15.1 fix 3)")
     # v13 fix 3 (kept): the ship funnels in card 04 are neutral grey.
     if 'M66 46 L72 26 L78 46 Z" fill="#C65D00"' in html:
         problems.append("card 04 funnel 1 still #C65D00 (v13 fix 3: must be neutral)")
@@ -436,20 +490,22 @@ def check_front() -> None:
     map_html = html[map_start:map_end]
     pins = map_html.count("<circle cx=")
     if pins != 11:
-        problems.append(f"map pins must be 11 (found {pins}) (v15: Lviv pin gone with the excluded story)")
-    for num in ("01", "03", "04", "05", "10", "11", "17", "18", "19", "23", "27"):
+        problems.append(f"map pins must be 11 (found {pins}) (v15.1 fix 5: 09/16/34 in, 19/23/27 out)")
+    for num in ("01", "03", "04", "05", "09", "10", "11", "16", "17", "18", "34"):
         if f">{num}</text>" not in map_html:
             problems.append(f"map pin number {num} missing")
-    if ">02</text>" in map_html:
-        problems.append("map pin 02 (Lviv) must be gone (v15 P0)")
+    for gone in ("02", "19", "23", "27"):
+        if f">{gone}</text>" in map_html:
+            problems.append(f"map pin {gone} must be gone (v15.1 fix 5)")
     for slug in (
-        "CPH", "GOF", "ANTALYA", "BAH", "BAY",
-        "MOY", "HKG", "BND", "PER", "BSB", "SINALOA",
+        "CPH", "GOF", "ANTALYA", "BAH", "JKT",
+        "HKG", "BND", "FUK", "PER", "SINALOA", "LAS",
     ):
         if f">{slug}</text>" not in map_html:
             problems.append(f"map pin slug {slug} missing")
-    if ">LVIV</text>" in map_html:
-        problems.append("map pin slug LVIV must be gone (v15 P0)")
+    for gone_slug in ("BAY", "MOY", "BSB", "LVIV"):
+        if f">{gone_slug}</text>" in map_html:
+            problems.append(f"map pin slug {gone_slug} must be gone (v15.1 fix 5)")
     if "THE WORLD &middot; 11 PINS" not in map_html:
         problems.append("map label must be 'THE WORLD · 11 PINS' (v15)")
     # v12 step 5: every pin is neutral ink with a white numeral.
@@ -507,8 +563,8 @@ def check_front() -> None:
     if ".lst .col.r .row { line-height:18px; }" not in html:
         problems.append("list right column pitch must be 18px at 2x (v15: 13/13 rows, even pitch)")
     rows = re.findall(r'<div class="row">.*?</div>', html)
-    if len(rows) != 26:
-        problems.append(f"ALSO ON rows must be 26 (found {len(rows)}) (v15: F1 is a card now)")
+    if len(rows) != 25:
+        problems.append(f"ALSO ON rows must be 25 (found {len(rows)}) (v15.1: 16 is a card now)")
     for row in rows:
         if " &mdash; " in row:
             problems.append(f"row still carries a per-row source (v12 step 2): {row[:60]!r}")
@@ -519,10 +575,10 @@ def check_front() -> None:
         problems.append("shared credit line 'Sources: Anadolu …' missing (v12 step 2)")
     if 'style="position:absolute; left:48px; top:1810px; width:1952px;' not in html:
         problems.append("credit line must sit at top 1810px full width (v12 step 2)")
-    if "26 MORE STORIES &middot; 06&ndash;36" not in html:
-        problems.append("ALSO ON header must read '26 MORE STORIES · 06–36' (v15)")
-    if "27 MORE STORIES" in html:
-        problems.append("stale '27 MORE STORIES' still present (v15 has 26)")
+    if "25 MORE STORIES &middot; 06&ndash;36" not in html:
+        problems.append("ALSO ON header must read '25 MORE STORIES · 06–36' (v15.1)")
+    if "26 MORE STORIES" in html or "27 MORE STORIES" in html:
+        problems.append("stale '26/27 MORE STORIES' still present (v15.1 has 25)")
     if "text-overflow:ellipsis; padding-right:8px;" not in html:
         problems.append("list rows need ellipsis + 8px right inset at 2x (v12 step 4)")
     if ".lst .row .n { font-weight:bold; color:#191919; }" not in html:
@@ -541,15 +597,25 @@ def check_front() -> None:
         problems.append("DATE CHECK title line must be 'DATE CHECK ✓ As of 22 Nov, 17:00 UTC.' (v15 P2)")
     if "Includes items that broke 19&ndash;21 Nov" in html:
         problems.append("DATE CHECK must not admit non-22-Nov items were included (v15 P2)")
-    for col in ("EXCLUDED (PRE-22 NOV)", "LEFT OUT", "NOT YET (POST-17:00 UTC)", "CORRECTIONS"):
+    for col in ("EXCLUDED (PRE-22 NOV)", "LEFT OUT", "NOT YET (POST-17:00 UTC)", "OFFICIAL REVISIONS"):
         if col not in html:
-            problems.append(f"DATE CHECK column {col} missing (v15 P2)")
+            problems.append(f"DATE CHECK column {col} missing (v15.1 fix 7)")
+    if "CORRECTIONS" in html:
+        problems.append("stale DATE CHECK column 'CORRECTIONS' still present (v15.1 fix 7: OFFICIAL REVISIONS)")
+    if "HK: 5,640 registered voters (subsector)" not in html:
+        problems.append("DATE CHECK revisions must read 'HK: 5,640 registered voters (subsector)' (v15.1 fix 7)")
+    if "NEMA toll, Nigeria" in html:
+        problems.append("stale 'NEMA toll, Nigeria' still present (v15.1 fix 7: the Nigeria note left with the excluded story)")
+    if "HK 5,640 voters" in html:
+        problems.append("stale 'HK 5,640 voters' still present (v15.1 fix 7: 'HK: 5,640 registered voters (subsector)')")
+    if "Nigeria boat capsize &middot; 21 Nov" not in html:
+        problems.append("DATE CHECK must exclude the Nigeria boat with its date (v15.1 fix 3)")
     if "HELD" in html:
         problems.append("stale DATE CHECK column 'HELD' still present (v15 P2: it is EXCLUDED now)")
     if "Ukraine 400-drone strike &middot; 19&ndash;20 Nov" not in html:
         problems.append("DATE CHECK must exclude the Ukraine strike with its date (v15 P2)")
-    if "Nigeria boat capsize" in html:
-        problems.append("Nigeria must not be in the exclusion list: story 23 stays a card, dated on it (v15 P2)")
+    if "Nigeria boat capsize" in html and "Nigeria boat capsize &middot; 21 Nov" not in html:
+        problems.append("Nigeria must appear only in the DATE CHECK exclusion list (v15.1 fix 3)")
     if ".dc .col .h .notyet { color:#D98E00; }" not in html:
         problems.append("DATE CHECK NOT YET must be amber (v12 step 5)")
 
@@ -588,17 +654,18 @@ def check_front() -> None:
         + html.count('<div class="card"')
         + html.count('<div class="row">')
     )
-    if slots != 35:
-        problems.append(f"story slots must be 35 (found {slots}) (v15: Ukraine excluded)")
+    if slots != 34:
+        problems.append(f"story slots must be 34 (found {slots}) (v15.1: Ukraine + Nigeria excluded)")
 
     if problems:
         raise SystemExit("front.html v15 check failed:\n- " + "\n- ".join(problems))
     print(
-        f"front.html v15 check ok: COP31 lead + serif heads + capsule badges; "
-        f"6 numbers in even columns; 1 lead + {cards} cards + 26 list rows = 35 slots; "
-        f"11 map pins (ink, 24px numerals; ANTALYA<BAH); timeline 6 nodes, NOW on the "
-        f"last tick; DATE CHECK red box with EXCLUDED (PRE-22 NOV); red #B01E1E x4; "
-        f"footer ends 1013"
+        f"front.html v15.1 check ok: COP31 lead + serif heads (Neon-2's sans "
+        f"claim verified false) + capsule badges; 6 numbers, all 22 Nov; "
+        f"1 lead + {cards} cards + 25 list rows = 34 slots; 11 map pins "
+        f"(09 JKT, 16 FUK, 34 LAS in); timeline 5 nodes, NOW stacked on "
+        f"the 17:00 tick; DATE CHECK red box, Nigeria excluded, OFFICIAL "
+        f"REVISIONS; red #B01E1E x4; footer ends 1013"
     )
 
 

@@ -14,8 +14,8 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 .tllab { position:absolute; left:48px; top:244px; font-size:20px; font-weight:bold; letter-spacing:2px; white-space:nowrap; }
 .tick { position:absolute; top:242px; font-size:20px; white-space:nowrap; }
 .tick b { font-weight:bold; }
-.nowmark { position:absolute; top:238px; font-size:20px; font-weight:bold; color:#B01E1E; white-space:nowrap; }
-.nowmark .ring { display:inline-block; width:16px; height:16px; border:3px solid #B01E1E; border-radius:50%; vertical-align:-2px; margin-right:6px; }
+.nowmark { position:absolute; top:226px; width:64px; text-align:center; font-size:18px; font-weight:bold; color:#B01E1E; }
+.nowmark .ring { display:inline-block; width:14px; height:14px; border:3px solid #B01E1E; border-radius:50%; margin-top:2px; }
 /* ---- NUMBERS 212-388 : v15 — six even columns x48-2000, no bars, no rate chip ---- */
 .nlab { position:absolute; left:48px; top:294px; font-size:18px; font-weight:bold; letter-spacing:2px; white-space:nowrap; }
 .nfig { position:absolute; top:290px; width:312px; }
@@ -77,13 +77,13 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 .foot { position:absolute; left:48px; width:1952px; font-size:16px; line-height:16px; white-space:nowrap; }
 </style></head><body>
 
-<!-- MASTHEAD 0-218 : v15 — dek re-strung to the new top 3 (COP31 · HK votes · Iran claims); Ukraine barrage is no longer on the page, so it leaves the dek; 35 stories, 11 pins -->
+<!-- MASTHEAD 0-218 : v15 — dek re-strung to the new top 3 (COP31 · HK votes · Iran claims); Ukraine barrage is no longer on the page, so it leaves the dek; v15.1: 34 stories, 11 pins (Nigeria boat excluded, Onosato promoted) -->
 <div class="bigdate">Sunday 22 November 2026</div>
 <div class="mastdek">COP31 collapses in Antalya &middot; Hong Kong votes, turnout 98.79% &middot; Iran claims strikes on US bases in Bahrain</div>
-<div class="mastsmall" style="right:48px; top:184px;">35 STORIES &middot; 11 PINS</div>
+<div class="mastsmall" style="right:48px; top:184px;">34 STORIES &middot; 11 PINS</div>
 <div class="rule" style="left:48px; top:218px; width:1952px; height:2px;"></div>
 
-<!-- THE DAY IN UTC 226-282 : v15 — six nodes (five timed events + NOW anchored on the last tick); ticks 12px tall at 2x = 6px display -->
+<!-- THE DAY IN UTC 226-282 : v15.1 — five timed events + NOW stacked on the ATP FINAL tick (ring centred on 1511); ticks 12px tall at 2x = 6px display; axis ends 1720, past the last label -->
 <div class="tlbg"></div>
 <div class="tllab">THE DAY IN UTC</div>
 <div class="tick" style="left:360px;"><b>00:09</b> &middot; PERU M6.9</div>
@@ -91,35 +91,34 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 <div class="tick" style="left:936px;"><b>09:42</b> &middot; BANDA SEA M6.9</div>
 <div class="tick" style="left:1224px;"><b>10:00</b> &middot; HK POLLS CLOSE</div>
 <div class="tick" style="left:1512px;"><b>17:00</b> &middot; ATP FINAL</div>
-<div class="nowmark" style="left:1791px;"><span class="ring"></span>NOW</div>
-<div style="position:absolute; left:360px; top:270px; width:1540px; height:2px; background:#191919;"></div>
+<div class="nowmark" style="left:1471px;"><div>NOW</div><span class="ring"></span></div>
+<div style="position:absolute; left:360px; top:270px; width:1360px; height:2px; background:#191919;"></div>
 <div style="position:absolute; left:359px; top:264px; width:2px; height:12px; background:#191919;"></div>
 <div style="position:absolute; left:647px; top:264px; width:2px; height:12px; background:#191919;"></div>
 <div style="position:absolute; left:935px; top:264px; width:2px; height:12px; background:#191919;"></div>
 <div style="position:absolute; left:1223px; top:264px; width:2px; height:12px; background:#191919;"></div>
 <div style="position:absolute; left:1511px; top:264px; width:2px; height:12px; background:#191919;"></div>
-<div style="position:absolute; left:1799px; top:264px; width:2px; height:12px; background:#191919;"></div>
 
-<!-- THE DAY IN NUMBERS 290-446 : v15 — six even columns x48-2000 (312 wide, 16 gap), all figures 68px, no bars, no rate chip; every number anchors to a 22 Nov event or the day's verified tolls (the nations-count figure dropped: not in the research file) -->
+<!-- THE DAY IN NUMBERS 290-446 : v15.1 — six even columns x48-2000 (312 wide, 16 gap), all figures 68px, no bars, no rate chip; every number is a 22 Nov figure now (856 HK candidates and 75th Verstappen win replace the Nov-21 tariff figure and the month-cumulative Moyale figure) -->
 <div class="nlab">THE DAY IN NUMBERS</div>
 <div class="nfig" style="left:48px;"><div class="f" style="font-size:68px; margin-top:20px;">98.79%</div><div class="l">HK turnout &middot; 5,640 voters</div><div class="s">INFO.GOV.HK</div></div>
 <div class="nfig" style="left:376px;"><div class="f" style="font-size:68px; margin-top:20px;">0</div><div class="l">fossil-fuel mentions in draft</div><div class="s">COP31 DRAFT &middot; REUTERS</div></div>
 <div class="nfig" style="left:704px;"><div class="f" style="font-size:68px; margin-top:20px;">6.9</div><div class="l">two M6.9 quakes, one day</div><div class="s">PERU 00:09 &middot; BANDA 09:42 UTC</div></div>
-<div class="nfig" style="left:1032px;"><div class="f" style="font-size:68px; margin-top:20px;">98.5%</div><div class="l">tariffs gone &middot; EU&ndash;Indonesia</div><div class="s">EU COUNCIL &middot; 21 NOV</div></div>
+<div class="nfig" style="left:1032px;"><div class="f" style="font-size:68px; margin-top:20px;">856</div><div class="l">candidates &middot; Hong Kong</div><div class="s">INFO.GOV.HK &middot; 22 NOV</div></div>
 <div class="nfig" style="left:1360px;"><div class="f" style="font-size:68px; margin-top:20px;">11</div><div class="l">killed after Sinaloa capture</div><div class="s">AP &middot; 22 NOV</div></div>
-<div class="nfig" style="left:1688px;"><div class="f" style="font-size:68px; margin-top:20px;">700K</div><div class="l">displaced &middot; Moyale &middot; Nov</div><div class="s">ISLAMIC RELIEF</div></div>
+<div class="nfig" style="left:1688px;"><div class="f" style="font-size:68px; margin-top:20px;">75th</div><div class="l">career win &middot; Verstappen</div><div class="s">FORMULA 1 &middot; 22 NOV</div></div>
 
 <!-- REGION STRIP 396-432 : EUROPE 6 (Ukraine barrage excluded from the page in v15) -->
 <div class="key" style="left:48px; width:279px;"><div class="sw" style="background:#2E7A7A;"></div><div class="nm">MIDDLE EAST 4</div></div>
 <div class="key" style="left:327px; width:279px;"><div class="sw" style="background:#2F5D8A;"></div><div class="nm">EUROPE 6</div></div>
 <div class="key" style="left:606px; width:279px;"><div class="sw" style="background:#B97A1E;"></div><div class="nm">ASIA 8</div></div>
 <div class="key" style="left:885px; width:279px;"><div class="sw" style="background:#4A7A3D;"></div><div class="nm">AMERICAS 7</div></div>
-<div class="key" style="left:1164px; width:279px;"><div class="sw" style="background:#8A5A28;"></div><div class="nm">AFRICA 5</div></div>
+<div class="key" style="left:1164px; width:279px;"><div class="sw" style="background:#8A5A28;"></div><div class="nm">AFRICA 4</div></div>
 <div class="key" style="left:1443px; width:279px;"><div class="sw" style="background:#6A5E8C;"></div><div class="nm">OCEANIA 2</div></div>
 <div class="key" style="left:1722px; width:278px;"><div class="sw" style="background:#5A5A5A;"></div><div class="nm">MKT+SPORT 3</div></div>
 
 <!-- LEAD 518-1006 : v15 — COP31 collapse is the lead (03, 22 Nov); Ukraine 19-20 Nov leaves the page (DATE CHECK EXCLUDED). Illustration: draft document with FOSSIL FUELS struck out + NO DEAL stamp + 1.5C thermometer + NOV 9-21 +1 DAY calendar -->
-<svg class="leadimg" width="1180" height="436" viewBox="0 0 1180 494" preserveAspectRatio="none"><rect width="1180" height="494" fill="#1E2A4A"/><rect y="430" width="1180" height="64" fill="#16283F"/><g fill="#F6F1E5"><circle cx="60" cy="50" r="3"/><circle cx="700" cy="40" r="3"/><circle cx="1140" cy="60" r="3"/><circle cx="60" cy="380" r="3"/><circle cx="1140" cy="380" r="3"/><circle cx="700" cy="410" r="3"/></g><rect x="150" y="100" width="520" height="330" fill="#E8E0CC"/><rect x="110" y="70" width="520" height="330" fill="#FDFBF5"/><text x="140" y="130" font-family="DejaVu Sans" font-size="44" font-weight="bold" fill="#191919">DRAFT</text><g fill="#C9C2B2"><rect x="140" y="158" width="460" height="10"/><rect x="140" y="183" width="460" height="10"/><rect x="140" y="208" width="460" height="10"/><rect x="140" y="233" width="300" height="10"/></g><text x="140" y="302" font-family="DejaVu Sans" font-size="40" font-weight="bold" fill="#C62828">FOSSIL FUELS</text><rect x="135" y="288" width="340" height="8" fill="#C62828"/><g fill="#C9C2B2"><rect x="140" y="330" width="460" height="10"/><rect x="140" y="355" width="380" height="10"/></g><g transform="rotate(-8 550 355)"><rect x="400" y="310" width="300" height="90" fill="none" stroke="#C62828" stroke-width="8"/><text x="425" y="372" font-family="DejaVu Sans" font-size="60" font-weight="bold" fill="#C62828">NO DEAL</text></g><text x="818" y="90" font-family="DejaVu Sans" font-size="32" font-weight="bold" text-anchor="middle" fill="#F6F1E5">1.5&deg;C</text><rect x="802" y="110" width="32" height="230" rx="16" fill="#F6F1E5"/><rect x="810" y="200" width="16" height="140" fill="#C62828"/><circle cx="818" cy="350" r="30" fill="#C62828"/><g stroke="#F6F1E5" stroke-width="2"><line x1="838" y1="140" x2="850" y2="140"/><line x1="838" y1="200" x2="850" y2="200"/><line x1="838" y1="260" x2="850" y2="260"/></g><g font-family="DejaVu Sans" font-size="18" fill="#F6F1E5"><text x="856" y="147">2.0</text><text x="856" y="207">1.5</text><text x="856" y="267">1.0</text></g><rect x="920" y="70" width="180" height="90" fill="#FDFBF5"/><text x="940" y="108" font-family="DejaVu Sans" font-size="28" font-weight="bold" fill="#191919">NOV 9&ndash;21</text><text x="940" y="148" font-family="DejaVu Sans" font-size="28" font-weight="bold" fill="#C62828">+1 DAY</text></svg>
+<svg class="leadimg" width="1180" height="436" viewBox="0 0 1180 494" preserveAspectRatio="none"><rect width="1180" height="494" fill="#1E2A4A"/><rect y="430" width="1180" height="64" fill="#16283F"/><g fill="#F6F1E5"><circle cx="60" cy="50" r="3"/><circle cx="700" cy="40" r="3"/><circle cx="1140" cy="60" r="3"/><circle cx="60" cy="380" r="3"/><circle cx="1140" cy="380" r="3"/><circle cx="700" cy="410" r="3"/></g><rect x="150" y="100" width="520" height="330" fill="#E8E0CC"/><rect x="110" y="70" width="520" height="330" fill="#FDFBF5"/><text x="140" y="130" font-family="DejaVu Sans" font-size="44" font-weight="bold" fill="#191919">DRAFT</text><g fill="#C9C2B2"><rect x="140" y="158" width="460" height="10"/><rect x="140" y="183" width="460" height="10"/><rect x="140" y="208" width="460" height="10"/><rect x="140" y="233" width="300" height="10"/></g><text x="140" y="302" font-family="DejaVu Sans" font-size="40" font-weight="bold" fill="#C62828">FOSSIL FUELS</text><rect x="135" y="288" width="340" height="8" fill="#C62828"/><g fill="#C9C2B2"><rect x="140" y="330" width="460" height="10"/><rect x="140" y="355" width="380" height="10"/></g><g transform="rotate(-8 494 355)"><rect x="344" y="316" width="255" height="78" fill="none" stroke="#C62828" stroke-width="8"/><text x="361" y="367" font-family="DejaVu Sans" font-size="45" font-weight="bold" fill="#C62828">NO DEAL</text></g><text x="818" y="90" font-family="DejaVu Sans" font-size="32" font-weight="bold" text-anchor="middle" fill="#F6F1E5">1.5&deg;C</text><rect x="802" y="110" width="32" height="230" rx="16" fill="#F6F1E5"/><rect x="810" y="200" width="16" height="140" fill="#C62828"/><circle cx="818" cy="350" r="30" fill="#C62828"/><g stroke="#F6F1E5" stroke-width="2"><line x1="838" y1="140" x2="850" y2="140"/><line x1="838" y1="200" x2="850" y2="200"/><line x1="838" y1="260" x2="850" y2="260"/></g><g font-family="DejaVu Sans" font-size="18" fill="#F6F1E5"><text x="856" y="147">2.0</text><text x="856" y="207">1.5</text><text x="856" y="267">1.0</text></g><rect x="920" y="70" width="180" height="90" fill="#FDFBF5"/><text x="940" y="108" font-family="DejaVu Sans" font-size="28" font-weight="bold" fill="#191919">NOV 9&ndash;21</text><text x="940" y="148" font-family="DejaVu Sans" font-size="28" font-weight="bold" fill="#C62828">+1 DAY</text></svg>
 <div class="leadban">COP31 &middot; NO DEAL</div>
 <div class="counts">
   <div class="c"><b>0</b> FOSSIL-FUEL MENTIONS</div>
@@ -134,7 +133,7 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
   <div class="src">COP31 draft text &middot; Reuters</div>
 </div>
 
-<!-- SECONDARY CARDS 1014-1538 : v15 — eight cards (01, 04, 05, 09 / 10, 18, 23, 34); COP31 is the lead, F1 promoted to a card; serif heads 29px; capsule badges + source in .src -->
+<!-- SECONDARY CARDS 1014-1538 : v15.1 — eight cards (01, 04, 05, 09 / 10, 16, 18, 34); COP31 is the lead, F1 promoted to a card; v15.1: Nigeria boat (Nov-21 only) excluded, Onosato (22 Nov, CONFIRMED) promoted to card 16; serif heads 29px; capsule badges + source in .src -->
 <div class="card" style="left:48px; top:1014px;">
 <svg width="160" height="128" viewBox="0 0 160 128" style="position:absolute; left:8px; top:12px;"><rect width="160" height="128" fill="#3A2E4A"/><rect y="96" width="160" height="32" fill="#232323"/><rect x="70" y="40" width="6" height="56" fill="#555555"/><rect x="50" y="28" width="46" height="18" fill="#8A8A8A" transform="rotate(-18 73 37)"/><circle cx="73" cy="37" r="4" fill="#B01E1E"/><g fill="#6B7A5A"><rect x="30" y="70" width="10" height="26" transform="rotate(18 35 83)"/><rect x="48" y="70" width="10" height="26" transform="rotate(18 53 83)"/></g><rect x="20" y="96" width="70" height="14" fill="#4A5A3D"/><circle cx="40" cy="112" r="5" fill="#191919"/><circle cx="70" cy="112" r="5" fill="#191919"/><circle cx="120" cy="60" r="10" fill="#E8710A"/><circle cx="120" cy="60" r="5" fill="#F2A900"/></svg>
 <div class="toprule" style="background:#2E7A7A;"></div><div class="num">01</div><div class="vdot" style="background:#D98E00;"></div>
@@ -160,7 +159,7 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 <div class="src"><span class="bdg2 b-conf">&#10003; CONFIRMED</span> <span class="ssrc">BBC &middot; NYT</span></div>
 </div>
 <div class="card" style="left:1524px; top:1014px;">
-<svg width="160" height="128" viewBox="0 0 160 128" style="position:absolute; left:8px; top:12px;"><rect width="160" height="128" fill="#FDFBF5"/><path d="M20 110 L140 110" stroke="#191919" stroke-width="3"/><path d="M20 16 L20 110" stroke="#191919" stroke-width="3"/><path d="M30 30 L70 55 L110 80 L140 100" stroke="#B97A1E" stroke-width="5" fill="none"/><g fill="#B97A1E"><circle cx="30" cy="30" r="6"/><circle cx="70" cy="55" r="6"/><circle cx="110" cy="80" r="6"/><circle cx="140" cy="100" r="6"/></g><text x="40" y="28" font-family="DejaVu Sans" font-size="14" font-weight="bold" fill="#191919">50%</text></svg>
+<svg width="160" height="128" viewBox="0 0 160 128" style="position:absolute; left:8px; top:12px;"><rect width="160" height="128" fill="#FDFBF5"/><text x="32" y="30" font-family="DejaVu Sans" font-size="14" font-weight="bold" fill="#191919">BEFORE</text><rect x="32" y="38" width="120" height="18" fill="#B97A1E"/><text x="146" y="52" font-family="DejaVu Sans" font-size="14" font-weight="bold" text-anchor="end" fill="#FFFFFF">100%</text><text x="32" y="84" font-family="DejaVu Sans" font-size="14" font-weight="bold" fill="#191919">NOW</text><rect x="32" y="92" width="120" height="18" fill="none" stroke="#191919" stroke-width="2"/><rect x="32" y="92" width="2" height="18" fill="#2E7D32"/><text x="42" y="106" font-family="DejaVu Sans" font-size="14" font-weight="bold" fill="#2E7D32">1.5% left</text></svg>
 <div class="toprule" style="background:#B97A1E;"></div><div class="num">09</div><div class="vdot" style="background:#2F5D8A;"></div>
 <div class="kick" style="color:#B97A1E;">ASIA &middot; JAKARTA</div>
 <div class="head">EU&ndash;Indonesia deal:<br>98.5% tariffs gone</div>
@@ -184,12 +183,12 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 <div class="src"><span class="bdg2 b-conf">&#10003; CONFIRMED</span> <span class="ssrc">REUTERS</span></div>
 </div>
 <div class="card" style="left:1032px; top:1278px;">
-<svg width="160" height="128" viewBox="0 0 160 128" style="position:absolute; left:8px; top:12px;"><rect width="160" height="128" fill="#2F5D8A"/><path d="M0 84 q20 -10 40 0 t40 0 t40 0 t40 0" stroke="#7FA8C9" stroke-width="4" fill="none"/><path d="M0 104 q20 -10 40 0 t40 0 t40 0 t40 0" stroke="#7FA8C9" stroke-width="4" fill="none"/><path d="M50 74 L110 54 L118 66 L58 86 Z" fill="#3A3A3A"/><circle cx="130" cy="60" r="6" fill="#F6F1E5"/><circle cx="142" cy="70" r="6" fill="#F6F1E5"/></svg>
-<div class="toprule" style="background:#8A5A28;"></div><div class="num">23</div><div class="vdot" style="background:#2E7D32;"></div>
-<div class="kick" style="color:#8A5A28;">AFRICA &middot; BAYELSA</div>
-<div class="head">Mourners&rsquo; boat<br>capsizes</div>
-<div class="dek">NEMA: at least 24 dead<br>21 Nov &middot; search on</div>
-<div class="src"><span class="bdg2 b-conf">&#10003; CONFIRMED</span> <span class="ssrc">AP &middot; DW</span></div>
+<svg width="160" height="128" viewBox="0 0 160 128" style="position:absolute; left:8px; top:12px;"><rect width="160" height="128" fill="#FDFBF5"/><circle cx="80" cy="72" r="46" fill="#E8DCC0" stroke="#8A5A28" stroke-width="3"/><circle cx="80" cy="72" r="36" fill="none" stroke="#8A5A28" stroke-width="1"/><ellipse cx="80" cy="70" rx="26" ry="22" fill="#8A5A28"/><circle cx="80" cy="42" r="12" fill="#8A5A28"/><circle cx="80" cy="28" r="4" fill="#191919"/><rect x="54" y="66" width="52" height="12" fill="#191919"/><circle cx="52" cy="72" r="6" fill="#8A5A28"/><circle cx="108" cy="72" r="6" fill="#8A5A28"/><rect x="68" y="90" width="8" height="14" fill="#8A5A28"/><rect x="84" y="90" width="8" height="14" fill="#8A5A28"/></svg>
+<div class="toprule" style="background:#B97A1E;"></div><div class="num">16</div><div class="vdot" style="background:#2E7D32;"></div>
+<div class="kick" style="color:#B97A1E;">ASIA &middot; FUKUOKA</div>
+<div class="head">Onosato wins<br>7th Emperor&rsquo;s Cup</div>
+<div class="dek">Beats Wakamotoharu<br>in a playoff &middot; 13-2</div>
+<div class="src"><span class="bdg2 b-conf">&#10003; CONFIRMED</span> <span class="ssrc">ABEMA</span></div>
 </div>
 <div class="card" style="left:1524px; top:1278px;">
 <svg width="160" height="128" viewBox="0 0 160 128" style="position:absolute; left:8px; top:12px;"><rect width="160" height="128" fill="#1E3A5F"/><line x1="16" y1="116" x2="50" y2="28" stroke="#F6F1E5" stroke-width="4"/><g><rect x="50" y="28" width="20" height="17" fill="#F6F1E5"/><rect x="70" y="28" width="20" height="17" fill="#191919"/><rect x="90" y="28" width="20" height="17" fill="#F6F1E5"/><rect x="110" y="28" width="20" height="17" fill="#191919"/><rect x="50" y="45" width="20" height="17" fill="#191919"/><rect x="70" y="45" width="20" height="17" fill="#F6F1E5"/><rect x="90" y="45" width="20" height="17" fill="#191919"/><rect x="110" y="45" width="20" height="17" fill="#F6F1E5"/><rect x="50" y="62" width="20" height="17" fill="#F6F1E5"/><rect x="70" y="62" width="20" height="17" fill="#191919"/><rect x="90" y="62" width="20" height="17" fill="#F6F1E5"/><rect x="110" y="62" width="20" height="17" fill="#191919"/></g><g stroke="#7FA8C9" stroke-width="3"><line x1="20" y1="100" x2="120" y2="100"/><line x1="30" y1="110" x2="150" y2="110"/><line x1="20" y1="120" x2="100" y2="120"/></g></svg>
@@ -200,13 +199,13 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 <div class="src"><span class="bdg2 b-off">&#10003; OFFICIAL</span> <span class="ssrc">FORMULA 1</span></div>
 </div>
 
-<!-- MAP + ALSO ON 1538-1842 : v15 — 11 pins (Lviv pin 02 removed with the excluded Ukraine story); map land #D5CEC0, grid #AFA695; 26 list rows (F1 is a card now) -->
+<!-- MAP + ALSO ON 1538-1842 : v15.1 — 11 pins (09 JKT + 34 LAS + 16 FUK in; 19 BSB, 23 BAY, 27 MOY out); map land #D5CEC0, grid #AFA695; 25 list rows (16 promoted to a card) -->
 <div class="mapbox">
 <div class="mlab">THE WORLD &middot; 11 PINS</div>
-<svg width="1240" height="296" viewBox="0 0 1240 296" style="position:absolute; left:0; top:0;"><g stroke="#AFA695" stroke-width="1"><line x1="0" y1="60" x2="1240" y2="60"/><line x1="0" y1="120" x2="1240" y2="120"/><line x1="0" y1="180" x2="1240" y2="180"/><line x1="0" y1="240" x2="1240" y2="240"/><line x1="200" y1="0" x2="200" y2="296"/><line x1="450" y1="0" x2="450" y2="296"/><line x1="700" y1="0" x2="700" y2="296"/><line x1="950" y1="0" x2="950" y2="296"/><line x1="1150" y1="0" x2="1150" y2="296"/></g><g font-family="DejaVu Sans" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><circle cx="630" cy="62" r="26" fill="#191919"/><text x="630" y="71" font-size="24">05</text><circle cx="702" cy="48" r="26" fill="#191919"/><text x="702" y="57" font-size="24">04</text><circle cx="780" cy="135" r="26" fill="#191919"/><text x="780" y="144" font-size="24">03</text><circle cx="838" cy="175" r="26" fill="#191919"/><text x="838" y="184" font-size="24">01</text><circle cx="642" cy="168" r="26" fill="#191919"/><text x="642" y="177" font-size="24">23</text><circle cx="740" cy="185" r="26" fill="#191919"/><text x="740" y="194" font-size="24">27</text><circle cx="1013" cy="138" r="26" fill="#191919"/><text x="1013" y="147" font-size="24">10</text><circle cx="1064" cy="187" r="26" fill="#191919"/><text x="1064" y="196" font-size="24">11</text><circle cx="358" cy="196" r="26" fill="#191919"/><text x="358" y="205" font-size="24">17</text><circle cx="455" cy="204" r="26" fill="#191919"/><text x="455" y="213" font-size="24">19</text><circle cx="251" cy="133" r="26" fill="#191919"/><text x="251" y="142" font-size="24">18</text></g><g font-family="DejaVu Sans" font-size="16" font-weight="bold" fill="#191919"><text x="590" y="67" text-anchor="end">CPH</text><text x="734" y="54">GOF</text><text x="812" y="145">ANTALYA</text><text x="868" y="180">BAH</text><text x="642" y="204" text-anchor="middle">BAY</text><text x="740" y="222" text-anchor="middle">MOY</text><text x="978" y="143" text-anchor="end">HKG</text><text x="1064" y="228" text-anchor="middle">BND</text><text x="358" y="234" text-anchor="middle">PER</text><text x="455" y="242" text-anchor="middle">BSB</text><text x="220" y="138" text-anchor="end">SINALOA</text></g></svg>
+<svg width="1240" height="296" viewBox="0 0 1240 296" style="position:absolute; left:0; top:0;"><g stroke="#AFA695" stroke-width="1"><line x1="0" y1="60" x2="1240" y2="60"/><line x1="0" y1="120" x2="1240" y2="120"/><line x1="0" y1="180" x2="1240" y2="180"/><line x1="0" y1="240" x2="1240" y2="240"/><line x1="200" y1="0" x2="200" y2="296"/><line x1="450" y1="0" x2="450" y2="296"/><line x1="700" y1="0" x2="700" y2="296"/><line x1="950" y1="0" x2="950" y2="296"/><line x1="1150" y1="0" x2="1150" y2="296"/></g><g font-family="DejaVu Sans" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><circle cx="630" cy="62" r="26" fill="#191919"/><text x="630" y="71" font-size="24">05</text><circle cx="702" cy="48" r="26" fill="#191919"/><text x="702" y="57" font-size="24">04</text><circle cx="780" cy="135" r="26" fill="#191919"/><text x="780" y="144" font-size="24">03</text><circle cx="838" cy="175" r="26" fill="#191919"/><text x="838" y="184" font-size="24">01</text><circle cx="1013" cy="138" r="26" fill="#191919"/><text x="1013" y="147" font-size="24">10</text><circle cx="1064" cy="187" r="26" fill="#191919"/><text x="1064" y="196" font-size="24">11</text><circle cx="358" cy="196" r="26" fill="#191919"/><text x="358" y="205" font-size="24">17</text><circle cx="251" cy="133" r="26" fill="#191919"/><text x="251" y="142" font-size="24">18</text><circle cx="1000" cy="205" r="26" fill="#191919"/><text x="1000" y="214" font-size="24">09</text><circle cx="1090" cy="100" r="26" fill="#191919"/><text x="1090" y="109" font-size="24">16</text><circle cx="185" cy="100" r="26" fill="#191919"/><text x="185" y="109" font-size="24">34</text></g><g font-family="DejaVu Sans" font-size="16" font-weight="bold" fill="#191919"><text x="590" y="67" text-anchor="end">CPH</text><text x="734" y="54">GOF</text><text x="812" y="145">ANTALYA</text><text x="868" y="180">BAH</text><text x="978" y="143" text-anchor="end">HKG</text><text x="1064" y="228" text-anchor="middle">BND</text><text x="358" y="234" text-anchor="middle">PER</text><text x="220" y="138" text-anchor="end">SINALOA</text><text x="1000" y="248" text-anchor="middle">JKT</text><text x="1090" y="142" text-anchor="middle">FUK</text><text x="185" y="70" text-anchor="middle">LAS</text></g></svg>
 </div>
 <div class="lst">
-<div class="lh">ALSO IN THIS EDITION &mdash; 26 MORE STORIES &middot; 06&ndash;36</div>
+<div class="lh">ALSO IN THIS EDITION &mdash; 25 MORE STORIES &middot; 06&ndash;36</div>
 <div class="col" style="left:0; width:336px;">
 <div class="row"><span class="n">06</span> &middot; Zelenskyy: NATO guarantee</div>
 <div class="row"><span class="n">07</span> &middot; Costa: &euro;44bn more cuts</div>
@@ -216,7 +215,6 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 <div class="row"><span class="n">13</span> &middot; Takaichi cold welcome</div>
 <div class="row"><span class="n">14</span> &middot; Pakistani minister in India</div>
 <div class="row"><span class="n">15</span> &middot; Sen&rsquo;s run ends</div>
-<div class="row"><span class="n">16</span> &middot; Onosato wins title</div>
 <div class="row"><span class="n">17</span> &middot; Peru M6.9, no damage</div>
 <div class="row"><span class="n">19</span> &middot; Bolsonaro in intensive care</div>
 <div class="row"><span class="n">20</span> &middot; Supercell kills 3</div>
@@ -241,15 +239,15 @@ body { width:2048px; height:2048px; background:#F6F1E5; font-family:'DejaVu Sans
 
 <div style="position:absolute; left:48px; top:1810px; width:1952px; font-size:12px; color:#404040; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Sources: Anadolu &middot; Reuters &middot; Politico &middot; GDACS &middot; NYT &middot; Japan Times &middot; Dawn &middot; Times of India &middot; News On Japan &middot; USGS &middot; Straits Times &middot; WaPo &middot; CNBC &middot; Sudan Tribune &middot; Amnesty &middot; DW &middot; Islamic Relief &middot; UN &middot; ABC News &middot; Formula1.com &middot; ST &middot; NFL.com</div>
 
-<!-- DATE CHECK 1824-1976 : v15 — full-width red box (bg #FDF2F2, 3px #C62828 border, 10px red bar left, red title); the first column becomes EXCLUDED (PRE-22 NOV); no wording admitting non-22-Nov items were included -->
+<!-- DATE CHECK 1824-1976 : v15.1 — full-width red box (bg #FDF2F2, 3px #C62828 border, 10px red bar left, red title); EXCLUDED adds the Nigeria boat (Nov 21); column 4 is OFFICIAL REVISIONS (agency data, not author errata); no wording admitting non-22-Nov items were included -->
 <div class="dc">
   <div class="redbar"></div>
   <div class="l"><b>DATE CHECK &check;</b> As of 22 Nov, 17:00 UTC.</div>
   <div class="drule"></div>
-  <div class="col" style="left:26px;"><div class="h">EXCLUDED (PRE-22 NOV)</div>Ukraine 400-drone strike &middot; 19&ndash;20 Nov</div>
+  <div class="col" style="left:26px;"><div class="h">EXCLUDED (PRE-22 NOV)</div>Ukraine 400-drone strike &middot; 19&ndash;20 Nov<br>Nigeria boat capsize &middot; 21 Nov</div>
   <div class="col" style="left:510px;"><div class="h">LEFT OUT</div>ICJ verdict, 19 Nov &middot; FBI probe, unconfirmed</div>
   <div class="col" style="left:994px;"><div class="h"><span class="notyet">NOT YET (POST-17:00 UTC)</span></div>ATP final 17:00 UTC &middot; HK seat results tonight</div>
-  <div class="col" style="left:1478px;"><div class="h">CORRECTIONS</div>HK 5,640 voters &middot; NEMA toll, Nigeria</div>
+  <div class="col" style="left:1478px;"><div class="h">OFFICIAL REVISIONS</div>HK: 5,640 registered voters (subsector)</div>
 </div>
 
 <!-- FOOTER 1990-2028 : v15 — tally is now 5 confirmed (lead 03 + cards 04, 05, 18, 23) · 3 official (cards 09, 10, 34) · 1 claim (card 01) -->
